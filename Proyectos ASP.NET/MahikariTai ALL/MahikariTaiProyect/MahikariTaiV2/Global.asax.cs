@@ -9,10 +9,11 @@ namespace MahikariTaiV2
 {
     public class MvcApplication : HttpApplication
     {
-        private MembersController funcion = new MembersController();
+        private HomeController funcion = new HomeController();
         protected void Application_Start()
         {
-            //funcion.LibreriaDireccion();
+            string datadir = Server.MapPath("~/lib");
+            funcion.LibreriaDireccion(datadir);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

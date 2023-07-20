@@ -503,6 +503,7 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="lib\CL.txt" />
     <Content Include="Models\MahikariTai.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MahikariTai.edmx</DependentUpon>
@@ -641,6 +642,7 @@
       <DependentUpon>MahikariTai.edmx</DependentUpon>
     </Content>
     <Content Include="libman.json" />
+    <Content Include="lib\CL.zip" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\JavaScriptMembers.js" />
     <Content Include="Scripts\JavaScriptSelect.js" />
@@ -694,9 +696,7 @@
     <Content Include="Views\Miyakusha\Miembros.cshtml" />
     <Content Include="Views\Members\Juntaiin.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />

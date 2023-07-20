@@ -13,18 +13,10 @@ namespace MahikariTaiV2.Controllers
     {
         // GET: Members
         db_MahikariTaiEntities db = new db_MahikariTaiEntities();
-        private string datadir = "~/MahikariTaiV2/lib";
-        private string datadir2 = "~/MahikariTaiV2/lib/CL.txt";
 
         public ActionResult Index()
         {
             return View();
-        }
-
-        public void LibreriaDireccion()
-        {
-            GeoFileDownloader downloader = GeoFileDownloader.CreateGeoFileDownloader();
-            downloader.DownloadFile("CL.zip", datadir);
         }
 
         //Filtrar por Integrante "Shonenbu"
@@ -339,6 +331,7 @@ namespace MahikariTaiV2.Controllers
 
         public JsonResult GetRegiones()
         {
+            string datadir2 = Server.MapPath("~/lib/CL.txt");
             var regionesList = new List<string>();
             try
             {
@@ -361,6 +354,7 @@ namespace MahikariTaiV2.Controllers
 
         public JsonResult GetCiudades(string region)
         {
+            string datadir2 = Server.MapPath("~/lib/CL.txt");
             var ciudadesList = new List<string>();
             try
             {
@@ -384,6 +378,7 @@ namespace MahikariTaiV2.Controllers
 
         public JsonResult GetComunas(string ciudad)
         {
+            string datadir2 = Server.MapPath("~/lib/CL.txt");
             var comunasList = new List<string>();
             try
             {
