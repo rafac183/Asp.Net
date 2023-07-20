@@ -1,0 +1,83 @@
+﻿@model IEnumerable<MahikariTaiV2.Models.Cargos>
+
+@{
+    ViewBag.Title = "ListaMaestraCargos";
+}
+
+<h2>Cargos</h2>
+<h3>Acontinuacion se Muestran los cargos</h3>
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="breadcrumb-item active">Cargos</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-users me-1"></i>Members List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table id="tablaCargo" class="display table cell-border" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Cargos
+                        </th>
+                        <th>
+                            Accion
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.cargo)
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-success" onclick="location.href='@Url.Action("Miembros", new { cargo = item.cargo })'">
+                                    Miembro
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var tablaData;
+    var fila;
+
+    $(document).ready(function () {
+        tablaData = $('#tablaCargo').DataTable({
+            responsive: true,
+            lengthMenu: [5, 10, 25, 50, 100],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+            },
+            "columnDefs": [
+                { "orderable": false, "targets": -1 }, // Desactivar ordenamiento para la última columna (Acciones)
+                { "searchable": false, "targets": -1 }
+            ],
+
+        });
+        if ($(window).width() < 992) {
+            tablaData.column(-1).visible(false);
+        }
+
+        // Actualizar la visibilidad de la columna al cambiar el tamaño de la pantalla
+        $(window).resize(function () {
+            if ($(window).width() < 992) {
+                tablaData.column(-1).visible(false);
+            } else {
+                tablaData.column(-1).visible(true);
+            }
+        });
+
+    });
+</script>

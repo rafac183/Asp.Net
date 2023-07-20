@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NoHallado</title>
+</head>
+<body>
+    <h2>@ViewBag.Error</h2>
+
+    <p>
+        @*Aca puedes ver que redirrecionamos al metodo validar*@
+        @Html.ActionLink("Volver al Login", "Validar")
+    </p>
+</body>
+</html>

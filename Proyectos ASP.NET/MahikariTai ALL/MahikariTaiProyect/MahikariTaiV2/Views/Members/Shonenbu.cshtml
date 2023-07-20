@@ -1,0 +1,134 @@
+﻿@model IEnumerable<MahikariTaiV2.Models.ElIntegrante>
+
+@{
+    ViewBag.Title = "Shonenbu";
+}
+
+<h2>Shonenbu</h2>
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="breadcrumb-item active">Members</li>
+    <li class="breadcrumb-item active">Shonenbu</li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-users me-1"></i>Shonenbu List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                <a class="btn btn-primary" href="@Url.Action("Index", "Members")">Editar Datos</a>
+                <input hidden id="nameSelect" value="#tablaShonenbu"/>
+            </div>
+            <hr />
+            <table id="tablaShonenbu" class="display table cell-border text-center compact" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombres</th>
+                        <th>Apellido Paterno</th>
+                        <th>@Html.DisplayNameFor(model => model.secondLastname)</th>
+                        <th>@Html.DisplayNameFor(model => model.gender)</th>
+                        <th>@Html.DisplayNameFor(model => model.category)</th>
+                        <th>Correo</th>
+                        <th>@Html.DisplayNameFor(model => model.birthdate)</th>
+                        <th>@Html.DisplayNameFor(model => model.nacionality)</th>
+                        <th>Telefono</th>
+                        <th>Direccion</th>
+                        <th>@Html.DisplayNameFor(model => model.region)</th>
+                        <th>@Html.DisplayNameFor(model => model.ciudad)</th>
+                        <th>@Html.DisplayNameFor(model => model.comuna)</th>
+                        <th>Hobbies</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.rut)</td>
+                            <td>@Html.DisplayFor(modelItem => item.names)</td>
+                            <td>@Html.DisplayFor(modelItem => item.firstLastname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.secondLastname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.gender)</td>
+                            <td>@Html.DisplayFor(modelItem => item.category)</td>
+                            <td>@Html.DisplayFor(modelItem => item.email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.birthdate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.nacionality)</td>
+                            <td>@Html.DisplayFor(modelItem => item.phone)</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.street)
+                                @Html.DisplayFor(modelItem => item.number)
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.region)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ciudad)</td>
+                            <td>@Html.DisplayFor(modelItem => item.comuna)</td>
+                            <td>@Html.DisplayFor(modelItem => item.hobbies)</td>
+                            <td>
+                                <button class="btn btn-info btn-sm btn-allInfoS"><i class="fa fa-info-circle"></i></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*Modal AllInfo*@
+
+<div class="modal fade bd-example-modal" id="modalAllInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Informacion Completa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h6 id="titleInfo" class="modal-title fs-5"></h6>
+                    <hr />
+                    <div class="form-group">
+                        <h6 class="modal-title fw-bold text-decoration-underline fs-5">Datos Personales</h6>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Rut</label>
+                        <p id="rutTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Nombre</label>
+                        <p id="nameTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Apellido Paterno</label>
+                        <p id="firstLastNameTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Apellido Materno</label>
+                        <p id="secondLastNameTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Genero</label>
+                        <p id="generoTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Categoria</label>
+                        <p id="categoriaTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Correo</label>
+                        <p id="emailTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Fecha de Nacimiento</label>
+                        <p id="birthdateTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Nacionalidad</label>
+                        <p id="nacionalidadTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Telefono</label>
+                        <p id="phoneTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Direccion</label>
+                        <p id="streetTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Region</label>
+                        <p id="regionTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Ciudad</label>
+                        <p id="ciudadTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Comuna</label>
+                        <p id="comunaTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Hobbies</label>
+                        <p id="hobbiesTxt" class="text-md-start"></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/complementSelect")

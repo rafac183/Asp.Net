@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MahikariTaiV2.Models.Cargos>
+
+@{
+    ViewBag.Title = "Miembros";
+}
+
+<h2>Miembros</h2>
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-users me-1"></i>Members List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table id="tablaMiembroCargo" class="display table cell-border" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Rut
+                        </th>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Cargo
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.rut)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cargo)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var tablaData;
+    var fila;
+
+    $(document).ready(function () {
+        tablaData = $('#tablaMiembroCargo').DataTable({
+            responsive: true,
+            lengthMenu: [5, 10, 25, 50, 100],
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+            }
+        });
+    });
+</script>

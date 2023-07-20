@@ -1,0 +1,376 @@
+﻿@using System.Data;
+@using MahikariTaiV2.SR_DB
+
+@{
+    string region = "";
+    string ciudad = "";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+    DataSet generos = WS.Generos();
+    DataSet nacionalidades = WS.Nacionalidades();
+    DataSet regiones = WS.Regiones();
+    DataSet ciudades = WS.SearchCiudadAndShow(region);
+    DataSet comunas = WS.SearchCiudadAndShow(ciudad);
+    DataSet categorias = WS.Categorias();
+}
+
+@*Principio para volver al Home*@
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+    <li class="breadcrumb-item active">Members</li>
+    <li class="breadcrumb-item active">All Members</li>
+</ol>
+
+@*Configuracion Tabla*@
+<div class="card">
+    <div class="card-header">
+        <i class="fa fa-users me-1"></i>Members List
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+                <button type="button" class="btn btn-success" onclick="abrirModal(null)">Crear Nuevo</button>
+            </div>
+            <hr />
+            <table id="tablaMembers" class="display table cell-border compact text-center" style="width: 100%;">
+                <thead class="text-center">
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Categoria</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@*MODAL INFORMACION COMPLETA ----------------------------------------------------------*@
+
+@* Modal Informacion Completa*@
+<div class="modal fade bd-example-modal" id="modalAllInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Informacion Completa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h6 id="titleInfo" class="modal-title fs-5"></h6>
+                    <hr />
+                    <div class="form-group">
+                        <h6 class="modal-title fw-bold text-decoration-underline fs-5">Datos Personales</h6>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Rut</label>
+                        <p id="rutTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Nombre</label>
+                        <p id="nameTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Apellido Paterno</label>
+                        <p id="firstLastNameTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Apellido Materno</label>
+                        <p id="secondLastNameTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Genero</label>
+                        <p id="generoTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Categoria</label>
+                        <p id="categoriaTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Correo</label>
+                        <p id="emailTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Fecha de Nacimiento</label>
+                        <p id="birthdateTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Nacionalidad</label>
+                        <p id="nacionalidadTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Telefono</label>
+                        <p id="phoneTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Direccion</label>
+                        <p id="streetTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Region</label>
+                        <p id="regionTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Ciudad</label>
+                        <p id="ciudadTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Comuna</label>
+                        <p id="comunaTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Hobbies</label>
+                        <p id="hobbiesTxt" class="text-md-start"></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*MODALES PARA REGISTRO Y EDICION---------------------------------------------------------------*@
+
+@*Modal Datos Personales*@
+<div class="modal fade" id="modalDatosPer" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="titleModal" value=""></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <h6 class="modal-title">Datos Personales</h6>
+                    <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro del Miembro</small>
+                    <hr />
+                    <div class="col-sm-6">
+                        <label for="rutInput" class="form-label">Rut</label>
+                        <input type="hidden" id="txtRutId" value="0" />
+                        <input type="text" class="form-control" id="rutInput" maxlength="13" aria-describedby="rutInput" placeholder="example: 12.123.123-1" required>
+                        <small id="rutInput" class="form-text text-muted">Ingrese con puntos y guion para el registro</small>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="nameInput" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="nameInput" placeholder="example: Carlos Alberto" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="firstLastNameInput" class="form-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" id="firstLastNameInput" placeholder="example: Gimenez" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="secondLastNameInput" class="form-label">Apellido Materno</label>
+                        <input type="text" class="form-control" id="secondLastNameInput" placeholder="example: Perez" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="generoInput" class="form-label">Genero</label>
+                        <select id="generoSelect" class="form-select" aria-label="Default select example" required>
+                            <option disabled selected>Elige Una...</option>
+                            @foreach (DataRow row in generos.Tables[0].Rows)
+                            {
+                                <option value="@row["Genero"]">@row["Genero"]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="categoriaSelect" class="form-label">Categoria</label>
+                        <select id="categoriaSelect" name="Categoria" class="form-select" required>
+                            <option disabled selected>Elige Una...</option>
+                            @foreach (DataRow row in categorias.Tables[0].Rows)
+                            {
+                                <option value="@row["Categoria"]">@row["Categoria"]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="emailInput" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="emailInput" placeholder="example: example@gmail.com" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="birthdateInput" class="form-label">Fecha de Nacimiento</label>
+                        <input id="birthdateInput" type="date" class="form-control" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="nacionalidadInput" class="form-label">Nacionalidad</label>
+                        <select id="nacionalidadSelect" class="form-select" aria-label="Default select example" required>
+                            <option disabled selected>Elige Una...</option>
+                            @foreach (DataRow row in nacionalidades.Tables[0].Rows)
+                            {
+                                <option value="@row["Nacionalidad"]">@row["Nacionalidad"]</option>
+                            }
+                        </select>
+                        <br />
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="phoneInput" class="form-label">Telefono</label>
+                        <input type="tel" class="form-control" id="phoneInput" maxlength="9" placeholder="example: 955229966" required>
+                    </div>
+                    <br /><br />
+                    <h6 class="modal-title">Direccion</h6>
+                    <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro de la direccion</small>
+                    <hr />
+
+                    <div class="col-sm-6">
+                        <label for="streetInput" class="form-label">Calle</label>
+                        <input type="text" class="form-control" id="streetInput" placeholder="example: San Pablo" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="numberInput" class="form-label">Numero</label>
+                        <input type="text" class="form-control" id="numberInput" placeholder="example: 100" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="regionSelect" class="form-label">Region</label>
+                        <select id="regionSelect" name="Region" class="form-select" required>
+                            <option disabled selected>Elige Una...</option>
+                            @foreach (DataRow row in regiones.Tables[0].Rows)
+                            {
+                                <option value="@row["Regiones"]">@row["Regiones"]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="ciudadSelect" class="form-label">Ciudad</label>
+                        <select id="ciudadSelect" name="Ciudad" class="form-select" aria-label="Default select example" required>
+                            <option disabled selected>Elige Una...</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="comunaSelect" class="form-label">Comuna</label>
+                        <select id="comunaSelect" name="Comuna" class="form-select" aria-label="Default select example" required>
+                            <option disabled selected>Elige Una...</option>
+                        </select>
+                        <br />
+                    </div>
+                    <br /><br />
+                    <h6 class="modal-title">Otros</h6>
+                    <hr />
+                    <div class="form-group">
+                        <label for="hobbiesInput">Hobbies</label>
+                        <textarea class="form-control" id="hobbiesInput" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="guardar()">Guardar Cambios</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*Modal Datos Familiares*@
+<div class="modal fade" id="modalDatosFam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Miembro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h6 class="modal-title">Datos de Kumite</h6>
+                    <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro del Miembro y Familiares</small>
+                    <hr />
+                    <label for="rutInput" class="form-label">Recibimiento Kenshu</label>
+                    <small id="kenshuSmallText" class="form-text text-muted">Registre solo los que posea el miembro</small>
+                    <div class="col-sm-6">
+                        <label for="initialInput" class="form-label">Inicial</label>
+                        <input type="month" class="form-control" id="rutInput" required>
+                        <label for="intermedioInput" class="form-label">Intermedio</label>
+                        <input type="month" class="form-control" id="rutInput">
+                        <label for="superiorInput" class="form-label">Superior</label>
+                        <input type="month" class="form-control" id="rutInput">
+                    </div>
+                    <label for="rutInput" class="form-label">Familiares</label>
+                    <div class="col-sm-6">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="abrirCrearNuevo()">Atras</button>
+                <button type="button" class="btn btn-primary" onclick="abrirWorkStudy()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal Estudios y Trabajo*@
+<div class="modal fade" id="modalWorkStudy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Miembro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h6 class="modal-title">Trabajo y estudios</h6>
+                    <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro del Miembro</small>
+                    <hr />
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Hobbies</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="abrirDatosFam()">Atras</button>
+                <button type="button" class="btn btn-primary" onclick="abrirOtros()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal Aseguramiento*@
+<div class="modal fade" id="modalUserEstado" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="titleModalAse" value=""></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="txtMemberRegistrado"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-closes" data-bs-dismiss="modal" onclick="recargar()">Entendido</button>
+                <button type="button" class="btn btn-success btn-noDelete" data-bs-dismiss="modal" style="display:none">No</button>
+                <button type="button" class="btn btn-danger btn-siDelete" style="display:none">Si</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*Modal Aseguramiento De modificacion o asignacion de CArgos*@
+<div class="modal fade" id="modalCarOrEdit" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">Que desea Hacer?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer d-grid gap-2 d-md-flex justify-content-md-center">
+                <button type="button" class="btn btn-success btn-editCargo">Modificar Cargo</button>
+                <button type="button" class="btn btn-danger btn-editDatos">Modificar Datos</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*Modal Editar Cargos*@
+<div class="modal fade" id="modalCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="titleModalAse" value=""></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="txtMemberRegistrado"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-closes" data-bs-dismiss="modal" onclick="recargar()">Entendido</button>
+                <button type="button" class="btn btn-success btn-noDelete" data-bs-dismiss="modal" style="display:none">No</button>
+                <button type="button" class="btn btn-danger btn-siDelete" style="display:none">Si</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var añadirUrl = "@Url.Action("AñadirMiembro", "Members")";
+    var modificarUrl = "@Url.Action("ModificarMiembro", "Members")";
+    var eliminarUrl = "@Url.Action("EliminarMiembro", "Members")";
+    var getCiudadesUrl = "@Url.Action("GetCiudadesByRegion", "Members")";
+    var getComunasUrl = "@Url.Action("GetComunasByCiudad", "Members")";
+</script>
