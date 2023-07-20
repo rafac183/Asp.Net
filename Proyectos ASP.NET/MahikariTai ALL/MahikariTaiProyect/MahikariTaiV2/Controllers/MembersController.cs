@@ -1,15 +1,11 @@
 ﻿using MahikariTaiV2.Models;
+using MahikariTaiV2.SR_DB;
+using NGeoNames;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using System.Web.Services;
-using MahikariTaiV2.SR_DB;
-using NGeoNames;
 
 namespace MahikariTaiV2.Controllers
 {
@@ -17,9 +13,18 @@ namespace MahikariTaiV2.Controllers
     {
         // GET: Members
         db_MahikariTaiEntities db = new db_MahikariTaiEntities();
+        private string datadir = "~/MahikariTaiV2/lib";
+        private string datadir2 = "~/MahikariTaiV2/lib/CL.txt";
+
         public ActionResult Index()
         {
             return View();
+        }
+
+        public void LibreriaDireccion()
+        {
+            GeoFileDownloader downloader = GeoFileDownloader.CreateGeoFileDownloader();
+            downloader.DownloadFile("CL.zip", datadir);
         }
 
         //Filtrar por Integrante "Shonenbu"
@@ -169,7 +174,7 @@ namespace MahikariTaiV2.Controllers
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            WS.AñadirMiembro(rut,nombres,primerApellido,segundoApellido,genero,categoria,email,birthdate,nacionalidad,phone,calle,numero,region,ciudad,comuna,hobbies);
+            WS.AñadirMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
 
             var resultado = new
             {
@@ -239,7 +244,7 @@ namespace MahikariTaiV2.Controllers
                     gender = row["Genero"].ToString(),
                     category = row["Categoria"].ToString(),
                     email = row["Correo"].ToString(),
-                    birthdate = birthdate, 
+                    birthdate = birthdate,
                     nacionality = row["Nacionalidad"].ToString(),
                     phone = row["Telefono"].ToString(),
                     street = row["Calle"].ToString(),
@@ -263,7 +268,7 @@ namespace MahikariTaiV2.Controllers
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
             DataSet miembros = WS.AllInfo(rut);
-            
+
 
             var miembro = new List<ElIntegrante>();
 
@@ -332,6 +337,72 @@ namespace MahikariTaiV2.Controllers
         }
 
 
+        public JsonResult GetRegiones()
+        {
+            var regionesList = new List<string>();
+            try
+            {
+                var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
 
+                var regions = data.Where(p => p.FeatureCode.Equals("ADM1")).OrderBy(p => p.Name);
+
+                foreach (var region in regions)
+                {
+                    regionesList.Add(region.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return Json(new { regiones = regionesList }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCiudades(string region)
+        {
+            var ciudadesList = new List<string>();
+            try
+            {
+                var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
+
+                var regionInfo = data.FirstOrDefault(p => p.FeatureCode.Equals("ADM1") && p.Name.Equals(region, StringComparison.OrdinalIgnoreCase));
+                var provincias = data.Where(p => p.FeatureCode.Equals("ADM2") && p.Admincodes[0].Equals(regionInfo.Admincodes[0])).OrderBy(p => p.Name);
+
+                foreach (var provincia in provincias)
+                {
+                    ciudadesList.Add(provincia.Name);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return Json(new { ciudades = ciudadesList }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetComunas(string ciudad)
+        {
+            var comunasList = new List<string>();
+            try
+            {
+                var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
+
+                var provinciaInfo = data.FirstOrDefault(p => p.FeatureCode.Equals("ADM2") && p.Name.Equals(ciudad, StringComparison.OrdinalIgnoreCase));
+                var comunas = data.Where(p => p.FeatureCode.Equals("ADM3") && p.Admincodes[1].Equals(provinciaInfo.Admincodes[1])).OrderBy(p => p.Name);
+
+                foreach (var comuna in comunas)
+                {
+                    comunasList.Add(comuna.Name);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return Json(new { comunas = comunasList }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

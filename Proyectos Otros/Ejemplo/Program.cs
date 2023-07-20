@@ -19,8 +19,8 @@ namespace Ejemplo
         {
             Chile ejemplo = new Chile();
             //ejemplo.regiones();
-            //ejemplo.provincias(null);
-            ejemplo.comunas(null);
+            ejemplo.provincias(null);
+            //ejemplo.comunas(null);
         }
     }
 }

@@ -498,13 +498,11 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="geonames-1.1.15.jar" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="lib\geonames-1.1.15.jar" />
     <Content Include="Models\MahikariTai.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MahikariTai.edmx</DependentUpon>
@@ -696,7 +694,9 @@
     <Content Include="Views\Miyakusha\Miembros.cshtml" />
     <Content Include="Views\Members\Juntaiin.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="lib\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />

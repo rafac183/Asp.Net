@@ -9,3 +9,14 @@ C:\Users\rafae\source\repos\Ejemplo\obj\Debug\Ejemplo.csproj.CoreCompileInputs.c
 C:\Users\rafae\source\repos\Ejemplo\obj\Debug\Ejemplo.csproj.CopyComplete
 C:\Users\rafae\source\repos\Ejemplo\obj\Debug\Ejemplo.exe
 C:\Users\rafae\source\repos\Ejemplo\obj\Debug\Ejemplo.pdb
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\bin\Debug\Ejemplo.exe.config
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\bin\Debug\Ejemplo.exe
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\bin\Debug\Ejemplo.pdb
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\bin\Debug\KdTreeLib.dll
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\bin\Debug\NGeoNames.dll
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\obj\Debug\Ejemplo.csproj.AssemblyReference.cache
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\obj\Debug\Ejemplo.csproj.SuggestedBindingRedirects.cache
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\obj\Debug\Ejemplo.csproj.CoreCompileInputs.cache
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\obj\Debug\Ejemplo.csproj.CopyComplete
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\obj\Debug\Ejemplo.exe
+C:\Users\rafae\Cursos\proyecto2\Proyectos Otros\Ejemplo\obj\Debug\Ejemplo.pdb

@@ -45,8 +45,9 @@ namespace Ejemplo
 
             // Read data into memory
             var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
+            
             // Find the region by its name
-
+            Console.WriteLine(data.GetType());
 
             if (region != null)
             {
