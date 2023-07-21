@@ -155,11 +155,32 @@ function abrirModal(json) {
     $("#phoneInput").val("");
     $("#streetInput").val("");
     $("#numberInput").val("");
+<<<<<<< HEAD
     $("#regionSelect").val($("#regionSelect option:first").val())/*.empty()*/;
     $("#provinciaSelect").val($("#provinciaSelect option:first").val()).prop('disabled', true);
     $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
     $("#hobbiesInput").val("");
     
+=======
+    $("#regionSelect").val($("#regionSelect option:first").val()).empty();
+    $("#provinciaSelect").val($("#provinciaSelect option:first").val()).prop('disabled', true);
+    $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
+    $("#hobbiesInput").val("");
+    $.ajax({
+        url: getRegionesUrl,
+        type: "POST",
+        success: function (data) {
+            $('#regionSelect').append('<option value="" disabled selected>Elige Una...</option>');
+            $.each(data.regiones, function (index, region) {
+                $('#regionSelect').append('<option value="' + region + '">' + region + '</option>');
+            });
+        },
+        error: function () {
+            // Manejar el error en caso de que la llamada AJAX falle
+            console.error('Error al obtener las regiones');
+        }
+    });
+>>>>>>> b38ae1c142e8d99374aac001efa680f3b0aaad53
 
     if (json != null) {
         title.innerText = "Editar Miembro";
@@ -362,6 +383,7 @@ function abrirWorkStudy() {
 
 
 
+<<<<<<< HEAD
 function regionsSelect() {
     $.ajax({
         url: getRegionesUrl,
@@ -378,6 +400,8 @@ function regionsSelect() {
     });
 }
 
+=======
+>>>>>>> b38ae1c142e8d99374aac001efa680f3b0aaad53
 //Funcion para Traer Ciudades de cierta Region
 $('#regionSelect').change(function () {
     var selectedRegion = $(this).val(); // Obtener el valor seleccionado
