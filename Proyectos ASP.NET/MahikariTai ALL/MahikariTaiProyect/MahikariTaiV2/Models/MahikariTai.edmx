@@ -18,8 +18,8 @@
             <PropertyRef Name="id_cargo" />
           </Key>
           <Property Name="id_cargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="rut_user" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="id_cargo_name" Type="int" Nullable="false" />
+          <Property Name="rut_user" Type="varchar" MaxLength="13" Nullable="false" />
         </EntityType>
         <EntityType Name="cargo_names">
           <Key>
@@ -27,6 +27,7 @@
           </Key>
           <Property Name="id_cargo_name" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cargo_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="id_grupo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="categoria">
           <Key>
@@ -35,21 +36,13 @@
           <Property Name="id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="categoria_name" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <EntityType Name="ciudad">
-          <Key>
-            <PropertyRef Name="id_ciudad" />
-          </Key>
-          <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name_ciudad" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="id_region" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="comuna">
           <Key>
             <PropertyRef Name="id_comuna" />
           </Key>
           <Property Name="id_comuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name_comuna" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="id_ciudad" Type="int" Nullable="false" />
+          <Property Name="id_provincia" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="direccion">
           <Key>
@@ -96,6 +89,13 @@
           </Key>
           <Property Name="id_grado_estudios" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="grado_estudios" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_grupo" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="job">
           <Key>
@@ -153,22 +153,20 @@
           <Property Name="grado_date" Type="date" Nullable="false" />
           <Property Name="rut_user" Type="varchar" MaxLength="13" Nullable="false" />
         </EntityType>
+        <EntityType Name="provincia">
+          <Key>
+            <PropertyRef Name="id_provincia" />
+          </Key>
+          <Property Name="id_provincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_provincia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_region" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="region">
           <Key>
             <PropertyRef Name="id_region" />
           </Key>
           <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name_region" Type="varchar" MaxLength="42" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK__admision__rut_us__4F7CD00D">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
@@ -182,7 +180,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cargo__id_cargo___7C4F7684">
+        <Association Name="FK__cargo__id_cargo___571DF1D5">
           <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="1" />
           <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,7 +192,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cargo__rut_user__52593CB8">
+        <Association Name="FK__cargo__rut_user__5812160E">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -206,27 +204,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ciudad__id_regio__398D8EEE">
-          <End Role="region" Type="Self.region" Multiplicity="1" />
-          <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
+        <Association Name="FK__cargo_nam__id_gr__5441852A">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="region">
-              <PropertyRef Name="id_region" />
+            <Principal Role="grupo">
+              <PropertyRef Name="id_grupo" />
             </Principal>
-            <Dependent Role="ciudad">
-              <PropertyRef Name="id_region" />
+            <Dependent Role="cargo_names">
+              <PropertyRef Name="id_grupo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__comuna__id_ciuda__3C69FB99">
-          <End Role="ciudad" Type="Self.ciudad" Multiplicity="1" />
+        <Association Name="FK__comuna__id_provi__3C69FB99">
+          <End Role="provincia" Type="Self.provincia" Multiplicity="1" />
           <End Role="comuna" Type="Self.comuna" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ciudad">
-              <PropertyRef Name="id_ciudad" />
+            <Principal Role="provincia">
+              <PropertyRef Name="id_provincia" />
             </Principal>
             <Dependent Role="comuna">
-              <PropertyRef Name="id_ciudad" />
+              <PropertyRef Name="id_provincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,7 +240,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__estudios__id_gra__571DF1D5">
+        <Association Name="FK__estudios__id_gra__5CD6CB2B">
           <End Role="grado_estudios" Type="Self.grado_estudios" Multiplicity="1" />
           <End Role="estudios" Type="Self.estudios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,7 +252,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__estudios__rut_us__5812160E">
+        <Association Name="FK__estudios__rut_us__5DCAEF64">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="estudios" Type="Self.estudios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -266,7 +264,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__familia__id_grad__5DCAEF64">
+        <Association Name="FK__familia__id_grad__6383C8BA">
           <End Role="omitama" Type="Self.omitama" Multiplicity="1" />
           <End Role="familia" Type="Self.familia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -278,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__familia__rut_use__5EBF139D">
+        <Association Name="FK__familia__rut_use__6477ECF3">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="familia" Type="Self.familia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -290,7 +288,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__job__rut_user__5AEE82B9">
+        <Association Name="FK__job__rut_user__60A75C0F">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="job" Type="Self.job" Multiplicity="*" />
           <ReferentialConstraint>
@@ -350,7 +348,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__omitama_d__rut_u__619B8048">
+        <Association Name="FK__omitama_d__rut_u__6754599E">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
           <ReferentialConstraint>
@@ -359,6 +357,18 @@
             </Principal>
             <Dependent Role="omitama_date">
               <PropertyRef Name="rut_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__provincia__id_re__398D8EEE">
+          <End Role="region" Type="Self.region" Multiplicity="1" />
+          <End Role="provincia" Type="Self.provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="provincia">
+              <PropertyRef Name="id_region" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -379,24 +389,13 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="hobbies" Type="varchar" Mode="In" />
           <Parameter Name="nombre_comuna" Type="varchar" Mode="In" />
-          <Parameter Name="nombre_ciudad" Type="varchar" Mode="In" />
+          <Parameter Name="nombre_provincia" Type="varchar" Mode="In" />
           <Parameter Name="nombre_region" Type="varchar" Mode="In" />
         </Function>
         <Function Name="eliminarMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="rut_user" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="generos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="insertarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="calle" Type="varchar" Mode="In" />
-          <Parameter Name="numero" Type="int" Mode="In" />
-          <Parameter Name="nombre_comuna" Type="varchar" Mode="In" />
-          <Parameter Name="nombre_ciudad" Type="varchar" Mode="In" />
-          <Parameter Name="nombre_region" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="miembroAllInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="rut_user" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="modificarMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="rut_user" Type="varchar" Mode="In" />
           <Parameter Name="categoria_name" Type="varchar" Mode="In" />
@@ -412,108 +411,71 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="hobbies" Type="varchar" Mode="In" />
           <Parameter Name="nombre_comuna" Type="varchar" Mode="In" />
-          <Parameter Name="nombre_ciudad" Type="varchar" Mode="In" />
+          <Parameter Name="nombre_provincia" Type="varchar" Mode="In" />
           <Parameter Name="nombre_region" Type="varchar" Mode="In" />
         </Function>
         <Function Name="nacionalidades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="regiones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="searchCiudadesPorRegion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombreRegion" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="searchComunasPorCiudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombreCiudad" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="db_MahikariTaiModelStoreContainer">
           <EntitySet Name="admision" EntityType="Self.admision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cargo" EntityType="Self.cargo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cargo_names" EntityType="Self.cargo_names" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="categoria" EntityType="Self.categoria" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ciudad" EntityType="Self.ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="comuna" EntityType="Self.comuna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="direccion" EntityType="Self.direccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="estudios" EntityType="Self.estudios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="familia" EntityType="Self.familia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="gender" EntityType="Self.gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="grado_estudios" EntityType="Self.grado_estudios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="job" EntityType="Self.job" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="miembro" EntityType="Self.miembro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="nacionality" EntityType="Self.nacionality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="omitama" EntityType="Self.omitama" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="omitama_date" EntityType="Self.omitama_date" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="provincia" EntityType="Self.provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="region" EntityType="Self.region" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__admision__rut_us__4F7CD00D" Association="Self.FK__admision__rut_us__4F7CD00D">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="admision" EntitySet="admision" />
           </AssociationSet>
-          <AssociationSet Name="FK__cargo__id_cargo___7C4F7684" Association="Self.FK__cargo__id_cargo___7C4F7684">
+          <AssociationSet Name="FK__cargo__id_cargo___571DF1D5" Association="Self.FK__cargo__id_cargo___571DF1D5">
             <End Role="cargo_names" EntitySet="cargo_names" />
             <End Role="cargo" EntitySet="cargo" />
           </AssociationSet>
-          <AssociationSet Name="FK__cargo__rut_user__52593CB8" Association="Self.FK__cargo__rut_user__52593CB8">
+          <AssociationSet Name="FK__cargo__rut_user__5812160E" Association="Self.FK__cargo__rut_user__5812160E">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="cargo" EntitySet="cargo" />
           </AssociationSet>
-          <AssociationSet Name="FK__ciudad__id_regio__398D8EEE" Association="Self.FK__ciudad__id_regio__398D8EEE">
-            <End Role="region" EntitySet="region" />
-            <End Role="ciudad" EntitySet="ciudad" />
+          <AssociationSet Name="FK__cargo_nam__id_gr__5441852A" Association="Self.FK__cargo_nam__id_gr__5441852A">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="cargo_names" EntitySet="cargo_names" />
           </AssociationSet>
-          <AssociationSet Name="FK__comuna__id_ciuda__3C69FB99" Association="Self.FK__comuna__id_ciuda__3C69FB99">
-            <End Role="ciudad" EntitySet="ciudad" />
+          <AssociationSet Name="FK__comuna__id_provi__3C69FB99" Association="Self.FK__comuna__id_provi__3C69FB99">
+            <End Role="provincia" EntitySet="provincia" />
             <End Role="comuna" EntitySet="comuna" />
           </AssociationSet>
           <AssociationSet Name="FK__direccion__id_co__3F466844" Association="Self.FK__direccion__id_co__3F466844">
             <End Role="comuna" EntitySet="comuna" />
             <End Role="direccion" EntitySet="direccion" />
           </AssociationSet>
-          <AssociationSet Name="FK__estudios__id_gra__571DF1D5" Association="Self.FK__estudios__id_gra__571DF1D5">
+          <AssociationSet Name="FK__estudios__id_gra__5CD6CB2B" Association="Self.FK__estudios__id_gra__5CD6CB2B">
             <End Role="grado_estudios" EntitySet="grado_estudios" />
             <End Role="estudios" EntitySet="estudios" />
           </AssociationSet>
-          <AssociationSet Name="FK__estudios__rut_us__5812160E" Association="Self.FK__estudios__rut_us__5812160E">
+          <AssociationSet Name="FK__estudios__rut_us__5DCAEF64" Association="Self.FK__estudios__rut_us__5DCAEF64">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="estudios" EntitySet="estudios" />
           </AssociationSet>
-          <AssociationSet Name="FK__familia__id_grad__5DCAEF64" Association="Self.FK__familia__id_grad__5DCAEF64">
+          <AssociationSet Name="FK__familia__id_grad__6383C8BA" Association="Self.FK__familia__id_grad__6383C8BA">
             <End Role="omitama" EntitySet="omitama" />
             <End Role="familia" EntitySet="familia" />
           </AssociationSet>
-          <AssociationSet Name="FK__familia__rut_use__5EBF139D" Association="Self.FK__familia__rut_use__5EBF139D">
+          <AssociationSet Name="FK__familia__rut_use__6477ECF3" Association="Self.FK__familia__rut_use__6477ECF3">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="familia" EntitySet="familia" />
           </AssociationSet>
-          <AssociationSet Name="FK__job__rut_user__5AEE82B9" Association="Self.FK__job__rut_user__5AEE82B9">
+          <AssociationSet Name="FK__job__rut_user__60A75C0F" Association="Self.FK__job__rut_user__60A75C0F">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="job" EntitySet="job" />
           </AssociationSet>
@@ -533,9 +495,13 @@
             <End Role="nacionality" EntitySet="nacionality" />
             <End Role="miembro" EntitySet="miembro" />
           </AssociationSet>
-          <AssociationSet Name="FK__omitama_d__rut_u__619B8048" Association="Self.FK__omitama_d__rut_u__619B8048">
+          <AssociationSet Name="FK__omitama_d__rut_u__6754599E" Association="Self.FK__omitama_d__rut_u__6754599E">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="omitama_date" EntitySet="omitama_date" />
+          </AssociationSet>
+          <AssociationSet Name="FK__provincia__id_re__398D8EEE" Association="Self.FK__provincia__id_re__398D8EEE">
+            <End Role="region" EntitySet="region" />
+            <End Role="provincia" EntitySet="provincia" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -557,10 +523,10 @@
             <PropertyRef Name="id_cargo" />
           </Key>
           <Property Name="id_cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_cargo_name" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="cargo_names" Relationship="Self.FK__cargo__id_cargo___7C4F7684" FromRole="cargo" ToRole="cargo_names" />
-          <NavigationProperty Name="miembro" Relationship="Self.FK__cargo__rut_user__52593CB8" FromRole="cargo" ToRole="miembro" />
+          <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cargo_names" Relationship="Self.FK__cargo__id_cargo___571DF1D5" FromRole="cargo" ToRole="cargo_names" />
+          <NavigationProperty Name="miembro" Relationship="Self.FK__cargo__rut_user__5812160E" FromRole="cargo" ToRole="miembro" />
         </EntityType>
         <EntityType Name="cargo_names">
           <Key>
@@ -568,7 +534,9 @@
           </Key>
           <Property Name="id_cargo_name" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cargo_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__id_cargo___7C4F7684" FromRole="cargo_names" ToRole="cargo" />
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__id_cargo___571DF1D5" FromRole="cargo_names" ToRole="cargo" />
+          <NavigationProperty Name="grupo" Relationship="Self.FK__cargo_nam__id_gr__5441852A" FromRole="cargo_names" ToRole="grupo" />
         </EntityType>
         <EntityType Name="categoria">
           <Key>
@@ -578,24 +546,14 @@
           <Property Name="categoria_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="miembro" Relationship="Self.FK__miembro__id_cate__49C3F6B7" FromRole="categoria" ToRole="miembro" />
         </EntityType>
-        <EntityType Name="ciudad">
-          <Key>
-            <PropertyRef Name="id_ciudad" />
-          </Key>
-          <Property Name="id_ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name_ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_region" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="region" Relationship="Self.FK__ciudad__id_regio__398D8EEE" FromRole="ciudad" ToRole="region" />
-          <NavigationProperty Name="comuna" Relationship="Self.FK__comuna__id_ciuda__3C69FB99" FromRole="ciudad" ToRole="comuna" />
-        </EntityType>
         <EntityType Name="comuna">
           <Key>
             <PropertyRef Name="id_comuna" />
           </Key>
           <Property Name="id_comuna" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_ciudad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ciudad" Relationship="Self.FK__comuna__id_ciuda__3C69FB99" FromRole="comuna" ToRole="ciudad" />
+          <Property Name="id_provincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="provincia" Relationship="Self.FK__comuna__id_provi__3C69FB99" FromRole="comuna" ToRole="provincia" />
           <NavigationProperty Name="direccion" Relationship="Self.FK__direccion__id_co__3F466844" FromRole="comuna" ToRole="direccion" />
         </EntityType>
         <EntityType Name="direccion">
@@ -619,8 +577,8 @@
           <Property Name="career_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name_center" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="grado_estudios" Relationship="Self.FK__estudios__id_gra__571DF1D5" FromRole="estudios" ToRole="grado_estudios" />
-          <NavigationProperty Name="miembro" Relationship="Self.FK__estudios__rut_us__5812160E" FromRole="estudios" ToRole="miembro" />
+          <NavigationProperty Name="grado_estudios" Relationship="Self.FK__estudios__id_gra__5CD6CB2B" FromRole="estudios" ToRole="grado_estudios" />
+          <NavigationProperty Name="miembro" Relationship="Self.FK__estudios__rut_us__5DCAEF64" FromRole="estudios" ToRole="miembro" />
         </EntityType>
         <EntityType Name="familia">
           <Key>
@@ -633,8 +591,8 @@
           <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="live_with_him" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="omitama" Relationship="Self.FK__familia__id_grad__5DCAEF64" FromRole="familia" ToRole="omitama" />
-          <NavigationProperty Name="miembro" Relationship="Self.FK__familia__rut_use__5EBF139D" FromRole="familia" ToRole="miembro" />
+          <NavigationProperty Name="omitama" Relationship="Self.FK__familia__id_grad__6383C8BA" FromRole="familia" ToRole="omitama" />
+          <NavigationProperty Name="miembro" Relationship="Self.FK__familia__rut_use__6477ECF3" FromRole="familia" ToRole="miembro" />
         </EntityType>
         <EntityType Name="gender">
           <Key>
@@ -650,7 +608,15 @@
           </Key>
           <Property Name="id_grado_estudios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="grado_estudios1" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="estudios" Relationship="Self.FK__estudios__id_gra__571DF1D5" FromRole="grado_estudios" ToRole="estudios" />
+          <NavigationProperty Name="estudios" Relationship="Self.FK__estudios__id_gra__5CD6CB2B" FromRole="grado_estudios" ToRole="estudios" />
+        </EntityType>
+        <EntityType Name="grupo">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_grupo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cargo_names" Relationship="Self.FK__cargo_nam__id_gr__5441852A" FromRole="grupo" ToRole="cargo_names" />
         </EntityType>
         <EntityType Name="job">
           <Key>
@@ -660,7 +626,7 @@
           <Property Name="profession" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="occupation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="miembro" Relationship="Self.FK__job__rut_user__5AEE82B9" FromRole="job" ToRole="miembro" />
+          <NavigationProperty Name="miembro" Relationship="Self.FK__job__rut_user__60A75C0F" FromRole="job" ToRole="miembro" />
         </EntityType>
         <EntityType Name="login">
           <Key>
@@ -686,15 +652,15 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="hobbies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="admision" Relationship="Self.FK__admision__rut_us__4F7CD00D" FromRole="miembro" ToRole="admision" />
-          <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__rut_user__52593CB8" FromRole="miembro" ToRole="cargo" />
+          <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__rut_user__5812160E" FromRole="miembro" ToRole="cargo" />
           <NavigationProperty Name="categoria" Relationship="Self.FK__miembro__id_cate__49C3F6B7" FromRole="miembro" ToRole="categoria" />
           <NavigationProperty Name="direccion" Relationship="Self.FK__miembro__id_dire__4CA06362" FromRole="miembro" ToRole="direccion" />
-          <NavigationProperty Name="estudios" Relationship="Self.FK__estudios__rut_us__5812160E" FromRole="miembro" ToRole="estudios" />
-          <NavigationProperty Name="familia" Relationship="Self.FK__familia__rut_use__5EBF139D" FromRole="miembro" ToRole="familia" />
+          <NavigationProperty Name="estudios" Relationship="Self.FK__estudios__rut_us__5DCAEF64" FromRole="miembro" ToRole="estudios" />
+          <NavigationProperty Name="familia" Relationship="Self.FK__familia__rut_use__6477ECF3" FromRole="miembro" ToRole="familia" />
           <NavigationProperty Name="gender" Relationship="Self.FK__miembro__id_gend__4AB81AF0" FromRole="miembro" ToRole="gender" />
-          <NavigationProperty Name="job" Relationship="Self.FK__job__rut_user__5AEE82B9" FromRole="miembro" ToRole="job" />
+          <NavigationProperty Name="job" Relationship="Self.FK__job__rut_user__60A75C0F" FromRole="miembro" ToRole="job" />
           <NavigationProperty Name="nacionality" Relationship="Self.FK__miembro__id_nac__4BAC3F29" FromRole="miembro" ToRole="nacionality" />
-          <NavigationProperty Name="omitama_date" Relationship="Self.FK__omitama_d__rut_u__619B8048" FromRole="miembro" ToRole="omitama_date" />
+          <NavigationProperty Name="omitama_date" Relationship="Self.FK__omitama_d__rut_u__6754599E" FromRole="miembro" ToRole="omitama_date" />
         </EntityType>
         <EntityType Name="nacionality">
           <Key>
@@ -710,7 +676,7 @@
           </Key>
           <Property Name="id_grado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="grado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="familia" Relationship="Self.FK__familia__id_grad__5DCAEF64" FromRole="omitama" ToRole="familia" />
+          <NavigationProperty Name="familia" Relationship="Self.FK__familia__id_grad__6383C8BA" FromRole="omitama" ToRole="familia" />
         </EntityType>
         <EntityType Name="omitama_date">
           <Key>
@@ -720,7 +686,17 @@
           <Property Name="grado_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="grado_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="miembro" Relationship="Self.FK__omitama_d__rut_u__619B8048" FromRole="omitama_date" ToRole="miembro" />
+          <NavigationProperty Name="miembro" Relationship="Self.FK__omitama_d__rut_u__6754599E" FromRole="omitama_date" ToRole="miembro" />
+        </EntityType>
+        <EntityType Name="provincia">
+          <Key>
+            <PropertyRef Name="id_provincia" />
+          </Key>
+          <Property Name="id_provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_region" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comuna" Relationship="Self.FK__comuna__id_provi__3C69FB99" FromRole="provincia" ToRole="comuna" />
+          <NavigationProperty Name="region" Relationship="Self.FK__provincia__id_re__398D8EEE" FromRole="provincia" ToRole="region" />
         </EntityType>
         <EntityType Name="region">
           <Key>
@@ -728,17 +704,7 @@
           </Key>
           <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_region" Type="String" MaxLength="42" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ciudad" Relationship="Self.FK__ciudad__id_regio__398D8EEE" FromRole="region" ToRole="ciudad" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="provincia" Relationship="Self.FK__provincia__id_re__398D8EEE" FromRole="region" ToRole="provincia" />
         </EntityType>
         <Association Name="FK__admision__rut_us__4F7CD00D">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
@@ -752,7 +718,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cargo__id_cargo___7C4F7684">
+        <Association Name="FK__cargo__id_cargo___571DF1D5">
           <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="1" />
           <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -764,7 +730,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__cargo__rut_user__52593CB8">
+        <Association Name="FK__cargo__rut_user__5812160E">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -773,6 +739,18 @@
             </Principal>
             <Dependent Role="cargo">
               <PropertyRef Name="rut_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cargo_nam__id_gr__5441852A">
+          <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+          <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupo">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="cargo_names">
+              <PropertyRef Name="id_grupo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -788,27 +766,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ciudad__id_regio__398D8EEE">
-          <End Role="region" Type="Self.region" Multiplicity="1" />
-          <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="region">
-              <PropertyRef Name="id_region" />
-            </Principal>
-            <Dependent Role="ciudad">
-              <PropertyRef Name="id_region" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__comuna__id_ciuda__3C69FB99">
-          <End Role="ciudad" Type="Self.ciudad" Multiplicity="1" />
+        <Association Name="FK__comuna__id_provi__3C69FB99">
+          <End Role="provincia" Type="Self.provincia" Multiplicity="1" />
           <End Role="comuna" Type="Self.comuna" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ciudad">
-              <PropertyRef Name="id_ciudad" />
+            <Principal Role="provincia">
+              <PropertyRef Name="id_provincia" />
             </Principal>
             <Dependent Role="comuna">
-              <PropertyRef Name="id_ciudad" />
+              <PropertyRef Name="id_provincia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -836,7 +802,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__estudios__id_gra__571DF1D5">
+        <Association Name="FK__estudios__id_gra__5CD6CB2B">
           <End Role="grado_estudios" Type="Self.grado_estudios" Multiplicity="1" />
           <End Role="estudios" Type="Self.estudios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -848,7 +814,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__estudios__rut_us__5812160E">
+        <Association Name="FK__estudios__rut_us__5DCAEF64">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="estudios" Type="Self.estudios" Multiplicity="*" />
           <ReferentialConstraint>
@@ -860,7 +826,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__familia__id_grad__5DCAEF64">
+        <Association Name="FK__familia__id_grad__6383C8BA">
           <End Role="omitama" Type="Self.omitama" Multiplicity="1" />
           <End Role="familia" Type="Self.familia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -872,7 +838,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__familia__rut_use__5EBF139D">
+        <Association Name="FK__familia__rut_use__6477ECF3">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="familia" Type="Self.familia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -896,7 +862,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__job__rut_user__5AEE82B9">
+        <Association Name="FK__job__rut_user__60A75C0F">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="job" Type="Self.job" Multiplicity="*" />
           <ReferentialConstraint>
@@ -920,7 +886,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__omitama_d__rut_u__619B8048">
+        <Association Name="FK__omitama_d__rut_u__6754599E">
           <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
           <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
           <ReferentialConstraint>
@@ -932,48 +898,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__provincia__id_re__398D8EEE">
+          <End Role="region" Type="Self.region" Multiplicity="1" />
+          <End Role="provincia" Type="Self.provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="provincia">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="db_MahikariTaiEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="admision" EntityType="Self.admision" />
           <EntitySet Name="cargo" EntityType="Self.cargo" />
           <EntitySet Name="cargo_names" EntityType="Self.cargo_names" />
           <EntitySet Name="categoria" EntityType="Self.categoria" />
-          <EntitySet Name="ciudad" EntityType="Self.ciudad" />
           <EntitySet Name="comuna" EntityType="Self.comuna" />
           <EntitySet Name="direccion" EntityType="Self.direccion" />
           <EntitySet Name="estudios" EntityType="Self.estudios" />
           <EntitySet Name="familia" EntityType="Self.familia" />
           <EntitySet Name="gender" EntityType="Self.gender" />
           <EntitySet Name="grado_estudios" EntityType="Self.grado_estudios" />
+          <EntitySet Name="grupo" EntityType="Self.grupo" />
           <EntitySet Name="job" EntityType="Self.job" />
           <EntitySet Name="login" EntityType="Self.login" />
           <EntitySet Name="miembro" EntityType="Self.miembro" />
           <EntitySet Name="nacionality" EntityType="Self.nacionality" />
           <EntitySet Name="omitama" EntityType="Self.omitama" />
           <EntitySet Name="omitama_date" EntityType="Self.omitama_date" />
+          <EntitySet Name="provincia" EntityType="Self.provincia" />
           <EntitySet Name="region" EntityType="Self.region" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK__admision__rut_us__4F7CD00D" Association="Self.FK__admision__rut_us__4F7CD00D">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="admision" EntitySet="admision" />
           </AssociationSet>
-          <AssociationSet Name="FK__cargo__id_cargo___7C4F7684" Association="Self.FK__cargo__id_cargo___7C4F7684">
+          <AssociationSet Name="FK__cargo__id_cargo___571DF1D5" Association="Self.FK__cargo__id_cargo___571DF1D5">
             <End Role="cargo_names" EntitySet="cargo_names" />
             <End Role="cargo" EntitySet="cargo" />
           </AssociationSet>
-          <AssociationSet Name="FK__cargo__rut_user__52593CB8" Association="Self.FK__cargo__rut_user__52593CB8">
+          <AssociationSet Name="FK__cargo__rut_user__5812160E" Association="Self.FK__cargo__rut_user__5812160E">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="cargo" EntitySet="cargo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cargo_nam__id_gr__5441852A" Association="Self.FK__cargo_nam__id_gr__5441852A">
+            <End Role="grupo" EntitySet="grupo" />
+            <End Role="cargo_names" EntitySet="cargo_names" />
           </AssociationSet>
           <AssociationSet Name="FK__miembro__id_cate__49C3F6B7" Association="Self.FK__miembro__id_cate__49C3F6B7">
             <End Role="categoria" EntitySet="categoria" />
             <End Role="miembro" EntitySet="miembro" />
           </AssociationSet>
-          <AssociationSet Name="FK__ciudad__id_regio__398D8EEE" Association="Self.FK__ciudad__id_regio__398D8EEE">
-            <End Role="region" EntitySet="region" />
-            <End Role="ciudad" EntitySet="ciudad" />
-          </AssociationSet>
-          <AssociationSet Name="FK__comuna__id_ciuda__3C69FB99" Association="Self.FK__comuna__id_ciuda__3C69FB99">
-            <End Role="ciudad" EntitySet="ciudad" />
+          <AssociationSet Name="FK__comuna__id_provi__3C69FB99" Association="Self.FK__comuna__id_provi__3C69FB99">
+            <End Role="provincia" EntitySet="provincia" />
             <End Role="comuna" EntitySet="comuna" />
           </AssociationSet>
           <AssociationSet Name="FK__direccion__id_co__3F466844" Association="Self.FK__direccion__id_co__3F466844">
@@ -984,19 +962,19 @@
             <End Role="direccion" EntitySet="direccion" />
             <End Role="miembro" EntitySet="miembro" />
           </AssociationSet>
-          <AssociationSet Name="FK__estudios__id_gra__571DF1D5" Association="Self.FK__estudios__id_gra__571DF1D5">
+          <AssociationSet Name="FK__estudios__id_gra__5CD6CB2B" Association="Self.FK__estudios__id_gra__5CD6CB2B">
             <End Role="grado_estudios" EntitySet="grado_estudios" />
             <End Role="estudios" EntitySet="estudios" />
           </AssociationSet>
-          <AssociationSet Name="FK__estudios__rut_us__5812160E" Association="Self.FK__estudios__rut_us__5812160E">
+          <AssociationSet Name="FK__estudios__rut_us__5DCAEF64" Association="Self.FK__estudios__rut_us__5DCAEF64">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="estudios" EntitySet="estudios" />
           </AssociationSet>
-          <AssociationSet Name="FK__familia__id_grad__5DCAEF64" Association="Self.FK__familia__id_grad__5DCAEF64">
+          <AssociationSet Name="FK__familia__id_grad__6383C8BA" Association="Self.FK__familia__id_grad__6383C8BA">
             <End Role="omitama" EntitySet="omitama" />
             <End Role="familia" EntitySet="familia" />
           </AssociationSet>
-          <AssociationSet Name="FK__familia__rut_use__5EBF139D" Association="Self.FK__familia__rut_use__5EBF139D">
+          <AssociationSet Name="FK__familia__rut_use__6477ECF3" Association="Self.FK__familia__rut_use__6477ECF3">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="familia" EntitySet="familia" />
           </AssociationSet>
@@ -1004,7 +982,7 @@
             <End Role="gender" EntitySet="gender" />
             <End Role="miembro" EntitySet="miembro" />
           </AssociationSet>
-          <AssociationSet Name="FK__job__rut_user__5AEE82B9" Association="Self.FK__job__rut_user__5AEE82B9">
+          <AssociationSet Name="FK__job__rut_user__60A75C0F" Association="Self.FK__job__rut_user__60A75C0F">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="job" EntitySet="job" />
           </AssociationSet>
@@ -1012,9 +990,13 @@
             <End Role="nacionality" EntitySet="nacionality" />
             <End Role="miembro" EntitySet="miembro" />
           </AssociationSet>
-          <AssociationSet Name="FK__omitama_d__rut_u__619B8048" Association="Self.FK__omitama_d__rut_u__619B8048">
+          <AssociationSet Name="FK__omitama_d__rut_u__6754599E" Association="Self.FK__omitama_d__rut_u__6754599E">
             <End Role="miembro" EntitySet="miembro" />
             <End Role="omitama_date" EntitySet="omitama_date" />
+          </AssociationSet>
+          <AssociationSet Name="FK__provincia__id_re__398D8EEE" Association="Self.FK__provincia__id_re__398D8EEE">
+            <End Role="region" EntitySet="region" />
+            <End Role="provincia" EntitySet="provincia" />
           </AssociationSet>
           <FunctionImport Name="allMembers" ReturnType="Collection(db_MahikariTaiModel.allMembers_Result)" />
           <FunctionImport Name="categorias" ReturnType="Collection(String)" />
@@ -1033,23 +1015,13 @@
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="hobbies" Mode="In" Type="String" />
             <Parameter Name="nombre_comuna" Mode="In" Type="String" />
-            <Parameter Name="nombre_ciudad" Mode="In" Type="String" />
+            <Parameter Name="nombre_provincia" Mode="In" Type="String" />
             <Parameter Name="nombre_region" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="eliminarMiembro">
             <Parameter Name="rut_user" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="generos" ReturnType="Collection(String)" />
-          <FunctionImport Name="insertarDireccion">
-            <Parameter Name="calle" Mode="In" Type="String" />
-            <Parameter Name="numero" Mode="In" Type="Int32" />
-            <Parameter Name="nombre_comuna" Mode="In" Type="String" />
-            <Parameter Name="nombre_ciudad" Mode="In" Type="String" />
-            <Parameter Name="nombre_region" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="miembroAllInfo" ReturnType="Collection(db_MahikariTaiModel.miembroAllInfo_Result)">
-            <Parameter Name="rut_user" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="modificarMiembro">
             <Parameter Name="rut_user" Mode="In" Type="String" />
             <Parameter Name="categoria_name" Mode="In" Type="String" />
@@ -1065,47 +1037,10 @@
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="hobbies" Mode="In" Type="String" />
             <Parameter Name="nombre_comuna" Mode="In" Type="String" />
-            <Parameter Name="nombre_ciudad" Mode="In" Type="String" />
+            <Parameter Name="nombre_provincia" Mode="In" Type="String" />
             <Parameter Name="nombre_region" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="nacionalidades" ReturnType="Collection(String)" />
-          <FunctionImport Name="regiones" ReturnType="Collection(String)" />
-          <FunctionImport Name="searchCiudadesPorRegion" ReturnType="Collection(String)">
-            <Parameter Name="nombreRegion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="searchComunasPorCiudad" ReturnType="Collection(String)">
-            <Parameter Name="nombreCiudad" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(db_MahikariTaiModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(db_MahikariTaiModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <ComplexType Name="allMembers_Result">
           <Property Type="String" Name="Rut" Nullable="false" MaxLength="13" />
@@ -1121,38 +1056,9 @@
           <Property Type="String" Name="Calle" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="Numero" Nullable="false" />
           <Property Type="String" Name="Region" Nullable="false" MaxLength="42" />
-          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Provincia" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Comuna" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Hobbies" Nullable="false" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="miembroAllInfo_Result">
-          <Property Type="String" Name="Rut" Nullable="false" MaxLength="13" />
-          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Apellido_Paterno" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="Apellido_Materno" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Genero" Nullable="false" MaxLength="9" />
-          <Property Type="String" Name="Categoria" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Fecha_de_Nacimiento" Nullable="false" />
-          <Property Type="String" Name="Nacionalidad" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="Telefono" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="Calle" Nullable="false" MaxLength="20" />
-          <Property Type="Int32" Name="Numero" Nullable="false" />
-          <Property Type="String" Name="Region" Nullable="false" MaxLength="42" />
-          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Comuna" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Hobbies" Nullable="false" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1173,8 +1079,8 @@
             <EntityTypeMapping TypeName="db_MahikariTaiModel.cargo">
               <MappingFragment StoreEntitySet="cargo">
                 <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
-                <ScalarProperty Name="rut_user" ColumnName="rut_user" />
                 <ScalarProperty Name="id_cargo_name" ColumnName="id_cargo_name" />
+                <ScalarProperty Name="rut_user" ColumnName="rut_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1183,6 +1089,7 @@
               <MappingFragment StoreEntitySet="cargo_names">
                 <ScalarProperty Name="id_cargo_name" ColumnName="id_cargo_name" />
                 <ScalarProperty Name="cargo_name" ColumnName="cargo_name" />
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1194,21 +1101,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ciudad">
-            <EntityTypeMapping TypeName="db_MahikariTaiModel.ciudad">
-              <MappingFragment StoreEntitySet="ciudad">
-                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
-                <ScalarProperty Name="name_ciudad" ColumnName="name_ciudad" />
-                <ScalarProperty Name="id_region" ColumnName="id_region" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="comuna">
             <EntityTypeMapping TypeName="db_MahikariTaiModel.comuna">
               <MappingFragment StoreEntitySet="comuna">
                 <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
                 <ScalarProperty Name="name_comuna" ColumnName="name_comuna" />
-                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="id_provincia" ColumnName="id_provincia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1260,6 +1158,14 @@
               <MappingFragment StoreEntitySet="grado_estudios">
                 <ScalarProperty Name="id_grado_estudios" ColumnName="id_grado_estudios" />
                 <ScalarProperty Name="grado_estudios1" ColumnName="grado_estudios" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupo">
+            <EntityTypeMapping TypeName="db_MahikariTaiModel.grupo">
+              <MappingFragment StoreEntitySet="grupo">
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="name_grupo" ColumnName="name_grupo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1325,22 +1231,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="provincia">
+            <EntityTypeMapping TypeName="db_MahikariTaiModel.provincia">
+              <MappingFragment StoreEntitySet="provincia">
+                <ScalarProperty Name="id_provincia" ColumnName="id_provincia" />
+                <ScalarProperty Name="name_provincia" ColumnName="name_provincia" />
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="region">
             <EntityTypeMapping TypeName="db_MahikariTaiModel.region">
               <MappingFragment StoreEntitySet="region">
                 <ScalarProperty Name="id_region" ColumnName="id_region" />
                 <ScalarProperty Name="name_region" ColumnName="name_region" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="db_MahikariTaiModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1360,7 +1264,7 @@
                 <ScalarProperty Name="Calle" ColumnName="Calle" />
                 <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
                 <ScalarProperty Name="Comuna" ColumnName="Comuna" />
                 <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
               </ComplexTypeMapping>
@@ -1370,58 +1274,8 @@
           <FunctionImportMapping FunctionImportName="crearMiembro" FunctionName="db_MahikariTaiModel.Store.crearMiembro" />
           <FunctionImportMapping FunctionImportName="eliminarMiembro" FunctionName="db_MahikariTaiModel.Store.eliminarMiembro" />
           <FunctionImportMapping FunctionImportName="generos" FunctionName="db_MahikariTaiModel.Store.generos" />
-          <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="db_MahikariTaiModel.Store.insertarDireccion" />
-          <FunctionImportMapping FunctionImportName="miembroAllInfo" FunctionName="db_MahikariTaiModel.Store.miembroAllInfo">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_MahikariTaiModel.miembroAllInfo_Result">
-                <ScalarProperty Name="Rut" ColumnName="Rut" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="Apellido_Paterno" ColumnName="Apellido Paterno" />
-                <ScalarProperty Name="Apellido_Materno" ColumnName="Apellido Materno" />
-                <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Fecha_de_Nacimiento" ColumnName="Fecha de Nacimiento" />
-                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Region" ColumnName="Region" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Comuna" ColumnName="Comuna" />
-                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="modificarMiembro" FunctionName="db_MahikariTaiModel.Store.modificarMiembro" />
           <FunctionImportMapping FunctionImportName="nacionalidades" FunctionName="db_MahikariTaiModel.Store.nacionalidades" />
-          <FunctionImportMapping FunctionImportName="regiones" FunctionName="db_MahikariTaiModel.Store.regiones" />
-          <FunctionImportMapping FunctionImportName="searchCiudadesPorRegion" FunctionName="db_MahikariTaiModel.Store.searchCiudadesPorRegion" />
-          <FunctionImportMapping FunctionImportName="searchComunasPorCiudad" FunctionName="db_MahikariTaiModel.Store.searchComunasPorCiudad" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="db_MahikariTaiModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="db_MahikariTaiModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="db_MahikariTaiModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="db_MahikariTaiModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_MahikariTaiModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="db_MahikariTaiModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_MahikariTaiModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="db_MahikariTaiModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="db_MahikariTaiModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

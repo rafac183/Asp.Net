@@ -17,13 +17,13 @@ namespace MahikariTaiV2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public region()
         {
-            this.ciudad = new HashSet<ciudad>();
+            this.provincia = new HashSet<provincia>();
         }
     
         public int id_region { get; set; }
         public string name_region { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ciudad> ciudad { get; set; }
+        public virtual ICollection<provincia> provincia { get; set; }
     }
 }

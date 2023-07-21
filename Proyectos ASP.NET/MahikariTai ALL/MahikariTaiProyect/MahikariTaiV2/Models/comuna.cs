@@ -22,9 +22,9 @@ namespace MahikariTaiV2.Models
     
         public int id_comuna { get; set; }
         public string name_comuna { get; set; }
-        public int id_ciudad { get; set; }
+        public int id_provincia { get; set; }
     
-        public virtual ciudad ciudad { get; set; }
+        public virtual provincia provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<direccion> direccion { get; set; }
     }

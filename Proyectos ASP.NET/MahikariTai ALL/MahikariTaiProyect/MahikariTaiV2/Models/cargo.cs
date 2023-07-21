@@ -15,8 +15,8 @@ namespace MahikariTaiV2.Models
     public partial class cargo
     {
         public int id_cargo { get; set; }
-        public string rut_user { get; set; }
         public int id_cargo_name { get; set; }
+        public string rut_user { get; set; }
     
         public virtual cargo_names cargo_names { get; set; }
         public virtual miembro miembro { get; set; }

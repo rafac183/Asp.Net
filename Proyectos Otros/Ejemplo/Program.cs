@@ -18,9 +18,9 @@ namespace Ejemplo
         static void Main(string[] args)
         {
             Chile ejemplo = new Chile();
-            //ejemplo.regiones();
-            //ejemplo.provincias("Aysén");
-            ejemplo.comunas("San Antonio");
+            ejemplo.regiones("hkj");
+            ejemplo.provincias(null, "oijubk");
+            ejemplo.comunas(null, "iuyuv");
         }
     }
 }

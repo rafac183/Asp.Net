@@ -17,7 +17,7 @@ namespace Ejemplo
         public string datadir = @"E:\test\geo\";
         public string datadir2 = @"E:\test\geo\CL.txt";
 
-        public void regiones()
+        public void regiones(string si = "")
         {
             GeoFileDownloader downloader = GeoFileDownloader.CreateGeoFileDownloader();
             downloader.DownloadFile("CL.zip", datadir);    // Zipfile will be automatically extracted
@@ -27,18 +27,35 @@ namespace Ejemplo
 
             var regions = data.Where(p => p.FeatureCode.Equals("ADM1")).OrderBy(p => p.Name);
 
-            foreach (var region in regions)
+            
+            if(si.Length > 0)
             {
-                Console.WriteLine(
-                    string.Format(
-                        CultureInfo.InvariantCulture, "{0}",
-                        region.Name
-                    )
-                );
+                var regionMasLarga = regions.OrderByDescending(region => region.Name.Length).FirstOrDefault();
+
+                // Imprime el nombre de la región más larga
+                if (regionMasLarga != null)
+                {
+                    Console.WriteLine(
+                        string.Format(
+                            CultureInfo.InvariantCulture, "La región más larga es: {0} \nTeniendo: {1} caracteres", regionMasLarga.Name, regionMasLarga.Name.Length
+                        )
+                    );
+                }
+            } else
+            {
+                foreach (var region in regions)
+                {
+                    Console.WriteLine(
+                        string.Format(
+                            CultureInfo.InvariantCulture, "{0}",
+                            region.Name
+                        )
+                    );
+                }
             }
         }
 
-        public void provincias(string region)
+        public void provincias(string region, string si = "")
         {
             GeoFileDownloader downloader = GeoFileDownloader.CreateGeoFileDownloader();
             downloader.DownloadFile("CL.zip", datadir);    // Zipfile will be automatically extracted
@@ -46,8 +63,7 @@ namespace Ejemplo
             // Read data into memory
             var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
             
-            // Find the region by its name
-            Console.WriteLine(data.GetType());
+            
 
             if (region != null)
             {
@@ -81,7 +97,7 @@ namespace Ejemplo
             else
             {
                 var provincias = data.Where(p => p.FeatureCode.Equals("ADM2")).OrderBy(p => p.Name);
-                if (provincias.Any())
+                if(si.Length == 0)
                 {
                     foreach (var provincia in provincias)
                     {
@@ -92,15 +108,25 @@ namespace Ejemplo
                             )
                         );
                     }
-                }
-                else
+                } else
                 {
-                    Console.WriteLine("No hay datos");
+                    var regionMasLarga = provincias.OrderByDescending(provincia => provincia.Name.Length).FirstOrDefault();
+
+                    // Imprime el nombre de la región más larga
+                    if (regionMasLarga != null)
+                    {
+                        Console.WriteLine(
+                            string.Format(
+                                CultureInfo.InvariantCulture, "La Provincia más larga es: {0} \nTeniendo: {1} caracteres", regionMasLarga.Name, regionMasLarga.Name.Length
+                            )
+                        );
+                    }
                 }
+
             }
         }
 
-        public void comunas(string provincia)
+        public void comunas(string provincia, string si = "")
         {
             GeoFileDownloader downloader = GeoFileDownloader.CreateGeoFileDownloader();
             downloader.DownloadFile("CL.zip", datadir);    // Zipfile will be automatically extracted
@@ -140,7 +166,7 @@ namespace Ejemplo
             else
             {
                 var comunas = data.Where(p => p.FeatureCode.Equals("ADM3")).OrderBy(p => p.Name);
-                if (comunas.Any())
+                if (si.Length == 0)
                 {
                     foreach (var comuna in comunas)
                     {
@@ -154,7 +180,17 @@ namespace Ejemplo
                 }
                 else
                 {
-                    Console.WriteLine("No hay datos");
+                    var regionMasLarga = comunas.OrderByDescending(comuna => comuna.Name.Length).FirstOrDefault();
+
+                    // Imprime el nombre de la región más larga
+                    if (regionMasLarga != null)
+                    {
+                        Console.WriteLine(
+                            string.Format(
+                                CultureInfo.InvariantCulture, "La Comuna más larga es: {0} \nTeniendo: {1} caracteres", regionMasLarga.Name, regionMasLarga.Name.Length
+                            )
+                        );
+                    }
                 }
             }
 

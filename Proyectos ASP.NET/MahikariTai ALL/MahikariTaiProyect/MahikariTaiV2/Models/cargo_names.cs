@@ -22,8 +22,10 @@ namespace MahikariTaiV2.Models
     
         public int id_cargo_name { get; set; }
         public string cargo_name { get; set; }
+        public int id_grupo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cargo> cargo { get; set; }
+        public virtual grupo grupo { get; set; }
     }
 }

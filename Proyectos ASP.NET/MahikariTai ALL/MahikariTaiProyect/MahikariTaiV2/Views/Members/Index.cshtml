@@ -2,16 +2,11 @@
 @using MahikariTaiV2.SR_DB
 
 @{
-    string region = "";
-    string ciudad = "";
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
     DataSet generos = WS.Generos();
     DataSet nacionalidades = WS.Nacionalidades();
-    DataSet regiones = WS.Regiones();
-    DataSet ciudades = WS.SearchCiudadAndShow(region);
-    DataSet comunas = WS.SearchCiudadAndShow(ciudad);
     DataSet categorias = WS.Categorias();
 }
 
@@ -224,7 +219,7 @@
                     <hr />
                     <div class="form-group">
                         <label for="hobbiesInput">Hobbies</label>
-                        <textarea class="form-control" id="hobbiesInput" rows="3"></textarea>
+                        <textarea class="form-control" id="hobbiesInput" rows="3" required></textarea>
                     </div>
                 </div>
             </div>
@@ -364,9 +359,9 @@
 </div>
 
 <script>
-    var añadirUrl = "@Url.Action("AñadirMiembro", "Members")";
-    var modificarUrl = "@Url.Action("ModificarMiembro", "Members")";
-    var eliminarUrl = "@Url.Action("EliminarMiembro", "Members")";
+    var añadirUrl = "@Url.Action("AñadirMiembros", "Members")";
+    var modificarUrl = "@Url.Action("ModificarMiembros", "Members")";
+    var eliminarUrl = "@Url.Action("EliminarMiembros", "Members")";
     var getRegionesUrl = "@Url.Action("GetRegiones", "Members")"
     var getProvinciasUrl = "@Url.Action("GetProvincias", "Members")";
     var getComunasUrl = "@Url.Action("GetComunas", "Members")";

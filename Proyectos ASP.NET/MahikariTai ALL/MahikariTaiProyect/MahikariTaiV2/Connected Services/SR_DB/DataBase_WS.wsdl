@@ -56,7 +56,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="calle" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="numero" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="region" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="ciudad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="provincia" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="comuna" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="hobbies" type="s:string" />
           </s:sequence>
@@ -92,7 +92,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="calle" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="numero" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="region" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="ciudad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="provincia" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="comuna" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="hobbies" type="s:string" />
           </s:sequence>
@@ -140,65 +140,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="NacionalidadesResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="Regiones">
-        <s:complexType />
-      </s:element>
-      <s:element name="RegionesResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="RegionesResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SearchCiudadAndShow">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="region" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SearchCiudadAndShowResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SearchCiudadAndShowResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
-                </s:sequence>
-              </s:complexType>
-            </s:element>
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SearchComunaAndShow">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ciudad" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SearchComunaAndShowResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SearchComunaAndShowResult">
               <s:complexType>
                 <s:sequence>
                   <s:element ref="s:schema" />
@@ -281,24 +222,6 @@
   <wsdl:message name="NacionalidadesSoapOut">
     <wsdl:part name="parameters" element="tns:NacionalidadesResponse" />
   </wsdl:message>
-  <wsdl:message name="RegionesSoapIn">
-    <wsdl:part name="parameters" element="tns:Regiones" />
-  </wsdl:message>
-  <wsdl:message name="RegionesSoapOut">
-    <wsdl:part name="parameters" element="tns:RegionesResponse" />
-  </wsdl:message>
-  <wsdl:message name="SearchCiudadAndShowSoapIn">
-    <wsdl:part name="parameters" element="tns:SearchCiudadAndShow" />
-  </wsdl:message>
-  <wsdl:message name="SearchCiudadAndShowSoapOut">
-    <wsdl:part name="parameters" element="tns:SearchCiudadAndShowResponse" />
-  </wsdl:message>
-  <wsdl:message name="SearchComunaAndShowSoapIn">
-    <wsdl:part name="parameters" element="tns:SearchComunaAndShow" />
-  </wsdl:message>
-  <wsdl:message name="SearchComunaAndShowSoapOut">
-    <wsdl:part name="parameters" element="tns:SearchComunaAndShowResponse" />
-  </wsdl:message>
   <wsdl:message name="GenerosSoapIn">
     <wsdl:part name="parameters" element="tns:Generos" />
   </wsdl:message>
@@ -335,18 +258,6 @@
     <wsdl:operation name="Nacionalidades">
       <wsdl:input message="tns:NacionalidadesSoapIn" />
       <wsdl:output message="tns:NacionalidadesSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="Regiones">
-      <wsdl:input message="tns:RegionesSoapIn" />
-      <wsdl:output message="tns:RegionesSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="SearchCiudadAndShow">
-      <wsdl:input message="tns:SearchCiudadAndShowSoapIn" />
-      <wsdl:output message="tns:SearchCiudadAndShowSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="SearchComunaAndShow">
-      <wsdl:input message="tns:SearchComunaAndShowSoapIn" />
-      <wsdl:output message="tns:SearchComunaAndShowSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="Generos">
       <wsdl:input message="tns:GenerosSoapIn" />
@@ -406,33 +317,6 @@
     </wsdl:operation>
     <wsdl:operation name="Nacionalidades">
       <soap:operation soapAction="http://tempuri.org/Nacionalidades" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Regiones">
-      <soap:operation soapAction="http://tempuri.org/Regiones" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SearchCiudadAndShow">
-      <soap:operation soapAction="http://tempuri.org/SearchCiudadAndShow" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SearchComunaAndShow">
-      <soap:operation soapAction="http://tempuri.org/SearchComunaAndShow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -508,33 +392,6 @@
     </wsdl:operation>
     <wsdl:operation name="Nacionalidades">
       <soap12:operation soapAction="http://tempuri.org/Nacionalidades" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Regiones">
-      <soap12:operation soapAction="http://tempuri.org/Regiones" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SearchCiudadAndShow">
-      <soap12:operation soapAction="http://tempuri.org/SearchCiudadAndShow" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SearchComunaAndShow">
-      <soap12:operation soapAction="http://tempuri.org/SearchComunaAndShow" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

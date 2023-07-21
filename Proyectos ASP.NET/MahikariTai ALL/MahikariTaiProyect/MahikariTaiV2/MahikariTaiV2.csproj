@@ -224,9 +224,6 @@
     <Compile Include="Models\categoria.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ciudad.cs">
-      <DependentUpon>MahikariTai.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\comuna.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
@@ -244,6 +241,9 @@
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\grado_estudios.cs">
+      <DependentUpon>MahikariTai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\grupo.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -273,9 +273,6 @@
     <Compile Include="Models\miembro.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\miembroAllInfo_Result.cs">
-      <DependentUpon>MahikariTai.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\nacionality.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
@@ -285,16 +282,10 @@
     <Compile Include="Models\omitama_date.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\provincia.cs">
+      <DependentUpon>MahikariTai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\region.cs">
-      <DependentUpon>MahikariTai.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>MahikariTai.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>MahikariTai.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -634,6 +625,8 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Connected Services\SR_DB\DataBase_WS.wsdl" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <Content Include="libman.json" />
+    <Content Include="lib\CL.zip" />
     <EntityDeploy Include="Models\MahikariTai.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MahikariTai.Designer.cs</LastGenOutput>
@@ -641,8 +634,6 @@
     <Content Include="Models\MahikariTai.edmx.diagram">
       <DependentUpon>MahikariTai.edmx</DependentUpon>
     </Content>
-    <Content Include="libman.json" />
-    <Content Include="lib\CL.zip" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\JavaScriptMembers.js" />
     <Content Include="Scripts\JavaScriptSelect.js" />

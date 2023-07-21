@@ -29,8 +29,8 @@ namespace MahikariTaiV2.Controllers
                          join ge in db.gender on mi.id_gender equals ge.id_gender
                          join dir in db.direccion on mi.id_direccion equals dir.id_direccion
                          join co in db.comuna on dir.id_comuna equals co.id_comuna
-                         join ci in db.ciudad on co.id_ciudad equals ci.id_ciudad
-                         join re in db.region on ci.id_region equals re.id_region
+                         join pr in db.provincia on co.id_provincia equals pr.id_provincia
+                         join re in db.region on pr.id_region equals re.id_region
                          where cat.categoria_name == "Shonenbu"
                          select new ElIntegrante
                          {
@@ -47,7 +47,7 @@ namespace MahikariTaiV2.Controllers
                              street = dir.calle,
                              number = dir.number.ToString(),
                              region = re.name_region,
-                             ciudad = ci.name_ciudad,
+                             provincia = pr.name_provincia,
                              comuna = co.name_comuna,
                              hobbies = mi.hobbies
                          };
@@ -64,8 +64,8 @@ namespace MahikariTaiV2.Controllers
                          join ge in db.gender on mi.id_gender equals ge.id_gender
                          join dir in db.direccion on mi.id_direccion equals dir.id_direccion
                          join co in db.comuna on dir.id_comuna equals co.id_comuna
-                         join ci in db.ciudad on co.id_ciudad equals ci.id_ciudad
-                         join re in db.region on ci.id_region equals re.id_region
+                         join pr in db.provincia on co.id_provincia equals pr.id_provincia
+                         join re in db.region on pr.id_region equals re.id_region
                          where cat.categoria_name == "Seinenbu"
                          select new ElIntegrante
                          {
@@ -82,7 +82,7 @@ namespace MahikariTaiV2.Controllers
                              street = dir.calle,
                              number = dir.number.ToString(),
                              region = re.name_region,
-                             ciudad = ci.name_ciudad,
+                             provincia = pr.name_provincia,
                              comuna = co.name_comuna,
                              hobbies = mi.hobbies
                          };
@@ -99,8 +99,8 @@ namespace MahikariTaiV2.Controllers
                          join ge in db.gender on mi.id_gender equals ge.id_gender
                          join dir in db.direccion on mi.id_direccion equals dir.id_direccion
                          join co in db.comuna on dir.id_comuna equals co.id_comuna
-                         join ci in db.ciudad on co.id_ciudad equals ci.id_ciudad
-                         join re in db.region on ci.id_region equals re.id_region
+                         join pr in db.provincia on co.id_provincia equals pr.id_provincia
+                         join re in db.region on pr.id_region equals re.id_region
                          where cat.categoria_name == "Seinenbu"
                          select new ElIntegrante
                          {
@@ -117,7 +117,7 @@ namespace MahikariTaiV2.Controllers
                              street = dir.calle,
                              number = dir.number.ToString(),
                              region = re.name_region,
-                             ciudad = ci.name_ciudad,
+                             provincia = pr.name_provincia,
                              comuna = co.name_comuna,
                              hobbies = mi.hobbies
                          };
@@ -135,8 +135,8 @@ namespace MahikariTaiV2.Controllers
                          join ge in db.gender on mi.id_gender equals ge.id_gender
                          join dir in db.direccion on mi.id_direccion equals dir.id_direccion
                          join co in db.comuna on dir.id_comuna equals co.id_comuna
-                         join ci in db.ciudad on co.id_ciudad equals ci.id_ciudad
-                         join re in db.region on ci.id_region equals re.id_region
+                         join pr in db.provincia on co.id_provincia equals pr.id_provincia
+                         join re in db.region on pr.id_region equals re.id_region
                          where cat.categoria_name == "Seijimbu"
                          select new ElIntegrante
                          {
@@ -153,7 +153,7 @@ namespace MahikariTaiV2.Controllers
                              street = dir.calle,
                              number = dir.number.ToString(),
                              region = re.name_region,
-                             ciudad = ci.name_ciudad,
+                             provincia = pr.name_provincia,
                              comuna = co.name_comuna,
                              hobbies = mi.hobbies
                          };
@@ -163,11 +163,11 @@ namespace MahikariTaiV2.Controllers
 
         //Añadir Miembro a la base de datos
         [HttpPost]
-        public JsonResult AñadirMiembro(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string ciudad, string comuna, string hobbies)
+        public JsonResult AñadirMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            WS.AñadirMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
+            WS.AñadirMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
 
             var resultado = new
             {
@@ -181,11 +181,11 @@ namespace MahikariTaiV2.Controllers
 
         //Modificar Miembro a la base de datos
         [HttpPost]
-        public JsonResult ModificarMiembro(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string ciudad, string comuna, string hobbies)
+        public JsonResult ModificarMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            WS.ModificarMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
+            WS.ModificarMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
 
             var resultado = new
             {
@@ -199,7 +199,7 @@ namespace MahikariTaiV2.Controllers
 
         //Eliminar miembro de la base de datos
         [HttpPost]
-        public JsonResult EliminarMiembro(string rut)
+        public JsonResult EliminarMiembros(string rut)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
@@ -243,7 +243,7 @@ namespace MahikariTaiV2.Controllers
                     street = row["Calle"].ToString(),
                     number = row["Numero"].ToString(),
                     region = row["Region"].ToString(),
-                    ciudad = row["Ciudad"].ToString(),
+                    provincia = row["Provincia"].ToString(),
                     comuna = row["Comuna"].ToString(),
                     hobbies = row["Hobbies"].ToString()
                 };
@@ -283,7 +283,7 @@ namespace MahikariTaiV2.Controllers
                     street = row["Calle"].ToString(),
                     number = row["Numero"].ToString(),
                     region = row["Region"].ToString(),
-                    ciudad = row["Ciudad"].ToString(),
+                    provincia = row["Provincia"].ToString(),
                     comuna = row["Comuna"].ToString(),
                     hobbies = row["Hobbies"].ToString()
                 };
@@ -294,24 +294,6 @@ namespace MahikariTaiV2.Controllers
 
             return Json(new { miembros = miembro }, JsonRequestBehavior.AllowGet);
         }
-
-        //Traer las ciudades de cada region desde la base de datos
-        [HttpPost]
-        public JsonResult GetCiudadesByRegion(string region)
-        {
-            // Lógica para obtener las ciudades según la región desde tu servicio web
-            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            DataSet ciudades = WS.SearchCiudadAndShow(region);
-
-            var ciudadesList = new List<string>();
-            foreach (DataRow row in ciudades.Tables[0].Rows)
-            {
-                ciudadesList.Add(row["Ciudad"].ToString());
-            }
-
-            return Json(new { ciudades = ciudadesList }, JsonRequestBehavior.AllowGet);
-        }
-
         
         [HttpPost]
         public JsonResult GetRegiones()
