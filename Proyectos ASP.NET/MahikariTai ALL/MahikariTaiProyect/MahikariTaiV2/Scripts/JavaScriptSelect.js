@@ -60,7 +60,7 @@ function allInfoSelect(json) {
     $("#phoneTxt").html(json[9]);
     $("#streetTxt").html(json[10]);
     $("#regionTxt").html(json[11]);
-    $("#ciudadTxt").html(json[12]);
+    $("#provinciaTxt").html(json[12]);
     $("#comunaTxt").html(json[13]);
     $("#hobbiesTxt").html(json[14]);
     $("#modalAllInfo").modal("show")

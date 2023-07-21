@@ -65,7 +65,7 @@ $(document).ready(function () {
             tablaData.column(-1).visible(true);
         }
     });
-
+    regionsSelect();
 });
 
 //Configuracion del Boton Toda la Informacion del integrante
@@ -155,24 +155,11 @@ function abrirModal(json) {
     $("#phoneInput").val("");
     $("#streetInput").val("");
     $("#numberInput").val("");
-    $("#regionSelect").val($("#regionSelect option:first").val()).empty();
+    $("#regionSelect").val($("#regionSelect option:first").val())/*.empty()*/;
     $("#provinciaSelect").val($("#provinciaSelect option:first").val()).prop('disabled', true);
     $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
     $("#hobbiesInput").val("");
-    $.ajax({
-        url: getRegionesUrl,
-        type: "POST",
-        success: function (data) {
-            $('#regionSelect').append('<option value="" disabled selected>Elige Una...</option>');
-            $.each(data.regiones, function (index, region) {
-                $('#regionSelect').append('<option value="' + region + '">' + region + '</option>');
-            });
-        },
-        error: function () {
-            // Manejar el error en caso de que la llamada AJAX falle
-            console.error('Error al obtener las regiones');
-        }
-    });
+    
 
     if (json != null) {
         title.innerText = "Editar Miembro";
@@ -374,6 +361,22 @@ function abrirWorkStudy() {
 }
 
 
+
+function regionsSelect() {
+    $.ajax({
+        url: getRegionesUrl,
+        type: "POST",
+        success: function (data) {
+            $.each(data.regiones, function (index, region) {
+                $('#regionSelect').append('<option value="' + region + '">' + region + '</option>');
+            });
+        },
+        error: function () {
+            // Manejar el error en caso de que la llamada AJAX falle
+            console.error('Error al obtener las regiones');
+        }
+    });
+}
 
 //Funcion para Traer Ciudades de cierta Region
 $('#regionSelect').change(function () {
