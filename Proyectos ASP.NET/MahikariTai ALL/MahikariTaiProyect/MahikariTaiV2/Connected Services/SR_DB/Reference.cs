@@ -46,7 +46,7 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies);
         
@@ -65,7 +65,7 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies);
         
@@ -85,7 +85,7 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies);
         
@@ -104,7 +104,7 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies);
         
@@ -121,27 +121,6 @@ namespace MahikariTaiV2.SR_DB {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Nacionalidades", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> NacionalidadesAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Regiones", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet Regiones();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Regiones", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> RegionesAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchCiudadAndShow", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet SearchCiudadAndShow(string region);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchCiudadAndShow", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> SearchCiudadAndShowAsync(string region);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchComunaAndShow", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet SearchComunaAndShow(string ciudad);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SearchComunaAndShow", ReplyAction="*")]
-        System.Threading.Tasks.Task<System.Data.DataSet> SearchComunaAndShowAsync(string ciudad);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Generos", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -215,10 +194,10 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies) {
-            return base.Channel.AñadirMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
+            return base.Channel.AñadirMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
         }
         
         public System.Threading.Tasks.Task<System.Data.DataSet> AñadirMiembroAsync(
@@ -235,10 +214,10 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies) {
-            return base.Channel.AñadirMiembroAsync(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
+            return base.Channel.AñadirMiembroAsync(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
         }
         
         public System.Data.DataSet ModificarMiembro(
@@ -255,10 +234,10 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies) {
-            return base.Channel.ModificarMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
+            return base.Channel.ModificarMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
         }
         
         public System.Threading.Tasks.Task<System.Data.DataSet> ModificarMiembroAsync(
@@ -275,10 +254,10 @@ namespace MahikariTaiV2.SR_DB {
                     string calle, 
                     int numero, 
                     string region, 
-                    string ciudad, 
+                    string provincia, 
                     string comuna, 
                     string hobbies) {
-            return base.Channel.ModificarMiembroAsync(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, ciudad, comuna, hobbies);
+            return base.Channel.ModificarMiembroAsync(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
         }
         
         public System.Data.DataSet EliminarMiembro(string rut) {
@@ -295,30 +274,6 @@ namespace MahikariTaiV2.SR_DB {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> NacionalidadesAsync() {
             return base.Channel.NacionalidadesAsync();
-        }
-        
-        public System.Data.DataSet Regiones() {
-            return base.Channel.Regiones();
-        }
-        
-        public System.Threading.Tasks.Task<System.Data.DataSet> RegionesAsync() {
-            return base.Channel.RegionesAsync();
-        }
-        
-        public System.Data.DataSet SearchCiudadAndShow(string region) {
-            return base.Channel.SearchCiudadAndShow(region);
-        }
-        
-        public System.Threading.Tasks.Task<System.Data.DataSet> SearchCiudadAndShowAsync(string region) {
-            return base.Channel.SearchCiudadAndShowAsync(region);
-        }
-        
-        public System.Data.DataSet SearchComunaAndShow(string ciudad) {
-            return base.Channel.SearchComunaAndShow(ciudad);
-        }
-        
-        public System.Threading.Tasks.Task<System.Data.DataSet> SearchComunaAndShowAsync(string ciudad) {
-            return base.Channel.SearchComunaAndShowAsync(ciudad);
         }
         
         public System.Data.DataSet Generos() {

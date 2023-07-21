@@ -26,7 +26,7 @@ namespace MahikariTaiV2.Models
         public string Calle { get; set; }
         public int Numero { get; set; }
         public string Region { get; set; }
-        public string Ciudad { get; set; }
+        public string Provincia { get; set; }
         public string Comuna { get; set; }
         public string Hobbies { get; set; }
     }

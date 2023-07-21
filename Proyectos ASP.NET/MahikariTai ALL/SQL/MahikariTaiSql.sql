@@ -6,14 +6,14 @@ use db_MahikariTai;
 
 create table region (
 id_region int not null identity primary key,
-name_region varchar(42) not null
+name_region varchar(50) not null
 );
 
 use db_MahikariTai;
 
-create table ciudad (
-id_ciudad int not null identity primary key,
-name_ciudad varchar(50) not null,
+create table provincia (
+id_provincia int not null identity primary key,
+name_provincia varchar(40) not null,
 id_region int not null references region
 );
 
@@ -21,8 +21,8 @@ use db_MahikariTai;
 
 create table comuna (
 id_comuna int not null identity primary key,
-name_comuna varchar(50) not null,
-id_ciudad int not null references ciudad
+name_comuna varchar(30) not null,
+id_provincia int not null references provincia
 );
 
 use db_MahikariTai;
@@ -102,9 +102,19 @@ rut_user varchar(13) not null references miembro
 
 --Cargo Miyakusha
 
+use db_MahikariTai;
+
+create table grupo (
+id_grupo int not null identity primary key,
+name_grupo varchar(10) not null
+);
+
+use db_MahikariTai;
+
 create table cargo_names (
 id_cargo_name int not null identity primary key,
-cargo_name varchar(20) not null
+cargo_name varchar(20) not null,
+id_grupo int not null references grupo
 );
 
 use db_MahikariTai;
@@ -129,7 +139,7 @@ rut_user varchar(13) not null references miembro
 --alter table cargo
 --ADD id_cargo_name int not null REFERENCES cargo_names(id_cargo_name);
 
-select * from cargo
+--select * from cargo
 
 --Estudios Miembro y/o Trabajo
 
@@ -193,8 +203,8 @@ clave varchar(50)
 );
 
 
-SELECT di.calle as Calle, di.number as Numero, co.name_comuna as Comuna, ci.name_ciudad As Ciudad, re.name_region as Region
+SELECT di.calle as Calle, di.number as Numero, co.name_comuna as Comuna, pr.name_provincia As Provincia, re.name_region as Region
 FROM direccion AS di
 JOIN comuna AS co ON di.id_comuna = co.id_comuna
-JOIN ciudad AS ci ON ci.id_ciudad = co.id_ciudad
-JOIN region AS re ON re.id_region = ci.id_region
+JOIN provincia AS pr ON pr.id_provincia = co.id_provincia
+JOIN region AS re ON re.id_region = pr.id_region

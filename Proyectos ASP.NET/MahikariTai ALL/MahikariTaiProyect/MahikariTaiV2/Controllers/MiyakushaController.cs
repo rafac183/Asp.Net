@@ -23,8 +23,8 @@ namespace MahikariTaiV2.Controllers
                          join ge in db.gender on mi.id_gender equals ge.id_gender
                          join dir in db.direccion on mi.id_direccion equals dir.id_direccion
                          join co in db.comuna on dir.id_comuna equals co.id_comuna
-                         join ci in db.ciudad on co.id_ciudad equals ci.id_ciudad
-                         join re in db.region on ci.id_region equals re.id_region
+                         join pr in db.provincia on co.id_provincia equals pr.id_provincia
+                         join re in db.region on pr.id_region equals re.id_region
                          where cat.categoria_name == "Shonenbu"
                          select new ElIntegrante
                          {
@@ -41,7 +41,7 @@ namespace MahikariTaiV2.Controllers
                              street = dir.calle,
                              number = dir.number.ToString(),
                              region = re.name_region,
-                             ciudad = ci.name_ciudad,
+                             provincia = pr.name_provincia,
                              comuna = co.name_comuna,
                              hobbies = mi.hobbies
                          };
