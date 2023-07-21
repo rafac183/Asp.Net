@@ -93,8 +93,8 @@
                         <p id="streetTxt" class="text-md-start"></p>
                         <label class="fw-bold" for="exampleFormControlTextarea1">Region</label>
                         <p id="regionTxt" class="text-md-start"></p>
-                        <label class="fw-bold" for="exampleFormControlTextarea1">Ciudad</label>
-                        <p id="ciudadTxt" class="text-md-start"></p>
+                        <label class="fw-bold" for="exampleFormControlTextarea1">Provincia</label>
+                        <p id="provinciaTxt" class="text-md-start"></p>
                         <label class="fw-bold" for="exampleFormControlTextarea1">Comuna</label>
                         <p id="comunaTxt" class="text-md-start"></p>
                         <label class="fw-bold" for="exampleFormControlTextarea1">Hobbies</label>
@@ -204,15 +204,11 @@
                         <label for="regionSelect" class="form-label">Region</label>
                         <select id="regionSelect" name="Region" class="form-select" required>
                             <option disabled selected>Elige Una...</option>
-                            @foreach (DataRow row in regiones.Tables[0].Rows)
-                            {
-                                <option value="@row["Regiones"]">@row["Regiones"]</option>
-                            }
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label for="ciudadSelect" class="form-label">Ciudad</label>
-                        <select id="ciudadSelect" name="Ciudad" class="form-select" aria-label="Default select example" required>
+                        <label for="ciudadSelect" class="form-label">Provincia</label>
+                        <select id="provinciaSelect" name="Ciudad" class="form-select" aria-label="Default select example" required>
                             <option disabled selected>Elige Una...</option>
                         </select>
                     </div>
@@ -371,6 +367,7 @@
     var añadirUrl = "@Url.Action("AñadirMiembro", "Members")";
     var modificarUrl = "@Url.Action("ModificarMiembro", "Members")";
     var eliminarUrl = "@Url.Action("EliminarMiembro", "Members")";
-    var getCiudadesUrl = "@Url.Action("GetCiudadesByRegion", "Members")";
-    var getComunasUrl = "@Url.Action("GetComunasByCiudad", "Members")";
+    var getRegionesUrl = "@Url.Action("GetRegiones", "Members")"
+    var getProvinciasUrl = "@Url.Action("GetProvincias", "Members")";
+    var getComunasUrl = "@Url.Action("GetComunas", "Members")";
 </script>

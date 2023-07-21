@@ -65,6 +65,7 @@ $(document).ready(function () {
             tablaData.column(-1).visible(true);
         }
     });
+
 });
 
 //Configuracion del Boton Toda la Informacion del integrante
@@ -93,7 +94,7 @@ function allInfo(json) {
     $("#phoneTxt").html(json.phone);
     $("#streetTxt").html(json.street + " " + json.number);
     $("#regionTxt").html(json.region);
-    $("#ciudadTxt").html(json.ciudad);
+    $("#provinciaTxt").html(json.ciudad);
     $("#comunaTxt").html(json.comuna);
     $("#hobbiesTxt").html(json.hobbies);
     $("#modalAllInfo").modal("show")
@@ -155,9 +156,22 @@ function abrirModal(json) {
     $("#streetInput").val("");
     $("#numberInput").val("");
     $("#regionSelect").val($("#regionSelect option:first").val());
-    $("#ciudadSelect").val($("#ciudadSelect option:first").val()).prop('disabled', true);
+    $("#provinciaSelect").val($("#provinciaSelect option:first").val()).prop('disabled', true);
     $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
     $("#hobbiesInput").val("");
+    $.ajax({
+        url: getRegionesUrl,
+        type: "POST",
+        success: function (data) {
+            $.each(data.regiones, function (index, region) {
+                $('#regionSelect').append('<option value="' + region + '">' + region + '</option>');
+            });
+        },
+        error: function () {
+            // Manejar el error en caso de que la llamada AJAX falle
+            console.error('Error al obtener las regiones');
+        }
+    })
 
     if (json != null) {
         title.innerText = "Editar Miembro";
@@ -178,20 +192,20 @@ function abrirModal(json) {
         $("#regionSelect").val(json.region);
         // Obtener las ciudades de la región seleccionada
         $.ajax({
-            url: getCiudadesUrl,
+            url: getProvinciasUrl,
             type: "POST",
             data: { region: json.region }, // Enviar el valor de la región seleccionada
             success: function (data) {
                 // Limpiar las opciones actuales del selector de ciudades
-                $('#ciudadSelect').empty();
+                $('#provinciaSelect').empty();
 
-                $('#ciudadSelect').append('<option value="" disabled selected>Elige Una...</option>');
+                $('#provinciaSelect').append('<option value="" disabled selected>Elige Una...</option>');
                 // Iterar sobre las ciudades devueltas y agregarlas como opciones en el select
-                $.each(data.ciudades, function (index, ciudad) {
-                    $('#ciudadSelect').append('<option value="' + ciudad + '">' + ciudad + '</option>');
+                $.each(data.provincias, function (index, provincia) {
+                    $('#provinciaSelect').append('<option value="' + provinciaS + '">' + provincia + '</option>');
                 });
                 // Asignar la ciudad seleccionada al campo correspondiente
-                $("#ciudadSelect").val(json.ciudad).prop('disabled', false);
+                $("#provinciaSelect").val(json.ciudad).prop('disabled', false);
             },
             error: function () {
                 console.error('Error al obtener las ciudades por región');
@@ -243,7 +257,7 @@ function guardar() {
         street: $("#streetInput").val(),
         number: parseInt($("#numberInput").val()),
         region: $("#regionSelect").val(),
-        ciudad: $("#ciudadSelect").val(),
+        ciudad: $("#provinciaSelect").val(),
         comuna: $("#comunaSelect").val(),
         hobbies: $("#hobbiesInput").val()
     }
@@ -360,19 +374,19 @@ $('#regionSelect').change(function () {
 
     // Realizar la llamada AJAX
     $.ajax({
-        url: getCiudadesUrl,
+        url: getProvinciasUrl,
         type: "POST",
         data: { region: selectedRegion }, // Enviar el valor de la región seleccionada
         success: function (data) {
             // Limpiar las opciones actuales del select de ciudades
             $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
-            $('#ciudadSelect').prop('disabled', false);
-            $('#ciudadSelect').empty();
+            $('#provinciaSelect').prop('disabled', false);
+            $('#provinciaSelect').empty();
 
-            $('#ciudadSelect').append('<option value="" disabled selected>Elige Una...</option>');
+            $('#provinciaSelect').append('<option value="" disabled selected>Elige Una...</option>');
             // Iterar sobre las ciudades devueltas y agregarlas como opciones en el select
-            $.each(data.ciudades, function (index, ciudad) {
-                $('#ciudadSelect').append('<option value="' + ciudad + '">' + ciudad + '</option>');
+            $.each(data.provincias, function (index, provincia) {
+                $('#provinciaSelect').append('<option value="' + provincia + '">' + provincia + '</option>');
             });
         },
         error: function () {
@@ -384,14 +398,14 @@ $('#regionSelect').change(function () {
 
 //Funcion para Traer Comunas de cierta Ciudad
 
-$('#ciudadSelect').change(function () {
-    var selectedCiudad = $(this).val(); // Obtener el valor seleccionado
+$('#provinciaSelect').change(function () {
+    var selectedProvincia = $(this).val(); // Obtener el valor seleccionado
 
     // Realizar la llamada AJAX
     $.ajax({
         url: getComunasUrl,
         type: "POST",
-        data: { ciudad: selectedCiudad }, // Enviar el valor de la región seleccionada
+        data: { provincia: selectedProvincia }, // Enviar el valor de la región seleccionada
         success: function (data) {
             // Limpiar las opciones actuales del select de ciudades
             $('#comunaSelect').prop('disabled', false);

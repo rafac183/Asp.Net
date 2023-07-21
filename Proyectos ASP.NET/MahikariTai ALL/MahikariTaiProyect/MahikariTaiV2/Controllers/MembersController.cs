@@ -4,6 +4,7 @@ using NGeoNames;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -311,24 +312,8 @@ namespace MahikariTaiV2.Controllers
             return Json(new { ciudades = ciudadesList }, JsonRequestBehavior.AllowGet);
         }
 
-        //Traer las comunas de cada ciudad desde la base de datos
+        
         [HttpPost]
-        public JsonResult GetComunasByCiudad(string ciudad)
-        {
-            // Lógica para obtener las comunas según la ciudad desde tu servicio web
-            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            DataSet comunas = WS.SearchComunaAndShow(ciudad);
-
-            var comunasList = new List<string>();
-            foreach (DataRow row in comunas.Tables[0].Rows)
-            {
-                comunasList.Add(row["Comuna"].ToString());
-            }
-
-            return Json(new { comunas = comunasList }, JsonRequestBehavior.AllowGet);
-        }
-
-
         public JsonResult GetRegiones()
         {
             string datadir2 = Server.MapPath("~/lib/CL.txt");
@@ -336,7 +321,6 @@ namespace MahikariTaiV2.Controllers
             try
             {
                 var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
-
                 var regions = data.Where(p => p.FeatureCode.Equals("ADM1")).OrderBy(p => p.Name);
 
                 foreach (var region in regions)
@@ -352,10 +336,11 @@ namespace MahikariTaiV2.Controllers
             return Json(new { regiones = regionesList }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetCiudades(string region)
+        [HttpPost]
+        public JsonResult GetProvincias(string region)
         {
             string datadir2 = Server.MapPath("~/lib/CL.txt");
-            var ciudadesList = new List<string>();
+            var provinciasList = new List<string>();
             try
             {
                 var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
@@ -365,7 +350,7 @@ namespace MahikariTaiV2.Controllers
 
                 foreach (var provincia in provincias)
                 {
-                    ciudadesList.Add(provincia.Name);
+                    provinciasList.Add(provincia.Name);
                 }
 
             }
@@ -373,10 +358,11 @@ namespace MahikariTaiV2.Controllers
             {
                 Console.WriteLine(ex.ToString());
             }
-            return Json(new { ciudades = ciudadesList }, JsonRequestBehavior.AllowGet);
+            return Json(new { provincias = provinciasList }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetComunas(string ciudad)
+        [HttpPost]
+        public JsonResult GetComunas(string provincia)
         {
             string datadir2 = Server.MapPath("~/lib/CL.txt");
             var comunasList = new List<string>();
@@ -384,7 +370,7 @@ namespace MahikariTaiV2.Controllers
             {
                 var data = GeoFileReader.ReadExtendedGeoNames(datadir2).Where(p => p.CountryCode.Equals("CL", StringComparison.OrdinalIgnoreCase)).ToArray();
 
-                var provinciaInfo = data.FirstOrDefault(p => p.FeatureCode.Equals("ADM2") && p.Name.Equals(ciudad, StringComparison.OrdinalIgnoreCase));
+                var provinciaInfo = data.FirstOrDefault(p => p.FeatureCode.Equals("ADM2") && p.Name.Equals(provincia, StringComparison.OrdinalIgnoreCase));
                 var comunas = data.Where(p => p.FeatureCode.Equals("ADM3") && p.Admincodes[1].Equals(provinciaInfo.Admincodes[1])).OrderBy(p => p.Name);
 
                 foreach (var comuna in comunas)
