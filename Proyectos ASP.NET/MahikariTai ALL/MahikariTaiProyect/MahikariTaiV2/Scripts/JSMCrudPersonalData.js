@@ -1,7 +1,6 @@
 ﻿var txt = document.getElementById("txtModalAse");
 var title = document.getElementById("titleModalAse");
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
-
 //Boton Eliminar Integrante
 $("#tablaMembers tbody").on(touchEvent, '.btn-eliminar', function () {
     fila = $(this).closest('tr');
@@ -11,6 +10,14 @@ $("#tablaMembers tbody").on(touchEvent, '.btn-eliminar', function () {
     $(".btn-siDelete").show();
     $(".btn-noDelete").show();
     $("#modalUserEstado").modal("show");
+});
+
+$('#modalUserEstado').on(touchEvent, '.btn-noDelete', function () {
+    setTimeout(function () {
+        $(".btn-siDelete").hide();
+        $(".btn-noDelete").hide();
+        $(".btn-closes").show();
+    }, 1000);
 });
 
 $('#modalUserEstado').on(touchEvent, '.btn-siDelete', function () {
@@ -148,10 +155,8 @@ function guardar() {
                 hobbies: Miembro.hobbies
             },
             success: function (response) {
-                // Handle the successful response from the server
-                console.log(response);
-                txt.innerText = response.mensaje;
-                title.innerText = response.mensaje2;
+                txt.innerHTML = response.mensaje;
+                title.innerHTML = response.mensaje2;
             },
             error: function () {
                 console.error("Error al Añadir");
@@ -180,10 +185,8 @@ function guardar() {
                 hobbies: Miembro.hobbies
             },
             success: function (response) {
-                // Handle the successful response from the server
-                console.log(response.mensaje);
-                txt.innerText = response.mensaje;
-                title.innerText = response.mensaje2;
+                txt.innerHTML = response.mensaje;
+                title.innerHTML = response.mensaje2;
             },
             error: function () {
                 console.error("Error al Modificar")

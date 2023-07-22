@@ -150,30 +150,53 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Obtener el ID de la región
-    DECLARE @regionId int
-    SELECT @regionId = id_region FROM region WHERE name_region = @nombre_region;
-
-    -- Obtener el ID de la ciudad
-    DECLARE @provinciaId int
-    SELECT @provinciaId = id_provincia FROM provincia WHERE name_provincia = @nombre_provincia AND id_region = @regionId;
-
-    -- Obtener el ID de la comuna
+    -- Obtener o insertar la ID de la comuna
     DECLARE @comunaId int
-    SELECT @comunaId = id_comuna FROM comuna WHERE name_comuna = @nombre_comuna AND id_provincia = @provinciaId;
+    SELECT @comunaId = id_comuna FROM comuna WHERE name_comuna = @nombre_comuna;
 
-    -- Eliminar la dirección existente del miembro
-    DELETE FROM direccion WHERE id_direccion IN (
-        SELECT id_direccion FROM miembro WHERE rut_user = @rut_user
-    );
+    IF @comunaId IS NULL
+    BEGIN
+        -- Obtener o insertar la ID de la provincia
+        DECLARE @provinciaId int
+        SELECT @provinciaId = id_provincia FROM provincia WHERE name_provincia = @nombre_provincia;
 
-    -- Insertar una nueva dirección para el miembro
-    INSERT INTO direccion (calle, number, id_comuna)
-    VALUES (@calle, @number, @comunaId);
+        IF @provinciaId IS NULL
+        BEGIN
+            -- Obtener o insertar la ID de la región
+            DECLARE @regionId int
+            SELECT @regionId = id_region FROM region WHERE name_region = @nombre_region;
 
-    -- Obtener el ID de la dirección recién insertada
+            IF @regionId IS NULL
+            BEGIN
+                INSERT INTO region (name_region) VALUES (@nombre_region);
+                SET @regionId = SCOPE_IDENTITY();
+            END
+
+            INSERT INTO provincia (name_provincia, id_region) VALUES (@nombre_provincia, @regionId);
+            SET @provinciaId = SCOPE_IDENTITY();
+        END
+
+        INSERT INTO comuna (name_comuna, id_provincia) VALUES (@nombre_comuna, @provinciaId);
+        SET @comunaId = SCOPE_IDENTITY();
+    END
+
+    -- Obtener o insertar la ID de la dirección
     DECLARE @direccionId int
-    SET @direccionId = SCOPE_IDENTITY();
+    SELECT @direccionId = id_direccion FROM direccion WHERE calle = @calle AND number = @number;
+
+    IF @direccionId IS NULL
+    BEGIN
+        INSERT INTO direccion (calle, number, id_comuna)
+        VALUES (@calle, @number, @comunaId);
+        SET @direccionId = SCOPE_IDENTITY(); -- Obtener el ID de la dirección insertada
+    END
+    ELSE
+    BEGIN
+        -- Actualizar la dirección existente
+        UPDATE direccion
+        SET id_comuna = @comunaId
+        WHERE id_direccion = @direccionId;
+    END
 
     -- Obtener el ID de la categoría
     DECLARE @id_categoria int;
@@ -204,9 +227,13 @@ BEGIN
 END
 
 
-EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Santiago', @nombre_region = 'Metropolitana de Santiago';
 
-EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Alejandro', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.225.588-9', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Santiago', @nombre_region = 'Metropolitana de Santiago';
+
+exec allMembers;
+
+EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3095, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Quinta Normal', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
+
+EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Carla', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '85', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
 
 delete from miembro where rut_user = '15.152.158-8'

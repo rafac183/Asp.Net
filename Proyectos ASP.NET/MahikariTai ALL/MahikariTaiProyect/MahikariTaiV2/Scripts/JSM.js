@@ -1,6 +1,8 @@
 ﻿//Modificar tabla Configuracion de la Tabla Completa
 var tablaData;
 var fila;
+var txt = document.getElementById("txtModalAse");
+var title = document.getElementById("titleModalAse");
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 $(document).ready(function () {
