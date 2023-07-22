@@ -636,6 +636,7 @@
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\JSM.js" />
+    <Content Include="Scripts\JSMCargos.js" />
     <Content Include="Scripts\JSMCrudFamilyData.js" />
     <Content Include="Scripts\JSMCrudOtherData.js" />
     <Content Include="Scripts\JSS.js" />
