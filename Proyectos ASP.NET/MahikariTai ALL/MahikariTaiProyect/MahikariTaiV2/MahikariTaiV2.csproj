@@ -635,8 +635,10 @@
       <DependentUpon>MahikariTai.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
-    <Content Include="Scripts\JavaScriptMembers.js" />
-    <Content Include="Scripts\JavaScriptSelect.js" />
+    <Content Include="Scripts\JSM.js" />
+    <Content Include="Scripts\JSMCrudFamilyData.js" />
+    <Content Include="Scripts\JSMCrudOtherData.js" />
+    <Content Include="Scripts\JSS.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />
@@ -646,6 +648,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSMCrudPersonalData.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\scripts.js" />
     <Content Include="Web.config" />

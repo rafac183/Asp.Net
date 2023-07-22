@@ -15,11 +15,14 @@ namespace MahikariTaiV2
                 "~/Scripts/fontawesome/all.min.js",
                 "~/Scripts/DataTables/jquery.dataTables.js",
                 "~/Scripts/DataTables/dataTables.responsive.js",
-                "~/Scripts/JavaScriptMembers.js",
+                "~/Scripts/JSM.js",
+                "~/Scripts/JSMCrudPersonalData.js",
+                "~/Scripts/JSMCrudFamilyData.js",
+                "~/Scripts/JSMCrudOtherData.js",
                 "~/Scripts/scripts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/complementSelect").Include(
-                        "~/Scripts/JavaScriptSelect.js"));
+                        "~/Scripts/JSS.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

@@ -225,7 +225,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="guardar()">Guardar Cambios</button>
+                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="validarCampos()">Guardar Cambios</button>
             </div>
 
         </div>
@@ -298,27 +298,6 @@
     </div>
 </div>
 
-@*Modal Aseguramiento*@
-<div class="modal fade" id="modalUserEstado" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="titleModalAse" value=""></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="txtMemberRegistrado"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-closes" data-bs-dismiss="modal" onclick="recargar()">Entendido</button>
-                <button type="button" class="btn btn-success btn-noDelete" data-bs-dismiss="modal" style="display:none">No</button>
-                <button type="button" class="btn btn-danger btn-siDelete" style="display:none">Si</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 @*Modal Aseguramiento De modificacion o asignacion de CArgos*@
 <div class="modal fade" id="modalCarOrEdit" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
     <div class="modal-dialog">
@@ -339,6 +318,27 @@
 
 @*Modal Editar Cargos*@
 <div class="modal fade" id="modalCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="titleModalAse" value=""></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="txtModalAse"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-closes" data-bs-dismiss="modal" onclick="recargar()">Entendido</button>
+                <button type="button" class="btn btn-success btn-noDelete" data-bs-dismiss="modal" style="display:none">No</button>
+                <button type="button" class="btn btn-danger btn-siDelete" style="display:none">Si</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*Modal Aseguramiento o Afirmacion de Datos Modificados/Ingresados*@
+<div class="modal fade" id="modalUserEstado" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
@@ -346,12 +346,32 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p id="txtMemberRegistrado"></p>
+                <p id="txtModalAse"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-closes" data-bs-dismiss="modal" onclick="recargar()">Entendido</button>
                 <button type="button" class="btn btn-success btn-noDelete" data-bs-dismiss="modal" style="display:none">No</button>
                 <button type="button" class="btn btn-danger btn-siDelete" style="display:none">Si</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*Modal Verificar Relleno de Campos*@
+<div class="modal fade" id="modalCampos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="titleModalAse" value="">Rellene Todos Los Campos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tiene que completar todos los Campos</p>
+                <p>Asi Podremos Continuar con el Proceso</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sure" data-bs-dismiss="modal">Entendido</button>
             </div>
 
         </div>
