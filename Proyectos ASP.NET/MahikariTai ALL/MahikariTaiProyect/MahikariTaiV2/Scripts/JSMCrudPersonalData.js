@@ -73,7 +73,7 @@ $("#modalCampos").on(touchEvent, '.btn-sure', function () {
     $("#modalDatosPer").modal("show");
 });
 //Verificacion de Llenado de todos los Datos
-function validarCampos() {
+function validarCamposPer() {
     var Miembro = {
         rut: $("#rutInput").val(),
         names: $("#nameInput").val(),
@@ -98,6 +98,31 @@ function validarCampos() {
             if (!Miembro[atributo]) {
                 // Si el atributo está vacío, abrir el modal "modalCampos"
                 $("#modalDatosPer").modal("hide");
+                $("#modalCampos").modal("show");
+                todosLlenos = false;
+                break; // Salir del bucle, ya que ya se ha encontrado un atributo vacío
+            }
+        }
+    }
+    //Si todo se Cumple Guardará los cambios
+    if (todosLlenos) {
+        $("#modalDatosPer").modal("hide");
+        $("#modalDatosKen").modal("show");
+    }
+}
+function validarCamposKen() {
+    var Kenshu = {
+        rut: $("#rutInput").val(),
+        dateIni: $("#dateIniInput").val(),
+        dateInt: $("#dateIntInput").val(),
+        dateSup: $("#dateSupInput").val()
+    }
+    var todosLlenos = true;
+    for (var atributo in Kenshu) {
+        if (Kenshu.hasOwnProperty(atributo)) {
+            if (!Kenshu[atributo]) {
+                // Si el atributo está vacío, abrir el modal "modalCampos"
+                $("#modalDatosKen").modal("hide");
                 $("#modalCampos").modal("show");
                 todosLlenos = false;
                 break; // Salir del bucle, ya que ya se ha encontrado un atributo vacío
@@ -132,6 +157,12 @@ function guardar() {
         comuna: $("#comunaSelect").val(),
         hobbies: $("#hobbiesInput").val()
     }
+    var Kenshu = {
+        rut: $("#rutInput").val(),
+        dateIni: $("#dateIniInput").val(),
+        dateInt: $("#dateIntInput").val(),
+        dateSup: $("#dateSupInput").val()
+    }
     if (id == 0) {
         $.ajax({
             url: añadirUrl,
@@ -154,14 +185,29 @@ function guardar() {
                 comuna: Miembro.comuna,
                 hobbies: Miembro.hobbies
             },
-            success: function (response) {
-                txt.innerHTML = response.mensaje;
-                title.innerHTML = response.mensaje2;
+            success: function () {
+                $.ajax({
+                    url: añadirKenshuUrl,
+                    type: "POST",
+                    data: {
+                        rut: Kenshu.rut,
+                        dateIni: Kenshu.dateIni,
+                        dateInt: Kenshu.dateInt,
+                        dateSup: Kenshu.dateSup
+                    },
+                    success: function (response) {
+                        txt.innerHTML = response.mensaje;
+                        title.innerHTML = response.mensaje2;
+                    },
+                    error: function () {
+                        console.error("Error al Añadir Kenshu");
+                    }
+                })
             },
             error: function () {
                 console.error("Error al Añadir");
             }
-        })
+        });
     } else if (id == 1) {
         $.ajax({
             url: modificarUrl,
@@ -195,16 +241,21 @@ function guardar() {
 
 
     }
-    $("#modalDatosPer").modal("hide")
-    setTimeout(function () {
-        $("#modalUserEstado").modal("show");
-    }, 2000);
+    $("#modalDatosKen").modal("hide")
+    $("#modalUserEstado").modal("show");
     
 }
 
+//Modal Kenshu
 
 
 //Modales Restantes
+
+function abrirCrearNuevo() {
+    $("#modalDatosKen").modal("hide")
+    $("#modalDatosPer").modal("show")
+    /*$("#modalDatosFam").modal("show")*/
+}
 function abrirDatosFam() {
     $("#modalDatosPer").modal("hide")
     $("#modalWorkStudy").modal("hide")

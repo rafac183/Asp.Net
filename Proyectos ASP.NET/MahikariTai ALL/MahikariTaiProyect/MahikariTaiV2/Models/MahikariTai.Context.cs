@@ -140,6 +140,15 @@ namespace MahikariTaiV2.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("generos");
         }
     
+        public virtual ObjectResult<miembroAllInfo_Result> miembroAllInfo(string rut_user)
+        {
+            var rut_userParameter = rut_user != null ?
+                new ObjectParameter("rut_user", rut_user) :
+                new ObjectParameter("rut_user", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<miembroAllInfo_Result>("miembroAllInfo", rut_userParameter);
+        }
+    
         public virtual int modificarMiembro(string rut_user, string categoria_name, string nombres, string first_lastname, string second_lastname, string gender, Nullable<System.DateTime> birthdate, string nacionality, string calle, Nullable<int> number, string phone_number, string email, string hobbies, string nombre_comuna, string nombre_provincia, string nombre_region)
         {
             var rut_userParameter = rut_user != null ?

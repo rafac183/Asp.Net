@@ -1,8 +1,7 @@
 ﻿//Modificar tabla Configuracion de la Tabla Completa
 var tablaData;
 var fila;
-var txt = document.getElementById("txtModalAse");
-var title = document.getElementById("titleModalAse");
+var selectIn;
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 $(document).ready(function () {
@@ -183,7 +182,6 @@ function abrirModal(json) {
         });
         $("#hobbiesInput").val(json.hobbies);
     }
-    $("#modalDatosFam").modal("hide")
     $("#modalDatosPer").modal("show")
 }
 
@@ -259,9 +257,45 @@ $('#provinciaSelect').change(function () {
     });
 });
 
-
-
 //Recargar Pagina
 function recargar() {
     tablaData.ajax.reload(null, false);
 }
+
+//Estatus Select de Kenshu
+$("#yesOrNotSelectIn").change(function () {
+    var select = $(this).val();
+    selectIn = select;
+    $.ajax({
+        success: function () {
+            if (select == "No") {
+                $("#dateIntInput").prop("disabled", true);
+                $("#dateSupInput").prop("disabled", true);
+                $("#yesOrNotSelectSu").val("No");
+            }
+            else {
+                $("#dateIntInput").prop("disabled", false);
+            }
+        }
+    })
+
+});
+
+$("#yesOrNotSelectSu").change(function () {
+    var select = $(this).val();
+    $.ajax({
+        success: function () {
+            if (select == "No") {
+                $("#dateSupInput").prop("disabled", true);
+            }
+            else if (select == "Si" && selectIn == "No") {
+                $("#dateSupInput").prop("disabled", true);
+                $("#yesOrNotSelectSu").val("No");
+            }
+            else {
+                $("#dateSupInput").prop("disabled", false);
+            }
+        }
+    })
+
+});

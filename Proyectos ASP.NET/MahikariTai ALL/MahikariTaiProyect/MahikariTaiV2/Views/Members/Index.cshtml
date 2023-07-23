@@ -2,7 +2,7 @@
 @using MahikariTaiV2.SR_DB
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Members";
     Layout = "~/Views/Shared/_Layout.cshtml";
     DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
     DataSet generos = WS.Generos();
@@ -225,9 +225,56 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="validarCampos()">Guardar Cambios</button>
+                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="validarCamposPer()">Guardar Cambios</button>
             </div>
 
+        </div>
+    </div>
+</div>
+
+@*Modal Datos Kenshu Integrante*@
+<div class="modal fade" id="modalDatosKen" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Miembro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <h6 class="modal-title">Datos de Kumite</h6>
+                    <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro del Miembro y Familiares</small>
+                    <hr />
+                    <label for="rutInput" class="form-label">Recibimiento Kenshu</label>
+                    <small id="kenshuSmallText" class="form-text text-muted">Registre solo los que posea el miembro</small>
+                    <div>
+                        <label for="initialInput" class="form-label">Inicial</label>
+                        <input type="month" class="form-control" id="dateIniInput" required>
+                    </div>
+                    <div class="col-sm-8">
+                        <label for="dateIntInput" class="form-label">Intermedio</label>
+                        <input type="month" class="form-control" id="dateIntInput" disabled>
+                        <label for="dateSupInput" class="form-label">Superior</label>
+                        <input type="month" class="form-control" id="dateSupInput" disabled>
+                    </div>
+                    <div class="col-sm-4">                        
+                        <label for="yesOrNotSelectIn" class="form-label">Tiene Intermedio?</label>
+                        <select id="yesOrNotSelectIn" name="Region" class="form-select" required>
+                            <option value="Si">Si</option>
+                            <option selected value="No">No</option>
+                        </select>
+                        <label for="regionSelect" class="form-label">Tiene Superior?</label>
+                        <select id="yesOrNotSelectSu" name="Region" class="form-select" required>
+                            <option value="Si">Si</option>
+                            <option selected value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="abrirCrearNuevo()">Atras</button>
+                <button type="button" class="btn btn-primary" onclick="validarCamposKen()">Guardar Cambios</button>
+            </div>
         </div>
     </div>
 </div>
@@ -378,6 +425,7 @@
 
 <script>
     var añadirUrl = "@Url.Action("AñadirMiembros", "Members")";
+    var añadirKenshuUrl = "@Url.Action("AñadirKenshuMiembros", "Members")";
     var modificarUrl = "@Url.Action("ModificarMiembros", "Members")";
     var eliminarUrl = "@Url.Action("EliminarMiembros", "Members")";
     var getRegionesUrl = "@Url.Action("GetRegiones", "Members")"

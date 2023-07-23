@@ -42,7 +42,7 @@
       <PropertyRef Name="id_comuna" />
     </Key>
     <Property Name="id_comuna" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name_comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name_comuna" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="id_provincia" Type="Int32" Nullable="false" />
     <NavigationProperty Name="provincia" Relationship="Self.FK__comuna__id_provi__3C69FB99" FromRole="comuna" ToRole="provincia" />
     <NavigationProperty Name="direccion" Relationship="Self.FK__direccion__id_co__3F466844" FromRole="comuna" ToRole="direccion" />
@@ -168,23 +168,25 @@
     <Property Name="id_grado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="grado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="familia" Relationship="Self.FK__familia__id_grad__6383C8BA" FromRole="omitama" ToRole="familia" />
+    <NavigationProperty Name="omitama_date" Relationship="Self.FK__omitama_d__id_gr__01142BA1" FromRole="omitama" ToRole="omitama_date" />
   </EntityType>
   <EntityType Name="omitama_date">
     <Key>
       <PropertyRef Name="id_grado_date" />
     </Key>
     <Property Name="id_grado_date" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="grado_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="grado_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_grado" Type="Int32" Nullable="false" />
     <NavigationProperty Name="miembro" Relationship="Self.FK__omitama_d__rut_u__6754599E" FromRole="omitama_date" ToRole="miembro" />
+    <NavigationProperty Name="omitama" Relationship="Self.FK__omitama_d__id_gr__01142BA1" FromRole="omitama_date" ToRole="omitama" />
   </EntityType>
   <EntityType Name="provincia">
     <Key>
       <PropertyRef Name="id_provincia" />
     </Key>
     <Property Name="id_provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name_provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name_provincia" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="id_region" Type="Int32" Nullable="false" />
     <NavigationProperty Name="comuna" Relationship="Self.FK__comuna__id_provi__3C69FB99" FromRole="provincia" ToRole="comuna" />
     <NavigationProperty Name="region" Relationship="Self.FK__provincia__id_re__398D8EEE" FromRole="provincia" ToRole="region" />
@@ -194,7 +196,7 @@
       <PropertyRef Name="id_region" />
     </Key>
     <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name_region" Type="String" MaxLength="42" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name_region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="provincia" Relationship="Self.FK__provincia__id_re__398D8EEE" FromRole="region" ToRole="provincia" />
   </EntityType>
   <Association Name="FK__admision__rut_us__4F7CD00D">
@@ -389,6 +391,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__omitama_d__id_gr__01142BA1">
+    <End Role="omitama" Type="Self.omitama" Multiplicity="1" />
+    <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="omitama">
+        <PropertyRef Name="id_grado" />
+      </Principal>
+      <Dependent Role="omitama_date">
+        <PropertyRef Name="id_grado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__provincia__id_re__398D8EEE">
     <End Role="region" Type="Self.region" Multiplicity="1" />
     <End Role="provincia" Type="Self.provincia" Multiplicity="*" />
@@ -485,6 +499,10 @@
       <End Role="miembro" EntitySet="miembro" />
       <End Role="omitama_date" EntitySet="omitama_date" />
     </AssociationSet>
+    <AssociationSet Name="FK__omitama_d__id_gr__01142BA1" Association="Self.FK__omitama_d__id_gr__01142BA1">
+      <End Role="omitama" EntitySet="omitama" />
+      <End Role="omitama_date" EntitySet="omitama_date" />
+    </AssociationSet>
     <AssociationSet Name="FK__provincia__id_re__398D8EEE" Association="Self.FK__provincia__id_re__398D8EEE">
       <End Role="region" EntitySet="region" />
       <End Role="provincia" EntitySet="provincia" />
@@ -513,6 +531,9 @@
       <Parameter Name="rut_user" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="generos" ReturnType="Collection(String)" />
+    <FunctionImport Name="miembroAllInfo" ReturnType="Collection(db_MahikariTaiModel.miembroAllInfo_Result)">
+      <Parameter Name="rut_user" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="modificarMiembro">
       <Parameter Name="rut_user" Mode="In" Type="String" />
       <Parameter Name="categoria_name" Mode="In" Type="String" />
@@ -546,9 +567,27 @@
     <Property Type="String" Name="Telefono" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="Calle" Nullable="false" MaxLength="20" />
     <Property Type="Int32" Name="Numero" Nullable="false" />
-    <Property Type="String" Name="Region" Nullable="false" MaxLength="42" />
-    <Property Type="String" Name="Provincia" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Comuna" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Region" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Provincia" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="Comuna" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Hobbies" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="miembroAllInfo_Result">
+    <Property Type="String" Name="Rut" Nullable="false" MaxLength="13" />
+    <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Apellido_Paterno" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Apellido_Materno" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Genero" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="Categoria" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Fecha_de_Nacimiento" Nullable="false" />
+    <Property Type="String" Name="Nacionalidad" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Telefono" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Calle" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="Numero" Nullable="false" />
+    <Property Type="String" Name="Region" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Provincia" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="Comuna" Nullable="false" MaxLength="30" />
     <Property Type="String" Name="Hobbies" Nullable="false" MaxLength="100" />
   </ComplexType>
 </Schema>

@@ -25,7 +25,7 @@ exec categorias;
 
 --_________________________________
 
---Crear Miembro
+--Crear Integrante
 
 CREATE PROCEDURE crearMiembro
     @categoria_name varchar(10),
@@ -116,7 +116,7 @@ BEGIN
     VALUES (@id_categoria, @nombres, @first_lastname, @second_lastname, @id_gender, @rut_user, @birthdate, @id_nac, @direccionId, @phone_number, @email, @hobbies);
 END
 
---exec allMembers;
+--Ejemplos
 
 EXEC crearMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
@@ -128,6 +128,7 @@ EXEC crearMiembro @categoria_name = 'Seijimbu', @nombres = 'Rafael Jose', @first
 
 EXEC crearMiembro @categoria_name = 'Seijimbu', @nombres = 'Gustavo Jose', @first_lastname = 'Correa', @second_lastname = 'Perez', @gender = 'Masculino', @rut_user = '15.152.158-8', @birthdate = '2000-01-05', @nacionality = 'Chilena', @calle = 'San Pablo', @number = 165, @phone_number = '911225544', @email = 'example@example.com', @hobbies = 'Trabajar', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
+--Modicicar integrante
 
 CREATE PROCEDURE modificarMiembro
     @rut_user varchar(13),
@@ -224,12 +225,9 @@ BEGIN
         email = @email,
         hobbies = @hobbies
     WHERE rut_user = @rut_user;
-END
+END;
 
-
-
-
-exec allMembers;
+--Ejemplos
 
 EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3095, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Quinta Normal', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
@@ -240,6 +238,7 @@ delete from miembro where rut_user = '15.152.158-8'
 
 SELECT * FROM miembro
 
+--Listar datos de integrante en especifico
 
 CREATE PROCEDURE miembroAllInfo
 @rut_user varchar(13)
@@ -259,6 +258,8 @@ END
 
 exec miembroAllInfo @rut_user = '27.225.588-9'
 
+--Eliminar Integrante
+
 CREATE PROCEDURE eliminarMiembro
 @rut_user varchar(13)
 AS
@@ -268,6 +269,8 @@ WHERE rut_user = @rut_user
 END
 
 exec eliminarMiembro @rut_user = '14.489.489-1'
+
+--Listar Todos los integrantes
 
 create procedure allMembers
 as
@@ -283,8 +286,40 @@ JOIN gender as ge on mi.id_gender = ge.id_gender
 
 exec allMembers;
 
+--Crear Kenshu de Integrante
+
+CREATE PROCEDURE crearKenshuMiembro
+	@rut_user varchar(13),
+	@grado_date_ini date,
+    @grado_date_int date = NULL,
+    @grado_date_sup date = NULL
+AS
+BEGIN
+	DECLARE @gradeId int
+    SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Inicial';
+
+	INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_ini, @rut_user);
+
+	IF @grado_date_int IS NOT NULL
+	BEGIN
+		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Intermedio';
+		INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_int, @rut_user);
+	END
+
+	IF @grado_date_sup IS NOT NULL
+	BEGIN
+		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Superior';
+
+	INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_sup, @rut_user);
+	END
+END
+
+
+
 
 --Cod para reiniciar Contador
 
 DELETE FROM miembro
 DBCC CHECKIDENT ('miembro', RESEED, 0);
+
+select * from omitama_date

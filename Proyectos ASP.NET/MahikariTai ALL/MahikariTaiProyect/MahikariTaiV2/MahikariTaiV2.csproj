@@ -273,6 +273,9 @@
     <Compile Include="Models\miembro.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\miembroAllInfo_Result.cs">
+      <DependentUpon>MahikariTai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\nacionality.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>

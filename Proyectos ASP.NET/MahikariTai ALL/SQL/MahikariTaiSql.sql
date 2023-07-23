@@ -46,14 +46,7 @@ create table categoria (
 id_categoria int not null identity primary key,
 categoria_name varchar(10) not null);
 
---Grado Omitama
 
-use db_MahikariTai;
-
-create table omitama (
-id_grado int not null identity primary key,
-grado varchar(10) not null
-);
 
 --Datos Generales
 
@@ -125,22 +118,6 @@ id_cargo_name int not null references cargo_names,
 rut_user varchar(13) not null references miembro
 );
 
---tabla anterior
---create table cargo (
---id_cargo int not null identity primary key,
---cargo_nombre varchar(50) not null,
---rut_user varchar(13) not null references miembro
---);
-
---modificaciones
---ALTER TABLE cargo
---DROP COLUMN cargo_nombre;
-
---alter table cargo
---ADD id_cargo_name int not null REFERENCES cargo_names(id_cargo_name);
-
---select * from cargo
-
 --Estudios Miembro y/o Trabajo
 
 --Estudios
@@ -174,6 +151,15 @@ occupation varchar(20) not null,
 rut_user varchar(13) not null references miembro
 );
 
+--Grado Omitama
+
+use db_MahikariTai;
+
+create table omitama (
+id_grado int not null identity primary key,
+grado varchar(10) not null
+);
+
 --Familia Miembro
 
 use db_MahikariTai;
@@ -192,7 +178,7 @@ live_with_him varchar(2) not null
 
 create table omitama_date (
 id_grado_date int not null identity primary key,
-grado_name varchar(10) not null,
+id_grado int not null references omitama,
 grado_date date not null,
 rut_user varchar(13) not null references miembro
 );
@@ -208,3 +194,33 @@ FROM direccion AS di
 JOIN comuna AS co ON di.id_comuna = co.id_comuna
 JOIN provincia AS pr ON pr.id_provincia = co.id_provincia
 JOIN region AS re ON re.id_region = pr.id_region
+
+--tabla anterior
+--create table cargo (
+--id_cargo int not null identity primary key,
+--cargo_nombre varchar(50) not null,
+--rut_user varchar(13) not null references miembro
+--);
+
+--modificaciones
+--ALTER TABLE cargo
+--DROP COLUMN cargo_nombre;
+
+--alter table cargo
+--ADD id_cargo_name int not null REFERENCES cargo_names(id_cargo_name);
+
+--select * from cargo
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+--Primero eliminar la llaves foraneas creadas
+
+-- Modificar la tabla job para agregar ON DELETE CASCADE a la restricción de clave foránea
+ALTER TABLE job
+ADD CONSTRAINT FK_job_miembro FOREIGN KEY (rut_user)
+REFERENCES miembro(rut_user)
+ON DELETE CASCADE;
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
