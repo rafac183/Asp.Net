@@ -163,11 +163,28 @@ namespace MahikariTaiV2.Controllers
 
         //Añadir Miembro a la base de datos
         [HttpPost]
-        public JsonResult AñadirMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
+        public void AñadirMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
             WS.AñadirMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
+        }
+
+        [HttpPost]
+        public JsonResult AñadirKenshuMiembros(string rut, string dateIni, string dateInt, string dateSup)
+        {
+            // Lógica para obtener las ciudades según la región desde tu servicio web
+            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+            if(dateInt == "")
+            {
+                WS.AñadirKenshu(rut, dateIni + "-01", null, null);
+            } else if(dateSup == "")
+            {
+                WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", null);
+            } else
+            {
+                WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", dateSup + "-01");
+            }
 
             var resultado = new
             {

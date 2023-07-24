@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< HEAD
       <Diagram DiagramId="05e324c0235c407d85255c3516208bf9" Name="Diagram1">
+=======
+      <Diagram DiagramId="ea5bdef8222a4700af27ca2f08c757d6" Name="Diagram1">
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
         <EntityTypeShape EntityType="db_MahikariTaiModel.admision" Width="1.5" PointX="12" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="db_MahikariTaiModel.cargo" Width="1.5" PointX="12" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="db_MahikariTaiModel.cargo_names" Width="1.5" PointX="9.75" PointY="17.125" IsExpanded="true" />
@@ -24,11 +28,19 @@
         <EntityTypeShape EntityType="db_MahikariTaiModel.omitama_date" Width="1.5" PointX="15" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="db_MahikariTaiModel.provincia" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="db_MahikariTaiModel.region" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+<<<<<<< HEAD
         <AssociationConnector Association="db_MahikariTaiModel.FK__admision__rut_us__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__id_cargo___5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__rut_user__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__cargo_nam__id_gr__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_cate__47DBAE45" ManuallyRouted="false" />
+=======
+        <AssociationConnector Association="db_MahikariTaiModel.FK__admision__rut_us__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__id_cargo___571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__rut_user__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo_nam__id_gr__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_cate__49C3F6B7" ManuallyRouted="false" />
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
         <AssociationConnector Association="db_MahikariTaiModel.FK__comuna__id_provi__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__direccion__id_co__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_dire__4AB81AF0" ManuallyRouted="false" />
@@ -36,11 +48,19 @@
         <AssociationConnector Association="db_MahikariTaiModel.FK__estudios__rut_us__5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__familia__id_grad__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__familia__rut_use__6477ECF3" ManuallyRouted="false" />
+<<<<<<< HEAD
         <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_gend__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__job__rut_user__5EBF139D" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_nac__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__omitama_d__rut_u__68487DD7" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__omitama_d__id_gr__6754599E" ManuallyRouted="false" />
+=======
+        <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_gend__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__job__rut_user__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_nac__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__omitama_d__rut_u__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__omitama_d__id_gr__01142BA1" ManuallyRouted="false" />
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
         <AssociationConnector Association="db_MahikariTaiModel.FK__provincia__id_re__398D8EEE" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

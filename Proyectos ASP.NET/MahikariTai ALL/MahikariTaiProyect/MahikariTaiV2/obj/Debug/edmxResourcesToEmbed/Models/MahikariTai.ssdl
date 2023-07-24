@@ -144,9 +144,13 @@
       <PropertyRef Name="id_grado_date" />
     </Key>
     <Property Name="id_grado_date" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+<<<<<<< HEAD
     <Property Name="id_grado" Type="int" Nullable="false" />
+=======
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
     <Property Name="grado_date" Type="date" Nullable="false" />
     <Property Name="rut_user" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="id_grado" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="provincia">
     <Key>
@@ -355,7 +359,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+<<<<<<< HEAD
   <Association Name="FK__omitama_d__id_gr__6754599E">
+=======
+  <Association Name="FK__omitama_d__id_gr__01142BA1">
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
     <End Role="omitama" Type="Self.omitama" Multiplicity="1" />
     <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
     <ReferentialConstraint>
@@ -367,10 +375,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+<<<<<<< HEAD
   <Association Name="FK__omitama_d__rut_u__68487DD7">
     <End Role="miembro" Type="Self.miembro" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
+=======
+  <Association Name="FK__omitama_d__rut_u__6754599E">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
     <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -423,6 +436,13 @@
   <Function Name="miembroAllInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rut_user" Type="varchar" Mode="In" />
   </Function>
+<<<<<<< HEAD
+=======
+  <Function Name="generos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="miembroAllInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rut_user" Type="varchar" Mode="In" />
+  </Function>
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
   <Function Name="modificarMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rut_user" Type="varchar" Mode="In" />
     <Parameter Name="categoria_name" Type="varchar" Mode="In" />
@@ -522,11 +542,19 @@
       <End Role="nacionality" EntitySet="nacionality" />
       <End Role="miembro" EntitySet="miembro" />
     </AssociationSet>
+<<<<<<< HEAD
     <AssociationSet Name="FK__omitama_d__id_gr__6754599E" Association="Self.FK__omitama_d__id_gr__6754599E">
       <End Role="omitama" EntitySet="omitama" />
       <End Role="omitama_date" EntitySet="omitama_date" />
     </AssociationSet>
     <AssociationSet Name="FK__omitama_d__rut_u__68487DD7" Association="Self.FK__omitama_d__rut_u__68487DD7">
+=======
+    <AssociationSet Name="FK__omitama_d__id_gr__01142BA1" Association="Self.FK__omitama_d__id_gr__01142BA1">
+      <End Role="omitama" EntitySet="omitama" />
+      <End Role="omitama_date" EntitySet="omitama_date" />
+    </AssociationSet>
+    <AssociationSet Name="FK__omitama_d__rut_u__6754599E" Association="Self.FK__omitama_d__rut_u__6754599E">
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
       <End Role="miembro" EntitySet="miembro" />
       <End Role="omitama_date" EntitySet="omitama_date" />
     </AssociationSet>

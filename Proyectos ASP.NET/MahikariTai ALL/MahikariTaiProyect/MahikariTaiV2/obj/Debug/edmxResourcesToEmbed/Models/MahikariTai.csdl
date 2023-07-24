@@ -168,18 +168,30 @@
     <Property Name="id_grado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="grado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="familia" Relationship="Self.FK__familia__id_grad__6383C8BA" FromRole="omitama" ToRole="familia" />
+<<<<<<< HEAD
     <NavigationProperty Name="omitama_date" Relationship="Self.FK__omitama_d__id_gr__6754599E" FromRole="omitama" ToRole="omitama_date" />
+=======
+    <NavigationProperty Name="omitama_date" Relationship="Self.FK__omitama_d__id_gr__01142BA1" FromRole="omitama" ToRole="omitama_date" />
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
   </EntityType>
   <EntityType Name="omitama_date">
     <Key>
       <PropertyRef Name="id_grado_date" />
     </Key>
     <Property Name="id_grado_date" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+<<<<<<< HEAD
     <Property Name="id_grado" Type="Int32" Nullable="false" />
     <Property Name="grado_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="miembro" Relationship="Self.FK__omitama_d__rut_u__68487DD7" FromRole="omitama_date" ToRole="miembro" />
     <NavigationProperty Name="omitama" Relationship="Self.FK__omitama_d__id_gr__6754599E" FromRole="omitama_date" ToRole="omitama" />
+=======
+    <Property Name="grado_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_grado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="miembro" Relationship="Self.FK__omitama_d__rut_u__6754599E" FromRole="omitama_date" ToRole="miembro" />
+    <NavigationProperty Name="omitama" Relationship="Self.FK__omitama_d__id_gr__01142BA1" FromRole="omitama_date" ToRole="omitama" />
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
   </EntityType>
   <EntityType Name="provincia">
     <Key>
@@ -405,7 +417,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+<<<<<<< HEAD
   <Association Name="FK__omitama_d__id_gr__6754599E">
+=======
+  <Association Name="FK__omitama_d__id_gr__01142BA1">
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
     <End Role="omitama" Type="Self.omitama" Multiplicity="1" />
     <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
     <ReferentialConstraint>
@@ -513,7 +529,11 @@
       <End Role="miembro" EntitySet="miembro" />
       <End Role="omitama_date" EntitySet="omitama_date" />
     </AssociationSet>
+<<<<<<< HEAD
     <AssociationSet Name="FK__omitama_d__id_gr__6754599E" Association="Self.FK__omitama_d__id_gr__6754599E">
+=======
+    <AssociationSet Name="FK__omitama_d__id_gr__01142BA1" Association="Self.FK__omitama_d__id_gr__01142BA1">
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
       <End Role="omitama" EntitySet="omitama" />
       <End Role="omitama_date" EntitySet="omitama_date" />
     </AssociationSet>
@@ -551,6 +571,13 @@
     <FunctionImport Name="miembroAllInfo" ReturnType="Collection(db_MahikariTaiModel.miembroAllInfo_Result)">
       <Parameter Name="rut_user" Mode="In" Type="String" />
     </FunctionImport>
+<<<<<<< HEAD
+=======
+    <FunctionImport Name="generos" ReturnType="Collection(String)" />
+    <FunctionImport Name="miembroAllInfo" ReturnType="Collection(db_MahikariTaiModel.miembroAllInfo_Result)">
+      <Parameter Name="rut_user" Mode="In" Type="String" />
+    </FunctionImport>
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
     <FunctionImport Name="modificarMiembro">
       <Parameter Name="rut_user" Mode="In" Type="String" />
       <Parameter Name="categoria_name" Mode="In" Type="String" />
@@ -593,7 +620,11 @@
     <Property Type="String" Name="Rut" Nullable="false" MaxLength="13" />
     <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Apellido_Paterno" Nullable="false" MaxLength="20" />
+<<<<<<< HEAD
     <Property Type="String" Name="Apellido_Materno" Nullable="false" MaxLength="20" />
+=======
+    <Property Type="String" Name="Apellido_Materno" Nullable="true" MaxLength="20" />
+>>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
     <Property Type="String" Name="Genero" Nullable="false" MaxLength="9" />
     <Property Type="String" Name="Categoria" Nullable="false" MaxLength="10" />
     <Property Type="String" Name="Correo" Nullable="false" MaxLength="50" />
