@@ -160,13 +160,9 @@
       <EntityTypeMapping TypeName="db_MahikariTaiModel.omitama_date">
         <MappingFragment StoreEntitySet="omitama_date">
           <ScalarProperty Name="id_grado_date" ColumnName="id_grado_date" />
-<<<<<<< HEAD
           <ScalarProperty Name="id_grado" ColumnName="id_grado" />
-=======
->>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
           <ScalarProperty Name="grado_date" ColumnName="grado_date" />
           <ScalarProperty Name="rut_user" ColumnName="rut_user" />
-          <ScalarProperty Name="id_grado" ColumnName="id_grado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

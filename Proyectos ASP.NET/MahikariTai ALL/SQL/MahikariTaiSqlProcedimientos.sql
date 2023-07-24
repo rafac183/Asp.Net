@@ -227,7 +227,6 @@ BEGIN
         email = @email,
         hobbies = @hobbies
     WHERE rut_user = @rut_user;
-<<<<<<< HEAD
 
 	--Eliminar direcciones sobrantes
 	DELETE FROM direccion
@@ -237,15 +236,6 @@ END;
 --Ejemplos
 
 EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3095, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Quinta Normal', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
-=======
-END;
-
---Ejemplos
-
-EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3095, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Quinta Normal', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
-
-EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Carla', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '85', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
->>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
 
 EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Carla', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '85', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3097, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
@@ -285,7 +275,9 @@ DELETE FROM miembro
 WHERE rut_user = @rut_user
 END
 
-exec eliminarMiembro @rut_user = '14.489.489-1'
+exec allMembers;
+
+exec eliminarMiembro @rut_user = '85'
 
 --Listar Todos los integrantes
 
@@ -326,23 +318,18 @@ BEGIN
 	IF @grado_date_sup IS NOT NULL
 	BEGIN
 		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Superior';
-<<<<<<< HEAD
 		INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_sup, @rut_user);
 	END
 END;
-=======
-
-	INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_sup, @rut_user);
-	END
-END
->>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
 
 
 
 
 --Cod para reiniciar Contador
 
-DELETE FROM miembro
-DBCC CHECKIDENT ('miembro', RESEED, 0);
+DELETE FROM omitama_date
+DBCC CHECKIDENT ('omitama_date', RESEED, 0);
 
-select * from omitama_date
+exec crearKenshuMiembro @rut_user = '15.152.111-8', @grado_date_ini = '2015-02-06', @grado_date_int = '2018-06-15';
+
+select m.nombres, o.grado, od.grado_date from omitama_date as od join miembro as m on od.rut_user = m.rut_user join omitama as o on o.id_grado = od.id_grado;

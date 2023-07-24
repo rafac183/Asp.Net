@@ -73,7 +73,20 @@ namespace WS_DB
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
             conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
-            SqlDataAdapter da = new SqlDataAdapter("EXEC crearKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "', @grado_date_int = '" + dateInt + "', @grado_date_sup = '" + dateSup + "';", conn);
+            SqlDataAdapter da = new SqlDataAdapter();
+            if (dateInt == null)
+            {
+                da = new SqlDataAdapter("EXEC crearKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "';", conn);
+
+            }
+            else if(dateInt != null && dateSup == null)
+            {
+                da = new SqlDataAdapter("EXEC crearKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "', @grado_date_int = '" + dateInt + "';", conn);
+            }
+            else if(dateSup != null)
+            {
+                da = new SqlDataAdapter("EXEC crearKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "', @grado_date_int = '" + dateInt + "', @grado_date_sup = '" + dateSup + "';", conn);
+            }
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
             da.Fill(ds);

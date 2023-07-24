@@ -182,7 +182,7 @@ function abrirModal(json) {
         });
         $("#hobbiesInput").val(json.hobbies);
     }
-    $("#modalDatosPer").modal("show")
+    $("#modalDatosPer").modal("show");
 }
 
 function recargarRegiones() {

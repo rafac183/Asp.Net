@@ -15,13 +15,9 @@ namespace MahikariTaiV2.Models
     public partial class omitama_date
     {
         public int id_grado_date { get; set; }
-<<<<<<< HEAD
         public int id_grado { get; set; }
-=======
->>>>>>> 0ab54681af5a832b4fa47c249c04453d053ef103
         public System.DateTime grado_date { get; set; }
         public string rut_user { get; set; }
-        public int id_grado { get; set; }
     
         public virtual miembro miembro { get; set; }
         public virtual omitama omitama { get; set; }

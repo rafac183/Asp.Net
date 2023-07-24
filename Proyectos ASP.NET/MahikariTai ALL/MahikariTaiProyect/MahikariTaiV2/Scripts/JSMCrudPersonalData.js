@@ -1,4 +1,5 @@
 ﻿var fila;
+var modal;
 var txt = document.getElementById("txtModalAse");
 var title = document.getElementById("titleModalAse");
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
@@ -36,9 +37,9 @@ function eliminar(json) {
             data: {
                 rut: jsonRut
             },
-            success: function (response) {
-                txt.innerText = response.mensaje;
-                title.innerText = response.mensaje2;
+            success: function (respuesta) {
+                txt.innerText = respuesta.mensaje;
+                title.innerText = respuesta.mensaje2;
             },
             error: function () {
                 console.error("Error al eliminar");
@@ -73,7 +74,7 @@ $('#modalCarOrEdit').on(touchEvent, '.btn-editCargo', function () {
 
 //Guardar Datos modificados o ingresados
 $("#modalCampos").on(touchEvent, '.btn-sure', function () {
-    $("#modalDatosPer").modal("show");
+    $(modal).modal("show");
 });
 //Verificacion de Llenado de todos los Datos
 function validarCamposPer() {
@@ -101,6 +102,7 @@ function validarCamposPer() {
             if (!Miembro[atributo]) {
                 // Si el atributo está vacío, abrir el modal "modalCampos"
                 $("#modalDatosPer").modal("hide");
+                modal = "#modalDatosPer";
                 $("#modalCampos").modal("show");
                 todosLlenos = false;
                 break; // Salir del bucle, ya que ya se ha encontrado un atributo vacío
@@ -109,63 +111,14 @@ function validarCamposPer() {
     }
     //Si todo se Cumple Guardará los cambios
     if (todosLlenos) {
-        $("#modalDatosPer").modal("hide");
-        $("#modalDatosKen").modal("show");
+        guardar(Miembro)
     }
 }
-function validarCamposKen() {
-    var Kenshu = {
-        rut: $("#rutInput").val(),
-        dateIni: $("#dateIniInput").val(),
-        dateInt: $("#dateIntInput").val(),
-        dateSup: $("#dateSupInput").val()
-    }
-    var todosLlenos = true;
-    for (var atributo in Kenshu) {
-        if (Kenshu.hasOwnProperty(atributo)) {
-            if (!Kenshu[atributo]) {
-                // Si el atributo está vacío, abrir el modal "modalCampos"
-                $("#modalDatosKen").modal("hide");
-                $("#modalCampos").modal("show");
-                todosLlenos = false;
-                break; // Salir del bucle, ya que ya se ha encontrado un atributo vacío
-            }
-        }
-    }
-    //Si todo se Cumple Guardará los cambios
-    if (todosLlenos) {
-        guardar()
-    }
-}
+
 
 //Guardar Modificaciones/Datos Ingresados
-function guardar() {
-
+function guardar(Miembro) {
     var id = $("#txtRutId").val();
-    var Miembro = {
-        rut: $("#rutInput").val(),
-        names: $("#nameInput").val(),
-        firstLastname: $("#firstLastNameInput").val(),
-        secondLastname: $("#secondLastNameInput").val(),
-        gender: $("#generoSelect").val(),
-        category: $("#categoriaSelect").val(),
-        email: $("#emailInput").val(),
-        birthdate: $("#birthdateInput").val(),
-        nacionality: $("#nacionalidadSelect").val(),
-        phone: $("#phoneInput").val(),
-        street: $("#streetInput").val(),
-        number: parseInt($("#numberInput").val()),
-        region: $("#regionSelect").val(),
-        provincia: $("#provinciaSelect").val(),
-        comuna: $("#comunaSelect").val(),
-        hobbies: $("#hobbiesInput").val()
-    }
-    var Kenshu = {
-        rut: $("#rutInput").val(),
-        dateIni: $("#dateIniInput").val(),
-        dateInt: $("#dateIntInput").val(),
-        dateSup: $("#dateSupInput").val()
-    }
     if (id == 0) {
         $.ajax({
             url: añadirUrl,
@@ -187,25 +140,6 @@ function guardar() {
                 provincia: Miembro.provincia,
                 comuna: Miembro.comuna,
                 hobbies: Miembro.hobbies
-            },
-            success: function () {
-                $.ajax({
-                    url: añadirKenshuUrl,
-                    type: "POST",
-                    data: {
-                        rut: Kenshu.rut,
-                        dateIni: Kenshu.dateIni,
-                        dateInt: Kenshu.dateInt,
-                        dateSup: Kenshu.dateSup
-                    },
-                    success: function (response) {
-                        txt.innerHTML = response.mensaje;
-                        title.innerHTML = response.mensaje2;
-                    },
-                    error: function () {
-                        console.error("Error al Añadir Kenshu");
-                    }
-                })
             },
             error: function () {
                 console.error("Error al Añadir");
@@ -244,13 +178,49 @@ function guardar() {
 
 
     }
-    $("#modalDatosKen").modal("hide")
-    $("#modalUserEstado").modal("show");
+    $("#modalDatosPer").modal("hide")
+    $("#modalDatosKen").modal("show");
     
 }
 
 //Modal Kenshu
-
+function guardarKenshu() {
+    var id = $("#txtRutId").val();
+    var Kenshu = {
+        rut: $("#rutInput").val(),
+        dateIni: $("#dateIniInput").val(),
+        dateInt: $("#dateIntInput").val(),
+        dateSup: $("#dateSupInput").val()
+    }
+    if (id == 0) {
+        $.ajax({
+            url: añadirKenshuUrl,
+            type: "POST",
+            data: {
+                rut: Kenshu.rut,
+                dateIni: Kenshu.dateIni,
+                dateInt: Kenshu.dateInt,
+                dateSup: Kenshu.dateSup
+            },
+            success: function (response) {
+                if (response.exitoso == false) {
+                    $("#modalDatosKen").modal("hide");
+                    modal = "#modalDatosKen";
+                    $("#modalCampos").modal("show");
+                } else {
+                    txt.innerHTML = response.mensaje;
+                    title.innerHTML = response.mensaje2;
+                    $("#modalUserEstado").modal("show");
+                }                
+            },
+            error: function () {
+                console.error("Error al Añadir Kenshu");
+            }
+        });
+    } else if (id == 1) { }
+    $("#modalDatosKen").modal("hide")
+    
+}
 
 //Modales Restantes
 

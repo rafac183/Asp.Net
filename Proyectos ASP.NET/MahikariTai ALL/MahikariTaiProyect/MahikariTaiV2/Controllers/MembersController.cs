@@ -173,25 +173,53 @@ namespace MahikariTaiV2.Controllers
         [HttpPost]
         public JsonResult AñadirKenshuMiembros(string rut, string dateIni, string dateInt, string dateSup)
         {
-            // Lógica para obtener las ciudades según la región desde tu servicio web
-            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            if(dateInt == "")
-            {
-                WS.AñadirKenshu(rut, dateIni + "-01", null, null);
-            } else if(dateSup == "")
-            {
-                WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", null);
-            } else
-            {
-                WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", dateSup + "-01");
-            }
-
             var resultado = new
             {
                 exitoso = true,
                 mensaje = "El Miembro se agregó correctamente.",
                 mensaje2 = "Miembro Creado"
             };
+            // Lógica para obtener las ciudades según la región desde tu servicio web
+            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+            if(dateIni == "")
+            {
+                resultado = new
+                {
+                    exitoso = false,
+                    mensaje = "",
+                    mensaje2 = ""
+                };
+            }
+            else if(dateInt == "")
+            {
+                WS.AñadirKenshu(rut, dateIni + "-01", null, null);
+                resultado = new
+                {
+                    exitoso = true,
+                    mensaje = "El Miembro se agregó correctamente.",
+                    mensaje2 = "Miembro Creado"
+                };
+            } else if(dateSup == "")
+            {
+                WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", null);
+                resultado = new
+                {
+                    exitoso = true,
+                    mensaje = "El Miembro se agregó correctamente.",
+                    mensaje2 = "Miembro Creado"
+                };
+            } else
+            {
+                WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", dateSup + "-01");
+                resultado = new
+                {
+                    exitoso = true,
+                    mensaje = "El Miembro se agregó correctamente.",
+                    mensaje2 = "Miembro Creado"
+                };
+            }
+
+            
 
             return Json(resultado);
         }
@@ -222,14 +250,14 @@ namespace MahikariTaiV2.Controllers
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
             WS.EliminarMiembro(rut);
 
-            var resultado = new
+            var resultadoEliminar = new
             {
                 exitoso = true,
                 mensaje = "El Miembro se eliminó correctamente.",
                 mensaje2 = "Miembro Eliminado"
             };
 
-            return Json(resultado);
+            return Json(resultadoEliminar);
         }
 
         //Mostrar todos los miembros de la base de datos
