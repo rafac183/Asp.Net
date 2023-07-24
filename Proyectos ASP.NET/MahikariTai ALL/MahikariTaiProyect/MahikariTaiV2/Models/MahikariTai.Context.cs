@@ -57,6 +57,27 @@ namespace MahikariTaiV2.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("categorias");
         }
     
+        public virtual int crearKenshuMiembro(string rut_user, Nullable<System.DateTime> grado_date_ini, Nullable<System.DateTime> grado_date_int, Nullable<System.DateTime> grado_date_sup)
+        {
+            var rut_userParameter = rut_user != null ?
+                new ObjectParameter("rut_user", rut_user) :
+                new ObjectParameter("rut_user", typeof(string));
+    
+            var grado_date_iniParameter = grado_date_ini.HasValue ?
+                new ObjectParameter("grado_date_ini", grado_date_ini) :
+                new ObjectParameter("grado_date_ini", typeof(System.DateTime));
+    
+            var grado_date_intParameter = grado_date_int.HasValue ?
+                new ObjectParameter("grado_date_int", grado_date_int) :
+                new ObjectParameter("grado_date_int", typeof(System.DateTime));
+    
+            var grado_date_supParameter = grado_date_sup.HasValue ?
+                new ObjectParameter("grado_date_sup", grado_date_sup) :
+                new ObjectParameter("grado_date_sup", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("crearKenshuMiembro", rut_userParameter, grado_date_iniParameter, grado_date_intParameter, grado_date_supParameter);
+        }
+    
         public virtual int crearMiembro(string categoria_name, string nombres, string first_lastname, string second_lastname, string gender, string rut_user, Nullable<System.DateTime> birthdate, string nacionality, string calle, Nullable<int> number, string phone_number, string email, string hobbies, string nombre_comuna, string nombre_provincia, string nombre_region)
         {
             var categoria_nameParameter = categoria_name != null ?
@@ -126,18 +147,18 @@ namespace MahikariTaiV2.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("crearMiembro", categoria_nameParameter, nombresParameter, first_lastnameParameter, second_lastnameParameter, genderParameter, rut_userParameter, birthdateParameter, nacionalityParameter, calleParameter, numberParameter, phone_numberParameter, emailParameter, hobbiesParameter, nombre_comunaParameter, nombre_provinciaParameter, nombre_regionParameter);
         }
     
-        public virtual int eliminarMiembro(string rut_user)
+        public virtual ObjectResult<string> generos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("generos");
+        }
+    
+        public virtual ObjectResult<miembroAllInfo_Result> miembroAllInfo(string rut_user)
         {
             var rut_userParameter = rut_user != null ?
                 new ObjectParameter("rut_user", rut_user) :
                 new ObjectParameter("rut_user", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eliminarMiembro", rut_userParameter);
-        }
-    
-        public virtual ObjectResult<string> generos()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("generos");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<miembroAllInfo_Result>("miembroAllInfo", rut_userParameter);
         }
     
         public virtual int modificarMiembro(string rut_user, string categoria_name, string nombres, string first_lastname, string second_lastname, string gender, Nullable<System.DateTime> birthdate, string nacionality, string calle, Nullable<int> number, string phone_number, string email, string hobbies, string nombre_comuna, string nombre_provincia, string nombre_region)

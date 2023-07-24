@@ -18,6 +18,7 @@ namespace MahikariTaiV2.Models
         public omitama()
         {
             this.familia = new HashSet<familia>();
+            this.omitama_date = new HashSet<omitama_date>();
         }
     
         public int id_grado { get; set; }
@@ -25,5 +26,7 @@ namespace MahikariTaiV2.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<familia> familia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<omitama_date> omitama_date { get; set; }
     }
 }

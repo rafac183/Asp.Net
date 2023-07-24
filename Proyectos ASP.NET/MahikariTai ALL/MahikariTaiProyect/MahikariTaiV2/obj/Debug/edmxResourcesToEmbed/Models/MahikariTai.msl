@@ -160,7 +160,7 @@
       <EntityTypeMapping TypeName="db_MahikariTaiModel.omitama_date">
         <MappingFragment StoreEntitySet="omitama_date">
           <ScalarProperty Name="id_grado_date" ColumnName="id_grado_date" />
-          <ScalarProperty Name="grado_name" ColumnName="grado_name" />
+          <ScalarProperty Name="id_grado" ColumnName="id_grado" />
           <ScalarProperty Name="grado_date" ColumnName="grado_date" />
           <ScalarProperty Name="rut_user" ColumnName="rut_user" />
         </MappingFragment>
@@ -206,9 +206,31 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="categorias" FunctionName="db_MahikariTaiModel.Store.categorias" />
+    <FunctionImportMapping FunctionImportName="crearKenshuMiembro" FunctionName="db_MahikariTaiModel.Store.crearKenshuMiembro" />
     <FunctionImportMapping FunctionImportName="crearMiembro" FunctionName="db_MahikariTaiModel.Store.crearMiembro" />
-    <FunctionImportMapping FunctionImportName="eliminarMiembro" FunctionName="db_MahikariTaiModel.Store.eliminarMiembro" />
     <FunctionImportMapping FunctionImportName="generos" FunctionName="db_MahikariTaiModel.Store.generos" />
+    <FunctionImportMapping FunctionImportName="miembroAllInfo" FunctionName="db_MahikariTaiModel.Store.miembroAllInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="db_MahikariTaiModel.miembroAllInfo_Result">
+          <ScalarProperty Name="Rut" ColumnName="Rut" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellido_Paterno" ColumnName="Apellido Paterno" />
+          <ScalarProperty Name="Apellido_Materno" ColumnName="Apellido Materno" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Fecha_de_Nacimiento" ColumnName="Fecha de Nacimiento" />
+          <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Calle" ColumnName="Calle" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Comuna" ColumnName="Comuna" />
+          <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="modificarMiembro" FunctionName="db_MahikariTaiModel.Store.modificarMiembro" />
     <FunctionImportMapping FunctionImportName="nacionalidades" FunctionName="db_MahikariTaiModel.Store.nacionalidades" />
   </EntityContainerMapping>

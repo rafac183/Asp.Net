@@ -1,4 +1,5 @@
-﻿var txt = document.getElementById("txtModalAse");
+﻿var fila;
+var txt = document.getElementById("txtModalAse");
 var title = document.getElementById("titleModalAse");
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
@@ -24,8 +25,10 @@ function eliminar(json) {
     setTimeout(function () {
         $.ajax({
             url: eliminarUrl,
-            type: 'POST',
-            data: { rut: jsonRut },
+            type: "POST",
+            data: {
+                rut: jsonRut
+            },
             success: function (response) {
                 txt.innerText = response.mensaje;
                 title.innerText = response.mensaje2;
@@ -61,52 +64,52 @@ $('#modalCarOrEdit').on(touchEvent, '.btn-editCargo', function () {
     /*editCargo(datosFila);*/
 });
 
-//Guardar Datos modificados o ingresados
-$("#modalCampos").on(touchEvent, '.btn-sure', function () {
-    $("#modalDatosPer").modal("show");
-});
-//Verificacion de Llenado de todos los Datos
-function validarCampos() {
-    var Miembro = {
-        rut: $("#rutInput").val(),
-        names: $("#nameInput").val(),
-        firstLastname: $("#firstLastNameInput").val(),
-        secondLastname: $("#secondLastNameInput").val(),
-        gender: $("#generoSelect").val(),
-        category: $("#categoriaSelect").val(),
-        email: $("#emailInput").val(),
-        birthdate: $("#birthdateInput").val(),
-        nacionality: $("#nacionalidadSelect").val(),
-        phone: $("#phoneInput").val(),
-        street: $("#streetInput").val(),
-        number: parseInt($("#numberInput").val()),
-        region: $("#regionSelect").val(),
-        provincia: $("#provinciaSelect").val(),
-        comuna: $("#comunaSelect").val(),
-        hobbies: $("#hobbiesInput").val()
-    }
-    var todosLlenos = true;
-    for (var atributo in Miembro) {
-        if (Miembro.hasOwnProperty(atributo)) {
-            if (!Miembro[atributo]) {
-                // Si el atributo está vacío, abrir el modal "modalCampos"
-                $("#modalDatosPer").modal("hide");
-                $("#modalCampos").modal("show");
-                todosLlenos = false;
-                break; // Salir del bucle, ya que ya se ha encontrado un atributo vacío
-            }
-        }
-    }
-    //Si todo se Cumple Guardará los cambios
-    if (todosLlenos) {
-        guardar()
-    }
-}
+////Guardar Datos modificados o ingresados
+//$("#modalCampos").on(touchEvent, '.btn-sure', function () {
+//    $("#modalDatosPer").modal("show");
+//});
+////Verificacion de Llenado de todos los Datos
+//function validarCampos() {
+//    var Miembro = {
+//        rut: $("#rutInput").val(),
+//        names: $("#nameInput").val(),
+//        firstLastname: $("#firstLastNameInput").val(),
+//        secondLastname: $("#secondLastNameInput").val(),
+//        gender: $("#generoSelect").val(),
+//        category: $("#categoriaSelect").val(),
+//        email: $("#emailInput").val(),
+//        birthdate: $("#birthdateInput").val(),
+//        nacionality: $("#nacionalidadSelect").val(),
+//        phone: $("#phoneInput").val(),
+//        street: $("#streetInput").val(),
+//        number: parseInt($("#numberInput").val()),
+//        region: $("#regionSelect").val(),
+//        provincia: $("#provinciaSelect").val(),
+//        comuna: $("#comunaSelect").val(),
+//        hobbies: $("#hobbiesInput").val()
+//    }
+//    var todosLlenos = true;
+//    for (var atributo in Miembro) {
+//        if (Miembro.hasOwnProperty(atributo)) {
+//            if (!Miembro[atributo]) {
+//                // Si el atributo está vacío, abrir el modal "modalCampos"
+//                $("#modalDatosPer").modal("hide");
+//                $("#modalCampos").modal("show");
+//                todosLlenos = false;
+//                break; // Salir del bucle, ya que ya se ha encontrado un atributo vacío
+//            }
+//        }
+//    }
+//    //Si todo se Cumple Guardará los cambios
+//    if (todosLlenos) {
+//        guardar(/*Miembro*/)
+//    }
+//}
 
 //Guardar Modificaciones/Datos Ingresados
-function guardar() {
+function guardar(/*Miembro*/) {
 
-    id = $("#txtRutId").val();
+    var id = $("#txtRutId").val();
     var Miembro = {
         rut: $("#rutInput").val(),
         names: $("#nameInput").val(),
@@ -148,8 +151,6 @@ function guardar() {
                 hobbies: Miembro.hobbies
             },
             success: function (response) {
-                // Handle the successful response from the server
-                console.log(response);
                 txt.innerText = response.mensaje;
                 title.innerText = response.mensaje2;
             },
@@ -180,8 +181,6 @@ function guardar() {
                 hobbies: Miembro.hobbies
             },
             success: function (response) {
-                // Handle the successful response from the server
-                console.log(response.mensaje);
                 txt.innerText = response.mensaje;
                 title.innerText = response.mensaje2;
             },
@@ -193,10 +192,7 @@ function guardar() {
 
     }
     $("#modalDatosPer").modal("hide")
-    setTimeout(function () {
-        $("#modalUserEstado").modal("show");
-    }, 2000);
-    
+    $("#modalUserEstado").modal("show");   
 }
 
 

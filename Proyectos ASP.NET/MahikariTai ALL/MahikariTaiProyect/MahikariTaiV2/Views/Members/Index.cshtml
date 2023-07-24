@@ -225,7 +225,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="validarCampos()">Guardar Cambios</button>
+                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ @*onclick="validarCampos()"*@ onclick="guardar()">Guardar Cambios</button>
             </div>
 
         </div>
@@ -317,7 +317,7 @@
 </div>
 
 @*Modal Editar Cargos*@
-<div class="modal fade" id="modalCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+@*<div class="modal fade" id="modalCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
@@ -335,7 +335,7 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 @*Modal Aseguramiento o Afirmacion de Datos Modificados/Ingresados*@
 <div class="modal fade" id="modalUserEstado" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">

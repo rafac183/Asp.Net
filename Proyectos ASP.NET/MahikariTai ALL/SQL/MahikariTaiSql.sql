@@ -1,37 +1,31 @@
-create database db_MahikariTai;
+CREATE DATABASE db_MahikariTai;
 
 --Direccion Integrante
 
-use db_MahikariTai;
+USE db_MahikariTai;
 
-create table region (
-id_region int not null identity primary key,
-name_region varchar(50) not null
+CREATE TABLE region (
+id_region INT NOT NULL IDENTITY PRIMARY KEY,
+name_region varchar(50) NOT NULL
 );
 
-use db_MahikariTai;
-
-create table provincia (
-id_provincia int not null identity primary key,
-name_provincia varchar(40) not null,
-id_region int not null references region
+CREATE TABLE provincia (
+id_provincia INT NOT NULL IDENTITY PRIMARY KEY,
+name_provincia VARCHAR(40) NOT NULL,
+id_region INT NOT NULL REFERENCES region
 );
 
-use db_MahikariTai;
-
-create table comuna (
-id_comuna int not null identity primary key,
-name_comuna varchar(30) not null,
-id_provincia int not null references provincia
+CREATE TABLE comuna (
+id_comuna INT NOT NULL IDENTITY PRIMARY KEY,
+name_comuna VARCHAR(30) NOT NULL,
+id_provincia INT NOT NULL REFERENCES provincia
 );
 
-use db_MahikariTai;
-
-create table direccion (
-id_direccion int not null identity primary key,
-calle varchar(20) not null,
-number int not null,
-id_comuna int not null references comuna
+CREATE TABLE direccion (
+id_direccion INT NOT NULL IDENTITY PRIMARY KEY,
+calle VARCHAR(20) NOT NULL,
+number INT NOT NULL,
+id_comuna INT NOT NULL REFERENCES comuna
 );
 
 --_______________________________________
@@ -40,90 +34,137 @@ id_comuna int not null references comuna
 
 --Categoria Integrante
 
-use db_MahikariTai;
-
-create table categoria (
-id_categoria int not null identity primary key,
-categoria_name varchar(10) not null);
-
---Grado Omitama
-
-use db_MahikariTai;
-
-create table omitama (
-id_grado int not null identity primary key,
-grado varchar(10) not null
-);
+CREATE TABLE categoria (
+id_categoria INT NOT NULL IDENTITY PRIMARY KEY,
+categoria_name VARCHAR(10) NOT NULL);
 
 --Datos Generales
 
 --Genero
 
-create table gender (
-id_gender int not null identity primary key,
-gender varchar(9) not null
+CREATE TABLE gender (
+id_gender INT NOT NULL IDENTITY PRIMARY KEY,
+gender VARCHAR(9) NOT NULL
 );
 
 --Nacionalidad Integrante
 
-use db_MahikariTai
-
-create table nacionality (
-id_nac int not null identity primary key,
-nacionality varchar(20) not null
+CREATE TABLE nacionality (
+id_nac INT NOT NULL IDENTITY PRIMARY KEY,
+nacionality VARCHAR(20) NOT NULL
 );
 
 --Datos Miembro
 
-use db_MahikariTai;
-
-create table miembro (
-id_categoria int not null references categoria,
-nombres varchar(50) not null,
-first_lastname varchar(20) not null,
-second_lastname varchar(20),
-id_gender int not null references gender,
-rut_user varchar(13) not null primary key,
-birthdate date not null,
-id_nac int not null references nacionality,
-id_direccion int not null references direccion,
-phone_number varchar(10) not null,
-email varchar(50) not null,
-hobbies varchar(100) not null
+CREATE TABLE miembro (
+id_categoria INT NOT NULL REFERENCES categoria,
+nombres VARCHAR(50) NOT NULL,
+first_lastname VARCHAR(20) NOT NULL,
+second_lastname VARCHAR(20) NOT NULL,
+id_gender INT NOT NULL REFERENCES gender,
+rut_user VARCHAR(13) NOT NULL PRIMARY KEY,
+birthdate DATE NOT NULL,
+id_nac INT NOT NULL REFERENCES nacionality,
+id_direccion INT NOT NULL REFERENCES direccion,
+phone_number VARCHAR(10) NOT NULL,
+email VARCHAR(50) NOT NULL,
+hobbies VARCHAR(100) NOT NULL
 );
 
 --Admision Jun
 
-create table admision (
-id_admision int not null identity primary key,
-fecha_admision date not null,
-rut_user varchar(13) not null references miembro
+CREATE TABLE admision (
+id_admision INT NOT NULL IDENTITY PRIMARY KEY,
+fecha_admision DATE NOT NULL,
+rut_user VARCHAR(13) NOT NULL REFERENCES miembro ON DELETE CASCADE
 );
 
 --Cargo Miyakusha
 
-use db_MahikariTai;
-
-create table grupo (
-id_grupo int not null identity primary key,
-name_grupo varchar(10) not null
+CREATE TABLE grupo (
+id_grupo INT NOT NULL IDENTITY PRIMARY KEY,
+name_grupo VARCHAR(10) NOT NULL
 );
 
-use db_MahikariTai;
-
-create table cargo_names (
-id_cargo_name int not null identity primary key,
-cargo_name varchar(20) not null,
-id_grupo int not null references grupo
+CREATE TABLE cargo_names (
+id_cargo_name INT NOT NULL IDENTITY PRIMARY KEY,
+cargo_name VARCHAR(20) NOT NULL,
+id_grupo INT NOT NULL REFERENCES grupo ON DELETE CASCADE
 );
 
-use db_MahikariTai;
-
-create table cargo (
-id_cargo int not null identity primary key,
-id_cargo_name int not null references cargo_names,
-rut_user varchar(13) not null references miembro
+CREATE TABLE cargo (
+id_cargo INT NOT NULL IDENTITY PRIMARY KEY,
+id_cargo_name INT NOT NULL REFERENCES cargo_names,
+rut_user VARCHAR(13) NOT NULL REFERENCES miembro ON DELETE CASCADE
 );
+
+--Estudios Miembro y/o Trabajo
+
+--Estudios
+
+CREATE TABLE grado_estudios (
+id_grado_estudios INT NOT NULL IDENTITY PRIMARY KEY,
+grado_estudios VARCHAR(8) NOT NULL
+);
+
+CREATE TABLE estudios (
+id_estudios INT NOT NULL IDENTITY PRIMARY KEY,
+id_grado_estudios INT NOT NULL REFERENCES grado_estudios,
+career_years INT NOT NULL,
+career_name VARCHAR(30) NOT NULL,
+name_center VARCHAR(50) NOT NULL,
+rut_user VARCHAR(13) NOT NULL REFERENCES miembro ON DELETE CASCADE
+);
+
+--Trabajo
+
+CREATE TABLE job (
+id_job INT NOT NULL IDENTITY PRIMARY KEY,
+profession VARCHAR(20) NOT NULL,
+occupation VARCHAR(20) NOT NULL,
+rut_user VARCHAR(13) NOT NULL REFERENCES miembro ON DELETE CASCADE
+);
+
+--Grado Omitama
+
+CREATE TABLE omitama (
+id_grado INT NOT NULL IDENTITY PRIMARY KEY,
+grado VARCHAR(10) NOT NULL
+);
+
+--Familia Miembro
+
+CREATE TABLE familia (
+id_familia INT NOT NULL IDENTITY PRIMARY KEY,
+name_lastname_parent VARCHAR(70) NOT NULL,
+id_grado INT NOT NULL references omitama,
+phone_number VARCHAR(10) NOT NULL,
+rut_user VARCHAR(13) NOT NULL REFERENCES miembro ON DELETE CASCADE,
+gender VARCHAR(1) NOT NULL,
+live_with_him VARCHAR(2) NOT NULL
+);
+
+--Omitama Con fecha
+
+CREATE TABLE omitama_date (
+id_grado_date INT NOT NULL IDENTITY PRIMARY KEY,
+id_grado INT NOT NULL REFERENCES omitama,
+grado_date DATE NOT NULL,
+rut_user VARCHAR(13) NOT NULL REFERENCES miembro ON DELETE CASCADE
+);
+
+CREATE TABLE login(
+user_name VARCHAR(15) NOT NULL PRIMARY KEY,
+clave VARCHAR(50) 
+);
+
+exec allmembers;
+
+SELECT di.calle as Calle, di.number as Numero, co.name_comuna as Comuna, pr.name_provincia As Provincia, re.name_region as Region
+FROM direccion AS di
+JOIN comuna AS co ON di.id_comuna = co.id_comuna
+JOIN provincia AS pr ON pr.id_provincia = co.id_provincia
+JOIN region AS re ON re.id_region = pr.id_region
 
 --tabla anterior
 --create table cargo (
@@ -141,70 +182,16 @@ rut_user varchar(13) not null references miembro
 
 --select * from cargo
 
---Estudios Miembro y/o Trabajo
+---------------------------------------------------------------------
+---------------------------------------------------------------------
 
---Estudios
+--Primero eliminar la llaves foraneas creadas
 
-use db_MahikariTai;
+-- Modificar la tabla job para agregar ON DELETE CASCADE a la restricción de clave foránea
+ALTER TABLE job
+ADD CONSTRAINT FK_job_miembro FOREIGN KEY (rut_user)
+REFERENCES miembro(rut_user)
+ON DELETE CASCADE;
 
-create table grado_estudios (
-id_grado_estudios int not null identity primary key,
-grado_estudios varchar(8) not null
-);
-
-use db_MahikariTai;
-
-create table estudios (
-id_estudios int not null identity primary key,
-id_grado_estudios int not null references grado_estudios,
-career_years int not null,
-career_name varchar(30) not null,
-name_center varchar(50) not null,
-rut_user varchar(13) not null references miembro
-);
-
---Trabajo
-
-use db_MahikariTai;
-
-create table job (
-id_job int not null identity primary key,
-profession varchar(20) not null,
-occupation varchar(20) not null,
-rut_user varchar(13) not null references miembro
-);
-
---Familia Miembro
-
-use db_MahikariTai;
-
-create table familia (
-id_familia int not null identity primary key,
-name_lastname_parent varchar(70) not null,
-id_grado int not null references omitama,
-phone_number varchar(10) not null,
-rut_user varchar(13) not null references miembro,
-gender varchar(1) not null,
-live_with_him varchar(2) not null
-);
-
---Omitama Con fecha
-
-create table omitama_date (
-id_grado_date int not null identity primary key,
-grado_name varchar(10) not null,
-grado_date date not null,
-rut_user varchar(13) not null references miembro
-);
-
-create table login(
-user_name varchar(15) not null primary key,
-clave varchar(50) 
-);
-
-
-SELECT di.calle as Calle, di.number as Numero, co.name_comuna as Comuna, pr.name_provincia As Provincia, re.name_region as Region
-FROM direccion AS di
-JOIN comuna AS co ON di.id_comuna = co.id_comuna
-JOIN provincia AS pr ON pr.id_provincia = co.id_provincia
-JOIN region AS re ON re.id_region = pr.id_region
+---------------------------------------------------------------------
+---------------------------------------------------------------------

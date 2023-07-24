@@ -36,7 +36,7 @@
       <PropertyRef Name="id_comuna" />
     </Key>
     <Property Name="id_comuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name_comuna" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="name_comuna" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="id_provincia" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="direccion">
@@ -115,7 +115,7 @@
     <Property Name="id_categoria" Type="int" Nullable="false" />
     <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="first_lastname" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="second_lastname" Type="varchar" MaxLength="20" />
+    <Property Name="second_lastname" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="id_gender" Type="int" Nullable="false" />
     <Property Name="rut_user" Type="varchar" MaxLength="13" Nullable="false" />
     <Property Name="birthdate" Type="date" Nullable="false" />
@@ -144,7 +144,7 @@
       <PropertyRef Name="id_grado_date" />
     </Key>
     <Property Name="id_grado_date" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="grado_name" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="id_grado" Type="int" Nullable="false" />
     <Property Name="grado_date" Type="date" Nullable="false" />
     <Property Name="rut_user" Type="varchar" MaxLength="13" Nullable="false" />
   </EntityType>
@@ -153,7 +153,7 @@
       <PropertyRef Name="id_provincia" />
     </Key>
     <Property Name="id_provincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name_provincia" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="name_provincia" Type="varchar" MaxLength="40" Nullable="false" />
     <Property Name="id_region" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="region">
@@ -161,10 +161,12 @@
       <PropertyRef Name="id_region" />
     </Key>
     <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name_region" Type="varchar" MaxLength="42" Nullable="false" />
+    <Property Name="name_region" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <Association Name="FK__admision__rut_us__4F7CD00D">
-    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+  <Association Name="FK__admision__rut_us__4D94879B">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="admision" Type="Self.admision" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -175,7 +177,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__cargo__id_cargo___571DF1D5">
+  <Association Name="FK__cargo__id_cargo___5535A963">
     <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="1" />
     <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -187,8 +189,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__cargo__rut_user__5812160E">
-    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+  <Association Name="FK__cargo__rut_user__5629CD9C">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -199,8 +203,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__cargo_nam__id_gr__5441852A">
-    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+  <Association Name="FK__cargo_nam__id_gr__52593CB8">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="grupo">
@@ -235,7 +241,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__estudios__id_gra__5CD6CB2B">
+  <Association Name="FK__estudios__id_gra__5AEE82B9">
     <End Role="grado_estudios" Type="Self.grado_estudios" Multiplicity="1" />
     <End Role="estudios" Type="Self.estudios" Multiplicity="*" />
     <ReferentialConstraint>
@@ -247,8 +253,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__estudios__rut_us__5DCAEF64">
-    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+  <Association Name="FK__estudios__rut_us__5BE2A6F2">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="estudios" Type="Self.estudios" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -272,7 +280,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__familia__rut_use__6477ECF3">
-    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="familia" Type="Self.familia" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -283,8 +293,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__job__rut_user__60A75C0F">
-    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+  <Association Name="FK__job__rut_user__5EBF139D">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="job" Type="Self.job" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -295,7 +307,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__miembro__id_cate__49C3F6B7">
+  <Association Name="FK__miembro__id_cate__47DBAE45">
     <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
     <End Role="miembro" Type="Self.miembro" Multiplicity="*" />
     <ReferentialConstraint>
@@ -307,7 +319,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__miembro__id_dire__4CA06362">
+  <Association Name="FK__miembro__id_dire__4AB81AF0">
     <End Role="direccion" Type="Self.direccion" Multiplicity="1" />
     <End Role="miembro" Type="Self.miembro" Multiplicity="*" />
     <ReferentialConstraint>
@@ -319,7 +331,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__miembro__id_gend__4AB81AF0">
+  <Association Name="FK__miembro__id_gend__48CFD27E">
     <End Role="gender" Type="Self.gender" Multiplicity="1" />
     <End Role="miembro" Type="Self.miembro" Multiplicity="*" />
     <ReferentialConstraint>
@@ -331,7 +343,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__miembro__id_nac__4BAC3F29">
+  <Association Name="FK__miembro__id_nac__49C3F6B7">
     <End Role="nacionality" Type="Self.nacionality" Multiplicity="1" />
     <End Role="miembro" Type="Self.miembro" Multiplicity="*" />
     <ReferentialConstraint>
@@ -343,8 +355,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__omitama_d__rut_u__6754599E">
-    <End Role="miembro" Type="Self.miembro" Multiplicity="1" />
+  <Association Name="FK__omitama_d__id_gr__6754599E">
+    <End Role="omitama" Type="Self.omitama" Multiplicity="1" />
+    <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="omitama">
+        <PropertyRef Name="id_grado" />
+      </Principal>
+      <Dependent Role="omitama_date">
+        <PropertyRef Name="id_grado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__omitama_d__rut_u__68487DD7">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="omitama_date" Type="Self.omitama_date" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="miembro">
@@ -369,6 +395,12 @@
   </Association>
   <Function Name="allMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="categorias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="crearKenshuMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="rut_user" Type="varchar" Mode="In" />
+    <Parameter Name="grado_date_ini" Type="date" Mode="In" />
+    <Parameter Name="grado_date_int" Type="date" Mode="In" />
+    <Parameter Name="grado_date_sup" Type="date" Mode="In" />
+  </Function>
   <Function Name="crearMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="categoria_name" Type="varchar" Mode="In" />
     <Parameter Name="nombres" Type="varchar" Mode="In" />
@@ -387,10 +419,10 @@
     <Parameter Name="nombre_provincia" Type="varchar" Mode="In" />
     <Parameter Name="nombre_region" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="eliminarMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="generos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="miembroAllInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rut_user" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="generos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="modificarMiembro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="rut_user" Type="varchar" Mode="In" />
     <Parameter Name="categoria_name" Type="varchar" Mode="In" />
@@ -430,19 +462,19 @@
     <EntitySet Name="omitama_date" EntityType="Self.omitama_date" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="provincia" EntityType="Self.provincia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="region" EntityType="Self.region" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__admision__rut_us__4F7CD00D" Association="Self.FK__admision__rut_us__4F7CD00D">
+    <AssociationSet Name="FK__admision__rut_us__4D94879B" Association="Self.FK__admision__rut_us__4D94879B">
       <End Role="miembro" EntitySet="miembro" />
       <End Role="admision" EntitySet="admision" />
     </AssociationSet>
-    <AssociationSet Name="FK__cargo__id_cargo___571DF1D5" Association="Self.FK__cargo__id_cargo___571DF1D5">
+    <AssociationSet Name="FK__cargo__id_cargo___5535A963" Association="Self.FK__cargo__id_cargo___5535A963">
       <End Role="cargo_names" EntitySet="cargo_names" />
       <End Role="cargo" EntitySet="cargo" />
     </AssociationSet>
-    <AssociationSet Name="FK__cargo__rut_user__5812160E" Association="Self.FK__cargo__rut_user__5812160E">
+    <AssociationSet Name="FK__cargo__rut_user__5629CD9C" Association="Self.FK__cargo__rut_user__5629CD9C">
       <End Role="miembro" EntitySet="miembro" />
       <End Role="cargo" EntitySet="cargo" />
     </AssociationSet>
-    <AssociationSet Name="FK__cargo_nam__id_gr__5441852A" Association="Self.FK__cargo_nam__id_gr__5441852A">
+    <AssociationSet Name="FK__cargo_nam__id_gr__52593CB8" Association="Self.FK__cargo_nam__id_gr__52593CB8">
       <End Role="grupo" EntitySet="grupo" />
       <End Role="cargo_names" EntitySet="cargo_names" />
     </AssociationSet>
@@ -454,11 +486,11 @@
       <End Role="comuna" EntitySet="comuna" />
       <End Role="direccion" EntitySet="direccion" />
     </AssociationSet>
-    <AssociationSet Name="FK__estudios__id_gra__5CD6CB2B" Association="Self.FK__estudios__id_gra__5CD6CB2B">
+    <AssociationSet Name="FK__estudios__id_gra__5AEE82B9" Association="Self.FK__estudios__id_gra__5AEE82B9">
       <End Role="grado_estudios" EntitySet="grado_estudios" />
       <End Role="estudios" EntitySet="estudios" />
     </AssociationSet>
-    <AssociationSet Name="FK__estudios__rut_us__5DCAEF64" Association="Self.FK__estudios__rut_us__5DCAEF64">
+    <AssociationSet Name="FK__estudios__rut_us__5BE2A6F2" Association="Self.FK__estudios__rut_us__5BE2A6F2">
       <End Role="miembro" EntitySet="miembro" />
       <End Role="estudios" EntitySet="estudios" />
     </AssociationSet>
@@ -470,27 +502,31 @@
       <End Role="miembro" EntitySet="miembro" />
       <End Role="familia" EntitySet="familia" />
     </AssociationSet>
-    <AssociationSet Name="FK__job__rut_user__60A75C0F" Association="Self.FK__job__rut_user__60A75C0F">
+    <AssociationSet Name="FK__job__rut_user__5EBF139D" Association="Self.FK__job__rut_user__5EBF139D">
       <End Role="miembro" EntitySet="miembro" />
       <End Role="job" EntitySet="job" />
     </AssociationSet>
-    <AssociationSet Name="FK__miembro__id_cate__49C3F6B7" Association="Self.FK__miembro__id_cate__49C3F6B7">
+    <AssociationSet Name="FK__miembro__id_cate__47DBAE45" Association="Self.FK__miembro__id_cate__47DBAE45">
       <End Role="categoria" EntitySet="categoria" />
       <End Role="miembro" EntitySet="miembro" />
     </AssociationSet>
-    <AssociationSet Name="FK__miembro__id_dire__4CA06362" Association="Self.FK__miembro__id_dire__4CA06362">
+    <AssociationSet Name="FK__miembro__id_dire__4AB81AF0" Association="Self.FK__miembro__id_dire__4AB81AF0">
       <End Role="direccion" EntitySet="direccion" />
       <End Role="miembro" EntitySet="miembro" />
     </AssociationSet>
-    <AssociationSet Name="FK__miembro__id_gend__4AB81AF0" Association="Self.FK__miembro__id_gend__4AB81AF0">
+    <AssociationSet Name="FK__miembro__id_gend__48CFD27E" Association="Self.FK__miembro__id_gend__48CFD27E">
       <End Role="gender" EntitySet="gender" />
       <End Role="miembro" EntitySet="miembro" />
     </AssociationSet>
-    <AssociationSet Name="FK__miembro__id_nac__4BAC3F29" Association="Self.FK__miembro__id_nac__4BAC3F29">
+    <AssociationSet Name="FK__miembro__id_nac__49C3F6B7" Association="Self.FK__miembro__id_nac__49C3F6B7">
       <End Role="nacionality" EntitySet="nacionality" />
       <End Role="miembro" EntitySet="miembro" />
     </AssociationSet>
-    <AssociationSet Name="FK__omitama_d__rut_u__6754599E" Association="Self.FK__omitama_d__rut_u__6754599E">
+    <AssociationSet Name="FK__omitama_d__id_gr__6754599E" Association="Self.FK__omitama_d__id_gr__6754599E">
+      <End Role="omitama" EntitySet="omitama" />
+      <End Role="omitama_date" EntitySet="omitama_date" />
+    </AssociationSet>
+    <AssociationSet Name="FK__omitama_d__rut_u__68487DD7" Association="Self.FK__omitama_d__rut_u__68487DD7">
       <End Role="miembro" EntitySet="miembro" />
       <End Role="omitama_date" EntitySet="omitama_date" />
     </AssociationSet>

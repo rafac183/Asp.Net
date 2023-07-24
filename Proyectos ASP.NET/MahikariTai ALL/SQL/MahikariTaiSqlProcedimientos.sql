@@ -19,13 +19,15 @@ exec generos;
 
 create procedure categorias
 as
-select categoria_name as Categoria from categoria order by categoria_name;
+BEGIN
+	select categoria_name as Categoria from categoria order by categoria_name;
+END
 
 exec categorias;
 
 --_________________________________
 
---Crear Miembro
+--Crear Integrante
 
 CREATE PROCEDURE crearMiembro
     @categoria_name varchar(10),
@@ -116,7 +118,7 @@ BEGIN
     VALUES (@id_categoria, @nombres, @first_lastname, @second_lastname, @id_gender, @rut_user, @birthdate, @id_nac, @direccionId, @phone_number, @email, @hobbies);
 END
 
---exec allMembers;
+--Ejemplos
 
 EXEC crearMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
@@ -128,6 +130,7 @@ EXEC crearMiembro @categoria_name = 'Seijimbu', @nombres = 'Rafael Jose', @first
 
 EXEC crearMiembro @categoria_name = 'Seijimbu', @nombres = 'Gustavo Jose', @first_lastname = 'Correa', @second_lastname = 'Perez', @gender = 'Masculino', @rut_user = '15.152.158-8', @birthdate = '2000-01-05', @nacionality = 'Chilena', @calle = 'San Pablo', @number = 165, @phone_number = '911225544', @email = 'example@example.com', @hobbies = 'Trabajar', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
+--Modicicar integrante
 
 CREATE PROCEDURE modificarMiembro
     @rut_user varchar(13),
@@ -150,30 +153,53 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Obtener el ID de la región
-    DECLARE @regionId int
-    SELECT @regionId = id_region FROM region WHERE name_region = @nombre_region;
-
-    -- Obtener el ID de la ciudad
-    DECLARE @provinciaId int
-    SELECT @provinciaId = id_provincia FROM provincia WHERE name_provincia = @nombre_provincia AND id_region = @regionId;
-
-    -- Obtener el ID de la comuna
+    -- Obtener o insertar la ID de la comuna
     DECLARE @comunaId int
-    SELECT @comunaId = id_comuna FROM comuna WHERE name_comuna = @nombre_comuna AND id_provincia = @provinciaId;
+    SELECT @comunaId = id_comuna FROM comuna WHERE name_comuna = @nombre_comuna;
 
-    -- Eliminar la dirección existente del miembro
-    DELETE FROM direccion WHERE id_direccion IN (
-        SELECT id_direccion FROM miembro WHERE rut_user = @rut_user
-    );
+    IF @comunaId IS NULL
+    BEGIN
+        -- Obtener o insertar la ID de la provincia
+        DECLARE @provinciaId int
+        SELECT @provinciaId = id_provincia FROM provincia WHERE name_provincia = @nombre_provincia;
 
-    -- Insertar una nueva dirección para el miembro
-    INSERT INTO direccion (calle, number, id_comuna)
-    VALUES (@calle, @number, @comunaId);
+        IF @provinciaId IS NULL
+        BEGIN
+            -- Obtener o insertar la ID de la región
+            DECLARE @regionId int
+            SELECT @regionId = id_region FROM region WHERE name_region = @nombre_region;
 
-    -- Obtener el ID de la dirección recién insertada
+            IF @regionId IS NULL
+            BEGIN
+                INSERT INTO region (name_region) VALUES (@nombre_region);
+                SET @regionId = SCOPE_IDENTITY();
+            END
+
+            INSERT INTO provincia (name_provincia, id_region) VALUES (@nombre_provincia, @regionId);
+            SET @provinciaId = SCOPE_IDENTITY();
+        END
+
+        INSERT INTO comuna (name_comuna, id_provincia) VALUES (@nombre_comuna, @provinciaId);
+        SET @comunaId = SCOPE_IDENTITY();
+    END
+
+    -- Obtener o insertar la ID de la dirección
     DECLARE @direccionId int
-    SET @direccionId = SCOPE_IDENTITY();
+    SELECT @direccionId = id_direccion FROM direccion WHERE calle = @calle AND number = @number;
+
+    IF @direccionId IS NULL
+    BEGIN
+        INSERT INTO direccion (calle, number, id_comuna)
+        VALUES (@calle, @number, @comunaId);
+        SET @direccionId = SCOPE_IDENTITY(); -- Obtener el ID de la dirección insertada
+    END
+    ELSE
+    BEGIN
+        -- Actualizar la dirección existente
+        UPDATE direccion
+        SET id_comuna = @comunaId
+        WHERE id_direccion = @direccionId;
+    END
 
     -- Obtener el ID de la categoría
     DECLARE @id_categoria int;
@@ -201,18 +227,25 @@ BEGIN
         email = @email,
         hobbies = @hobbies
     WHERE rut_user = @rut_user;
-END
 
+	--Eliminar direcciones sobrantes
+	DELETE FROM direccion
+    WHERE id_direccion NOT IN (SELECT DISTINCT id_direccion FROM miembro);
+END;
 
-EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Santiago', @nombre_region = 'Metropolitana de Santiago';
+--Ejemplos
 
-EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Alejandro', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.225.588-9', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3093, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Santiago', @nombre_region = 'Metropolitana de Santiago';
+EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '27.450.698-9', @birthdate = '2002-03-18', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3095, @phone_number = '955229389', @email = 'rafac183antonio@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Quinta Normal', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
+EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Carla', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '85', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3097, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
+
+exec allMembers
 
 delete from miembro where rut_user = '15.152.158-8'
 
 SELECT * FROM miembro
 
+--Listar datos de integrante en especifico
 
 CREATE PROCEDURE miembroAllInfo
 @rut_user varchar(13)
@@ -232,6 +265,8 @@ END
 
 exec miembroAllInfo @rut_user = '27.225.588-9'
 
+--Eliminar Integrante
+
 CREATE PROCEDURE eliminarMiembro
 @rut_user varchar(13)
 AS
@@ -241,6 +276,8 @@ WHERE rut_user = @rut_user
 END
 
 exec eliminarMiembro @rut_user = '14.489.489-1'
+
+--Listar Todos los integrantes
 
 create procedure allMembers
 as
@@ -256,8 +293,39 @@ JOIN gender as ge on mi.id_gender = ge.id_gender
 
 exec allMembers;
 
+--Crear Kenshu de Integrante
+
+CREATE PROCEDURE crearKenshuMiembro
+	@rut_user varchar(13),
+	@grado_date_ini date,
+    @grado_date_int date = NULL,
+    @grado_date_sup date = NULL
+AS
+BEGIN
+	DECLARE @gradeId int
+    SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Inicial';
+
+	INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_ini, @rut_user);
+
+	IF @grado_date_int IS NOT NULL
+	BEGIN
+		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Intermedio';
+		INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_int, @rut_user);
+	END
+
+	IF @grado_date_sup IS NOT NULL
+	BEGIN
+		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Superior';
+		INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_sup, @rut_user);
+	END
+END;
+
+
+
 
 --Cod para reiniciar Contador
 
 DELETE FROM miembro
 DBCC CHECKIDENT ('miembro', RESEED, 0);
+
+select * from omitama_date
