@@ -242,6 +242,8 @@ namespace MahikariTaiV2.Controllers
             return Json(resultado);
         }
 
+
+
         //Eliminar miembro de la base de datos
         [HttpPost]
         public JsonResult EliminarMiembros(string rut)
@@ -301,45 +303,33 @@ namespace MahikariTaiV2.Controllers
 
         //Mostrar toda la informacion de cada miembro de la base de datos
         [HttpPost]
-        public JsonResult AllInfoMember(string rut)
+        public JsonResult AllInfoKenshu(string rut)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            DataSet miembros = WS.AllInfo(rut);
+            DataSet kenshus = WS.AllInfoKenshu(rut);
 
 
-            var miembro = new List<ElIntegrante>();
-
-            if (miembros != null && miembros.Tables.Count > 0 && miembros.Tables[0].Rows.Count > 0)
+            var Listakenshu = new List<Kenshu>();
+            if (kenshus != null)
             {
-                DataRow row = miembros.Tables[0].Rows[0];
-                var elMiembro = new ElIntegrante
+                foreach (DataRow row in kenshus.Tables[0].Rows)
                 {
-                    rut = row["Rut"].ToString(),
-                    names = row["Nombres"].ToString(),
-                    firstLastname = row["Apellido Paterno"].ToString(),
-                    secondLastname = row["Apellido Materno"].ToString(),
-                    gender = row["Genero"].ToString(),
-                    category = row["Categoria"].ToString(),
-                    email = row["Correo"].ToString(),
-                    birthdate = row.Field<DateTime>("Fecha de Nacimiento"),
-                    nacionality = row["Nacionalidad"].ToString(),
-                    phone = row["Telefono"].ToString(),
-                    street = row["Calle"].ToString(),
-                    number = row["Numero"].ToString(),
-                    region = row["Region"].ToString(),
-                    provincia = row["Provincia"].ToString(),
-                    comuna = row["Comuna"].ToString(),
-                    hobbies = row["Hobbies"].ToString()
-                };
+                    DateTime.TryParse(row["Fecha"].ToString(), out DateTime date);
+                    var Kenshu = new Kenshu
+                    {
+                        grado = row["Grado"].ToString(),
+                        date = date
+                    };
 
-                miembro.Add(elMiembro);
+                    Listakenshu.Add(Kenshu);
+                }
             }
 
 
-            return Json(new { miembros = miembro }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = Listakenshu }, JsonRequestBehavior.AllowGet);
         }
-        
+
         [HttpPost]
         public JsonResult GetRegiones()
         {

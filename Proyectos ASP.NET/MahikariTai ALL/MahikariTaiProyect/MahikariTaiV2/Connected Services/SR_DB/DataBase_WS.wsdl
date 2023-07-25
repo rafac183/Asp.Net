@@ -40,6 +40,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AllInfoKenshu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rut" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AllInfoKenshuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AllInfoKenshuResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="AñadirMiembro">
         <s:complexType>
           <s:sequence>
@@ -222,6 +243,12 @@
   <wsdl:message name="AllInfoSoapOut">
     <wsdl:part name="parameters" element="tns:AllInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="AllInfoKenshuSoapIn">
+    <wsdl:part name="parameters" element="tns:AllInfoKenshu" />
+  </wsdl:message>
+  <wsdl:message name="AllInfoKenshuSoapOut">
+    <wsdl:part name="parameters" element="tns:AllInfoKenshuResponse" />
+  </wsdl:message>
   <wsdl:message name="AñadirMiembroSoapIn">
     <wsdl:part name="parameters" element="tns:AñadirMiembro" />
   </wsdl:message>
@@ -273,6 +300,10 @@
       <wsdl:input message="tns:AllInfoSoapIn" />
       <wsdl:output message="tns:AllInfoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AllInfoKenshu">
+      <wsdl:input message="tns:AllInfoKenshuSoapIn" />
+      <wsdl:output message="tns:AllInfoKenshuSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AñadirMiembro">
       <wsdl:input message="tns:AñadirMiembroSoapIn" />
       <wsdl:output message="tns:AñadirMiembroSoapOut" />
@@ -315,6 +346,15 @@
     </wsdl:operation>
     <wsdl:operation name="AllInfo">
       <soap:operation soapAction="http://tempuri.org/AllInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllInfoKenshu">
+      <soap:operation soapAction="http://tempuri.org/AllInfoKenshu" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -399,6 +439,15 @@
     </wsdl:operation>
     <wsdl:operation name="AllInfo">
       <soap12:operation soapAction="http://tempuri.org/AllInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AllInfoKenshu">
+      <soap12:operation soapAction="http://tempuri.org/AllInfoKenshu" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

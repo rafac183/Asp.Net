@@ -250,6 +250,7 @@
     <Compile Include="Models\job.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Kenshu.cs" />
     <Compile Include="Models\LaFamilia.cs" />
     <Compile Include="Models\login.cs">
       <DependentUpon>MahikariTai.tt</DependentUpon>
@@ -642,6 +643,7 @@
     <Content Include="Scripts\JSMCargos.js" />
     <Content Include="Scripts\JSMCrudFamilyData.js" />
     <Content Include="Scripts\JSMCrudOtherData.js" />
+    <Content Include="Scripts\JSMInfo.js" />
     <Content Include="Scripts\JSS.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

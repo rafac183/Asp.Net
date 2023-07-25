@@ -30,6 +30,13 @@ namespace MahikariTaiV2.SR_DB {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllInfo", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> AllInfoAsync(string rut);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllInfoKenshu", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AllInfoKenshu(string rut);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllInfoKenshu", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AllInfoKenshuAsync(string rut);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AñadirMiembro", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet AñadirMiembro(
@@ -185,6 +192,14 @@ namespace MahikariTaiV2.SR_DB {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> AllInfoAsync(string rut) {
             return base.Channel.AllInfoAsync(rut);
+        }
+        
+        public System.Data.DataSet AllInfoKenshu(string rut) {
+            return base.Channel.AllInfoKenshu(rut);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AllInfoKenshuAsync(string rut) {
+            return base.Channel.AllInfoKenshuAsync(rut);
         }
         
         public System.Data.DataSet AñadirMiembro(

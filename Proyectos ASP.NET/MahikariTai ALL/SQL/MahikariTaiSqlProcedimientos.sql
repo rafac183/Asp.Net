@@ -265,6 +265,16 @@ END
 
 exec miembroAllInfo @rut_user = '27.225.588-9'
 
+CREATE PROCEDURE miembroAllInfoKenshu
+@rut_user VARCHAR(13)
+AS
+BEGIN
+	SELECT o.grado AS Grado, od.grado_date AS Fecha
+	FROM omitama_date AS od
+	JOIN omitama AS o ON o.id_grado = od.id_grado
+	WHERE od.rut_user = @rut_user
+END
+
 --Eliminar Integrante
 
 CREATE PROCEDURE eliminarMiembro

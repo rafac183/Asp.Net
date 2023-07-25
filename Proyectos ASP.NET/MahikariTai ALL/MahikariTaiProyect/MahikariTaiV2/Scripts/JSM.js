@@ -1,7 +1,6 @@
 ﻿//Modificar tabla Configuracion de la Tabla Completa
 var tablaData;
 var fila;
-var selectIn;
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 $(document).ready(function () {
@@ -66,36 +65,6 @@ $(document).ready(function () {
     recargarRegiones();
 });
 
-//Configuracion del Boton Toda la Informacion del integrante
-$("#tablaMembers tbody").on(touchEvent, '.btn-allInfo', function () {    
-    fila = $(this).closest('tr');
-    var datosFila = tablaData.row(fila).data();
-    allInfo(datosFila);
-});
-
-//Toda Informacion del Miembro
-function allInfo(json) {
-    var title = document.getElementById("titleInfo");
-    title.innerText = "Se Muestrar los Datos del Rut: '" + json.rut + "'";
-    $("#rutTxt").html(json.rut);
-    $("#nameTxt").html(json.names);
-    $("#firstLastNameTxt").html(json.firstLastname);
-    $("#secondLastNameTxt").html(json.secondLastname);
-    $("#generoTxt").html(json.gender);
-    $("#categoriaTxt").html(json.category);
-    $("#emailTxt").html(json.email);
-    var birthdate = new Date(parseInt(json.birthdate.substr(6)));
-    $("#birthdateTxt").html(moment(birthdate).format("DD-MM-YYYY").toString());
-    $("#nacionalidadTxt").html(json.nacionality);
-    $("#phoneTxt").html(json.phone);
-    $("#streetTxt").html(json.street + " " + json.number);
-    $("#regionTxt").html(json.region);
-    $("#provinciaTxt").html(json.provincia);
-    $("#comunaTxt").html(json.comuna);
-    $("#hobbiesTxt").html(json.hobbies);
-    $("#modalAllInfo").modal("show")
-}
-
 //Abrir Modal para Crear Integrante O Editar Integrante (Limpiar Casillas o Traer Datos)
 function abrirModal(json) {
 
@@ -118,6 +87,9 @@ function abrirModal(json) {
     $("#provinciaSelect").val($("#provinciaSelect option:first").val()).prop('disabled', true);
     $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
     $("#hobbiesInput").val("");
+    $("#dateIniInput").val(""),
+    $("#dateIntInput").val(""),
+    $("#dateSupInput").val("")
     
 
     if (json != null) {
