@@ -2,6 +2,7 @@
 var tablaData;
 var fila;
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+var selectVlIn, selectVlSu, selectIn;
 
 $(document).ready(function () {
     tablaData = $("#tablaMembers").DataTable({
@@ -63,6 +64,14 @@ $(document).ready(function () {
         }
     });
     recargarRegiones();
+
+    selectVlIn = $("#yesOrNotSelectIn").val();
+    selectIn = selectVlIn;
+    selectVlSu = $("#yesOrNotSelectSu").val();
+
+    // Ejecutamos la función para manejar el valor actual del select
+    selectValIn(selectVlIn);
+    selectValSu(selectVlSu);
 });
 
 //Abrir Modal para Crear Integrante O Editar Integrante (Limpiar Casillas o Traer Datos)
@@ -87,10 +96,9 @@ function abrirModal(json) {
     $("#provinciaSelect").val($("#provinciaSelect option:first").val()).prop('disabled', true);
     $("#comunaSelect").val($("#comunaSelect option:first").val()).prop('disabled', true);
     $("#hobbiesInput").val("");
-    $("#dateIniInput").val(""),
-    $("#dateIntInput").val(""),
-    $("#dateSupInput").val("")
-    
+    $("#dateIniInput").val("");
+    $("#yesOrNotSelectIn").val("No");
+    selectValIn(selectVlIn);
 
     if (json != null) {
         title.innerText = "Editar Miembro";
@@ -153,8 +161,9 @@ function abrirModal(json) {
             }
         });
         $("#hobbiesInput").val(json.hobbies);
+        allInfoKen(json, true);
     }
-    $("#modalDatosPer").modal("show");
+    $("#modalDatosKen").modal("show");
 }
 
 function recargarRegiones() {
@@ -236,38 +245,71 @@ function recargar() {
 
 //Estatus Select de Kenshu
 $("#yesOrNotSelectIn").change(function () {
-    var select = $(this).val();
-    selectIn = select;
-    $.ajax({
-        success: function () {
-            if (select == "No") {
-                $("#dateIntInput").prop("disabled", true);
-                $("#dateSupInput").prop("disabled", true);
-                $("#yesOrNotSelectSu").val("No");
-            }
-            else {
-                $("#dateIntInput").prop("disabled", false);
-            }
-        }
-    })
-
+    selectVlIn = $(this).val();
+    selectIn = selectVlIn;
+    selectValIn(selectVlIn);
 });
-
 $("#yesOrNotSelectSu").change(function () {
-    var select = $(this).val();
-    $.ajax({
-        success: function () {
-            if (select == "No") {
-                $("#dateSupInput").prop("disabled", true);
-            }
-            else if (select == "Si" && selectIn == "No") {
-                $("#dateSupInput").prop("disabled", true);
-                $("#yesOrNotSelectSu").val("No");
-            }
-            else {
-                $("#dateSupInput").prop("disabled", false);
-            }
-        }
-    })
-
+    selectVlSu = $(this).val();
+    selectValSu(selectVlSu);
 });
+
+function selectValIn(select) {
+    if (select == "No") {
+        $("#dateIntInput").prop("disabled", true);
+        $("#dateSupInput").prop("disabled", true);
+        $("#dateIntInput").val("");
+        $("#dateSupInput").val("");
+        $("#yesOrNotSelectSu").val("No");
+    } else {
+        $("#dateIntInput").prop("disabled", false);
+    }
+}
+
+//$("#yesOrNotSelectIn").change(function () {
+//    select = $(this).val();
+//    selectIn = select;
+//    $.ajax({
+//        success: function () {
+//            if (select == "No") {
+//                $("#dateIntInput").prop("disabled", true);
+//                $("#dateSupInput").prop("disabled", true);
+//                $("#dateIntInput").val("");
+//                $("#dateSupInput").val("");
+//                $("#yesOrNotSelectSu").val("No");
+//            }
+//            else {
+//                $("#dateIntInput").prop("disabled", false);
+//            }
+//        }
+//    })
+
+//});
+
+function selectValSu(select) {
+    if (select == "No" || selectIn == "No") {
+        $("#dateSupInput").prop("disabled", true);
+        $("#dateSupInput").val("");
+        $("#yesOrNotSelectSu").val("No");
+    }
+    else {
+        $("#dateSupInput").prop("disabled", false);
+    }
+}
+
+//$("#yesOrNotSelectSu").change(function () {
+//    select = $(this).val();
+//    $.ajax({
+//        success: function () {
+//            if (select == "No" || selectIn == "No") {
+//                $("#dateSupInput").prop("disabled", true);
+//                $("#dateSupInput").val("");
+//                $("#yesOrNotSelectSu").val("No");
+//            }
+//            else {
+//                $("#dateSupInput").prop("disabled", false);
+//            }
+//        }
+//    })
+
+//});

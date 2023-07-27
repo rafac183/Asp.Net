@@ -226,23 +226,65 @@ namespace MahikariTaiV2.Controllers
 
         //Modificar Miembro a la base de datos
         [HttpPost]
-        public JsonResult ModificarMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
+        public void ModificarMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
             WS.ModificarMiembro(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
+        }
 
+        [HttpPost]
+        public JsonResult ModificarKenshuMiembros(string rut, string dateIni, string dateInt, string dateSup)
+        {
             var resultado = new
             {
                 exitoso = true,
                 mensaje = "El Miembro se modificó correctamente.",
                 mensaje2 = "Miembro Modificado"
             };
-
+            // Lógica para obtener las ciudades según la región desde tu servicio web
+            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+            if (dateIni == "")
+            {
+                resultado = new
+                {
+                    exitoso = false,
+                    mensaje = "",
+                    mensaje2 = ""
+                };
+            }
+            else if (dateInt == "")
+            {
+                WS.ModificarKenshu(rut, dateIni + "-01", null, null);
+                resultado = new
+                {
+                    exitoso = true,
+                    mensaje = "El Miembro se modificó correctamente.",
+                    mensaje2 = "Miembro Modificado"
+                };
+            }
+            else if (dateSup == "")
+            {
+                WS.ModificarKenshu(rut, dateIni + "-01", dateInt + "-01", null);
+                resultado = new
+                {
+                    exitoso = true,
+                    mensaje = "El Miembro se modificó correctamente.",
+                    mensaje2 = "Miembro Modificado"
+                };
+            }
+            else
+            {
+                WS.ModificarKenshu(rut, dateIni + "-01", dateInt + "-01", dateSup + "-01");
+                resultado = new
+                {
+                    exitoso = true,
+                    mensaje = "El Miembro se modificó correctamente.",
+                    mensaje2 = "Miembro Modificado"
+                };
+            }
             return Json(resultado);
         }
-
-
 
         //Eliminar miembro de la base de datos
         [HttpPost]

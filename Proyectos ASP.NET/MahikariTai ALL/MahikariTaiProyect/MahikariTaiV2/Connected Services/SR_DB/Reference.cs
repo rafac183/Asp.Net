@@ -122,6 +122,13 @@ namespace MahikariTaiV2.SR_DB {
                     string comuna, 
                     string hobbies);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarKenshu", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarKenshu(string rut, string dateIni, string dateInt, string dateSup);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarKenshu", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarKenshuAsync(string rut, string dateIni, string dateInt, string dateSup);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarMiembro", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet EliminarMiembro(string rut);
@@ -288,6 +295,14 @@ namespace MahikariTaiV2.SR_DB {
                     string comuna, 
                     string hobbies) {
             return base.Channel.ModificarMiembroAsync(rut, nombres, primerApellido, segundoApellido, genero, categoria, email, birthdate, nacionalidad, phone, calle, numero, region, provincia, comuna, hobbies);
+        }
+        
+        public System.Data.DataSet ModificarKenshu(string rut, string dateIni, string dateInt, string dateSup) {
+            return base.Channel.ModificarKenshu(rut, dateIni, dateInt, dateSup);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarKenshuAsync(string rut, string dateIni, string dateInt, string dateSup) {
+            return base.Channel.ModificarKenshuAsync(rut, dateIni, dateInt, dateSup);
         }
         
         public System.Data.DataSet EliminarMiembro(string rut) {

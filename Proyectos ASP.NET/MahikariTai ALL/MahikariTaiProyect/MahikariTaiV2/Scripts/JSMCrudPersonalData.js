@@ -192,6 +192,7 @@ function guardarKenshu() {
         dateInt: $("#dateIntInput").val(),
         dateSup: $("#dateSupInput").val()
     }
+    debugger;
     if (id == 0) {
         $.ajax({
             url: añadirKenshuUrl,
@@ -210,15 +211,39 @@ function guardarKenshu() {
                 } else {
                     txt.innerHTML = response.mensaje;
                     title.innerHTML = response.mensaje2;
-                    $("#modalUserEstado").modal("show");
                 }                
             },
             error: function () {
                 console.error("Error al Añadir Kenshu");
             }
         });
-    } else if (id == 1) { }
-    $("#modalDatosKen").modal("hide")
+    } else if (id == 1) {
+        $.ajax({
+            url: modificarKenshuUrl,
+            type: "POST",
+            data: {
+                rut: Kenshu.rut,
+                dateIni: Kenshu.dateIni,
+                dateInt: Kenshu.dateInt,
+                dateSup: Kenshu.dateSup
+            },
+            success: function (response) {
+                if (response.exitoso == false) {
+                    $("#modalDatosKen").modal("hide");
+                    modal = "#modalDatosKen";
+                    $("#modalCampos").modal("show");
+                } else {
+                    txt.innerHTML = response.mensaje;
+                    title.innerHTML = response.mensaje2;                    
+                }
+            },
+            error: function () {
+                console.error("Error al Modificar Kenshu");
+            }
+        });
+    }
+    $("#modalDatosKen").modal("hide");
+    $("#modalUserEstado").modal("show");
     
 }
 

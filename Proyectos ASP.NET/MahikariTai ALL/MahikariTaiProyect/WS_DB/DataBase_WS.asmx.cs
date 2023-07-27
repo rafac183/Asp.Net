@@ -123,6 +123,33 @@ namespace WS_DB
             return ds;
         }
 
+        [WebMethod]
+        public DataSet ModificarKenshu(string rut, string dateIni, string dateInt, string dateSup)
+        {
+            SqlConnection conn = new SqlConnection();
+
+            //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
+            //sino tendrias que ingresar tu usuario y tu pas de la base de datos
+            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            SqlDataAdapter da = new SqlDataAdapter();
+            if (dateInt == null)
+            {
+                da = new SqlDataAdapter("EXEC modificarKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "';", conn);
+
+            }
+            else if (dateInt != null && dateSup == null)
+            {
+                da = new SqlDataAdapter("EXEC modificarKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "', @grado_date_int = '" + dateInt + "';", conn);
+            }
+            else if (dateSup != null)
+            {
+                da = new SqlDataAdapter("EXEC modificarKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "', @grado_date_int = '" + dateInt + "', @grado_date_sup = '" + dateSup + "';", conn);
+            }
+            //Cache de memoria, guardar lo que hice
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
 
         [WebMethod]
         public DataSet EliminarMiembro(string rut)

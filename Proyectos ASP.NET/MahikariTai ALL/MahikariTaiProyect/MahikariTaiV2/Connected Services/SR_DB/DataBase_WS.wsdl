@@ -157,6 +157,30 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ModificarKenshu">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateIni" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateInt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateSup" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarKenshuResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarKenshuResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="EliminarMiembro">
         <s:complexType>
           <s:sequence>
@@ -267,6 +291,12 @@
   <wsdl:message name="ModificarMiembroSoapOut">
     <wsdl:part name="parameters" element="tns:ModificarMiembroResponse" />
   </wsdl:message>
+  <wsdl:message name="ModificarKenshuSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarKenshu" />
+  </wsdl:message>
+  <wsdl:message name="ModificarKenshuSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarKenshuResponse" />
+  </wsdl:message>
   <wsdl:message name="EliminarMiembroSoapIn">
     <wsdl:part name="parameters" element="tns:EliminarMiembro" />
   </wsdl:message>
@@ -315,6 +345,10 @@
     <wsdl:operation name="ModificarMiembro">
       <wsdl:input message="tns:ModificarMiembroSoapIn" />
       <wsdl:output message="tns:ModificarMiembroSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarKenshu">
+      <wsdl:input message="tns:ModificarKenshuSoapIn" />
+      <wsdl:output message="tns:ModificarKenshuSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="EliminarMiembro">
       <wsdl:input message="tns:EliminarMiembroSoapIn" />
@@ -382,6 +416,15 @@
     </wsdl:operation>
     <wsdl:operation name="ModificarMiembro">
       <soap:operation soapAction="http://tempuri.org/ModificarMiembro" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarKenshu">
+      <soap:operation soapAction="http://tempuri.org/ModificarKenshu" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -475,6 +518,15 @@
     </wsdl:operation>
     <wsdl:operation name="ModificarMiembro">
       <soap12:operation soapAction="http://tempuri.org/ModificarMiembro" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarKenshu">
+      <soap12:operation soapAction="http://tempuri.org/ModificarKenshu" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

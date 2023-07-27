@@ -239,7 +239,7 @@ EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Rafael Antonio',
 
 EXEC modificarMiembro @categoria_name = 'Seinenbu', @nombres = 'Carla', @first_lastname = 'Cordero', @second_lastname = 'Giron', @gender = 'Masculino', @rut_user = '85', @birthdate = '2003-07-26', @nacionality = 'Venezolana', @calle = 'Santo Domingo', @number = 3097, @phone_number = '955229966', @email = 'cordero478@gmail.com', @hobbies = 'Jugar VideoJuegos, Ejercicio', @nombre_comuna = 'Santiago', @nombre_provincia = 'Provincia de Santiago', @nombre_region = 'Región Metropolitana';
 
-exec allMembers
+exec allMembers;
 
 delete from miembro where rut_user = '15.152.158-8'
 
@@ -272,7 +272,7 @@ BEGIN
 	SELECT o.grado AS Grado, od.grado_date AS Fecha
 	FROM omitama_date AS od
 	JOIN omitama AS o ON o.id_grado = od.id_grado
-	WHERE od.rut_user = @rut_user
+	WHERE od.rut_user = @rut_user ORDER BY od.grado_date
 END
 
 --Eliminar Integrante
@@ -332,6 +332,61 @@ BEGIN
 	END
 END;
 
+--Modificar Kenshu Integrante
+
+CREATE PROCEDURE modificarKenshuMiembro
+	@rut_user varchar(13),
+	@grado_date_ini date,
+    @grado_date_int date = NULL,
+    @grado_date_sup date = NULL
+AS
+BEGIN
+	DECLARE @id_date INT
+	DECLARE @gradeId INT
+	SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Inicial';
+
+	UPDATE omitama_date
+	SET grado_date = @grado_date_ini
+	WHERE rut_user = @rut_user AND id_grado = @gradeId;
+
+	IF @grado_date_int IS NOT NULL
+	BEGIN
+		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Intermedio';
+		SELECT @id_date = id_grado_date FROM omitama_date
+		WHERE rut_user = @rut_user AND id_grado = @gradeId;
+		IF @id_date IS NOT NULL
+		BEGIN 
+			UPDATE omitama_date
+			SET grado_date = @grado_date_int
+			WHERE rut_user = @rut_user AND id_grado = @gradeId;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_int, @rut_user);
+		END
+	END
+
+	IF @grado_date_sup IS NOT NULL
+	BEGIN
+		SELECT @gradeId = id_grado FROM omitama WHERE grado = 'Superior';
+		SELECT @id_date = id_grado_date FROM omitama_date
+		WHERE rut_user = @rut_user AND id_grado = @gradeId;
+		IF @id_date IS NOT NULL
+		BEGIN 
+			UPDATE omitama_date
+			SET grado_date = @grado_date_sup
+			WHERE rut_user = @rut_user AND id_grado = @gradeId;
+		END
+		ELSE
+		BEGIN
+			INSERT INTO omitama_date(id_grado, grado_date, rut_user) VALUES (@gradeId, @grado_date_sup, @rut_user);
+		END
+	END
+END;
+
+CREATE PROCEDURE crearFamilyMiembro
+	
+
 
 
 
@@ -339,7 +394,5 @@ END;
 
 DELETE FROM omitama_date
 DBCC CHECKIDENT ('omitama_date', RESEED, 0);
-
-exec crearKenshuMiembro @rut_user = '15.152.111-8', @grado_date_ini = '2015-02-06', @grado_date_int = '2018-06-15';
 
 select m.nombres, o.grado, od.grado_date from omitama_date as od join miembro as m on od.rut_user = m.rut_user join omitama as o on o.id_grado = od.id_grado;
