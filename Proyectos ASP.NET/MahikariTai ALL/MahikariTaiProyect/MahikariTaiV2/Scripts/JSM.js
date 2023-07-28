@@ -78,7 +78,7 @@ $(document).ready(function () {
 function abrirModal(json) {
 
     var title = document.getElementById("titleModal");
-    title.innerText = "Crear Miembro";
+    title.innerText = "Crear Miembro No Funciona";
     $("#txtRutId").val("0");
     $("#rutInput").val("").prop('disabled', false);
     $("#nameInput").val("");

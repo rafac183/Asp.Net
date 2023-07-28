@@ -1,16 +1,5 @@
-﻿using MahikariTaiV2.Models;
-using NGeoNames;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Web;
+﻿using NGeoNames;
 using System.Web.Mvc;
-using System.IO;
-using System.Data.Entity.Core.Metadata.Edm;
 
 namespace MahikariTaiV2.Controllers
 {
@@ -23,7 +12,7 @@ namespace MahikariTaiV2.Controllers
         }
 
         public void LibreriaDireccion(string datadir)
-        {            
+        {
             GeoFileDownloader downloader = GeoFileDownloader.CreateGeoFileDownloader();
             downloader.DownloadFile("CL.zip", datadir);
         }

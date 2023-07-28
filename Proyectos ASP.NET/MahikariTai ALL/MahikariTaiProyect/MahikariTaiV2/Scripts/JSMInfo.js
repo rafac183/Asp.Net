@@ -1,5 +1,4 @@
-﻿var tablaDataInfo;
-var fila;
+﻿var fila;
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
 //Configuracion del Boton Toda la Informacion del integrante

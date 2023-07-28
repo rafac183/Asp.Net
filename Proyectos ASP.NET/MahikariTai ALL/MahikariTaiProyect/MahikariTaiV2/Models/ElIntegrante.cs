@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MahikariTaiV2.Models
 {
@@ -13,7 +10,7 @@ namespace MahikariTaiV2.Models
         public string secondLastname { get; set; }
         public string gender { get; set; }
         public string category { get; set; }
-        public string email { get; set; }        
+        public string email { get; set; }
         public DateTime birthdate { get; set; }
         public string nacionality { get; set; }
         public string phone { get; set; }

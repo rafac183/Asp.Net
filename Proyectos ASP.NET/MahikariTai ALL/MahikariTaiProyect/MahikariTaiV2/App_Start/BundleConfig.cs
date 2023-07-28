@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace MahikariTaiV2
 {
@@ -15,13 +14,16 @@ namespace MahikariTaiV2
                 "~/Scripts/fontawesome/all.min.js",
                 "~/Scripts/DataTables/jquery.dataTables.js",
                 "~/Scripts/DataTables/dataTables.responsive.js",
-                "~/Scripts/JSM.js",
-                "~/Scripts/JSMInfo.js",
-                "~/Scripts/JSMCargos.js",
-                "~/Scripts/JSMCrudPersonalData.js",
-                "~/Scripts/JSMCrudFamilyData.js",
-                "~/Scripts/JSMCrudOtherData.js",
+                
                 "~/Scripts/scripts.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/complementMember").Include(
+                        "~/Scripts/JSM.js",
+                        "~/Scripts/JSMInfo.js",
+                        "~/Scripts/JSMCargos.js",
+                        "~/Scripts/JSMCrudPersonalData.js",
+                        "~/Scripts/JSMCrudFamilyData.js",
+                        "~/Scripts/JSMCrudOtherData.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/complementSelect").Include(
                         "~/Scripts/JSS.js"));

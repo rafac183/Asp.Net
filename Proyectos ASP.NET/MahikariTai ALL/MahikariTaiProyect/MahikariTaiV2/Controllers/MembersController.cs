@@ -3,9 +3,7 @@ using MahikariTaiV2.SR_DB;
 using NGeoNames;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -182,7 +180,7 @@ namespace MahikariTaiV2.Controllers
             };
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
-            if(dateIni == "")
+            if (dateIni == "")
             {
                 resultado = new
                 {
@@ -191,7 +189,7 @@ namespace MahikariTaiV2.Controllers
                     mensaje2 = ""
                 };
             }
-            else if(dateInt == "")
+            else if (dateInt == "")
             {
                 WS.AñadirKenshu(rut, dateIni + "-01", null, null);
                 resultado = new
@@ -200,7 +198,8 @@ namespace MahikariTaiV2.Controllers
                     mensaje = "El Miembro se agregó correctamente.",
                     mensaje2 = "Miembro Creado"
                 };
-            } else if(dateSup == "")
+            }
+            else if (dateSup == "")
             {
                 WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", null);
                 resultado = new
@@ -209,7 +208,8 @@ namespace MahikariTaiV2.Controllers
                     mensaje = "El Miembro se agregó correctamente.",
                     mensaje2 = "Miembro Creado"
                 };
-            } else
+            }
+            else
             {
                 WS.AñadirKenshu(rut, dateIni + "-01", dateInt + "-01", dateSup + "-01");
                 resultado = new
@@ -220,7 +220,7 @@ namespace MahikariTaiV2.Controllers
                 };
             }
 
-            
+
 
             return Json(resultado);
         }
@@ -453,7 +453,7 @@ namespace MahikariTaiV2.Controllers
             DataSet grupos = WS.Grupos();
             var gruposList = new List<string>();
 
-            foreach(DataRow row in grupos.Tables[0].Rows)
+            foreach (DataRow row in grupos.Tables[0].Rows)
             {
                 if (cargo.Contains("Buntaicho"))
                 {
@@ -461,20 +461,22 @@ namespace MahikariTaiV2.Controllers
                     {
                         gruposList.Add(row[0].ToString());
                     }
-                    
-                } else if (cargo.Equals("Taicho") || cargo.Equals("Shomu"))
+
+                }
+                else if (cargo.Equals("Taicho") || cargo.Equals("Shomu"))
                 {
                     if (row[0].ToString().Contains("Todo el Grupo"))
                     {
                         gruposList.Add(row[0].ToString());
                     }
-                } else
+                }
+                else
                 {
                     if (!row[0].ToString().Contains("Taiin "))
                     {
                         gruposList.Add(row[0].ToString());
                     }
-                }              
+                }
             }
             return Json(new { grupos = gruposList }, JsonRequestBehavior.AllowGet);
         }

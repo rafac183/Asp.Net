@@ -4,30 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e2126353ba5441a8b508da253ce7389e" Name="Diagram1">
-        <EntityTypeShape EntityType="db_MahikariTaiModel.admision" Width="1.5" PointX="12" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.cargo" Width="1.5" PointX="12" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.cargo_names" Width="1.5" PointX="9.75" PointY="17.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.categoria" Width="1.5" PointX="7.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.comuna" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.direccion" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.estudios" Width="1.5" PointX="15" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.familia" Width="1.5" PointX="15" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.gender" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.grado_estudios" Width="1.5" PointX="12.75" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.grupo" Width="1.5" PointX="7.5" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.job" Width="1.5" PointX="12" PointY="20" IsExpanded="true" />
+      <Diagram DiagramId="c691c0ce02314bf6824abfbf888efb2a" Name="Diagram1">
+        <EntityTypeShape EntityType="db_MahikariTaiModel.admision" Width="1.5" PointX="12" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.cargo" Width="1.5" PointX="12" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.cargo_names" Width="1.5" PointX="9.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.categoria" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.comuna" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.direccion" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.estudios" Width="1.5" PointX="15" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.familia" Width="1.5" PointX="15" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.gender" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.grado_estudios" Width="1.5" PointX="12.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.grupo" Width="1.5" PointX="9.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.job" Width="1.5" PointX="12" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="db_MahikariTaiModel.login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.miembro" Width="1.5" PointX="9.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.nacionality" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.omitama" Width="1.5" PointX="12.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.omitama_date" Width="1.5" PointX="15" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.provincia" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_MahikariTaiModel.region" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.miembro" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.nacionality" Width="1.5" PointX="7.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.omitama" Width="1.5" PointX="12.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.omitama_date" Width="1.5" PointX="15" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.provincia" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_MahikariTaiModel.region" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__admision__rut_us__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__id_cargo___5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__rut_user__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo_nam__id_gr__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__id_cargo___2CF2ADDF" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__id_grupo__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="db_MahikariTaiModel.FK__cargo__rut_user__2EDAF651" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__miembro__id_cate__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__comuna__id_provi__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="db_MahikariTaiModel.FK__direccion__id_co__3F466844" ManuallyRouted="false" />

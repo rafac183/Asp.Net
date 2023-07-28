@@ -16,9 +16,11 @@ namespace MahikariTaiV2.Models
     {
         public int id_cargo { get; set; }
         public int id_cargo_name { get; set; }
+        public int id_grupo { get; set; }
         public string rut_user { get; set; }
     
         public virtual cargo_names cargo_names { get; set; }
+        public virtual grupo grupo { get; set; }
         public virtual miembro miembro { get; set; }
     }
 }

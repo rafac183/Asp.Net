@@ -15,9 +15,11 @@
     </Key>
     <Property Name="id_cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="id_cargo_name" Type="Int32" Nullable="false" />
+    <Property Name="id_grupo" Type="Int32" Nullable="false" />
     <Property Name="rut_user" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="cargo_names" Relationship="Self.FK__cargo__id_cargo___5535A963" FromRole="cargo" ToRole="cargo_names" />
-    <NavigationProperty Name="miembro" Relationship="Self.FK__cargo__rut_user__5629CD9C" FromRole="cargo" ToRole="miembro" />
+    <NavigationProperty Name="cargo_names" Relationship="Self.FK__cargo__id_cargo___2CF2ADDF" FromRole="cargo" ToRole="cargo_names" />
+    <NavigationProperty Name="grupo" Relationship="Self.FK__cargo__id_grupo__2DE6D218" FromRole="cargo" ToRole="grupo" />
+    <NavigationProperty Name="miembro" Relationship="Self.FK__cargo__rut_user__2EDAF651" FromRole="cargo" ToRole="miembro" />
   </EntityType>
   <EntityType Name="cargo_names">
     <Key>
@@ -25,9 +27,7 @@
     </Key>
     <Property Name="id_cargo_name" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="cargo_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="id_grupo" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__id_cargo___5535A963" FromRole="cargo_names" ToRole="cargo" />
-    <NavigationProperty Name="grupo" Relationship="Self.FK__cargo_nam__id_gr__52593CB8" FromRole="cargo_names" ToRole="grupo" />
+    <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__id_cargo___2CF2ADDF" FromRole="cargo_names" ToRole="cargo" />
   </EntityType>
   <EntityType Name="categoria">
     <Key>
@@ -106,8 +106,8 @@
       <PropertyRef Name="id_grupo" />
     </Key>
     <Property Name="id_grupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name_grupo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="cargo_names" Relationship="Self.FK__cargo_nam__id_gr__52593CB8" FromRole="grupo" ToRole="cargo_names" />
+    <Property Name="name_grupo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__id_grupo__2DE6D218" FromRole="grupo" ToRole="cargo" />
   </EntityType>
   <EntityType Name="job">
     <Key>
@@ -143,7 +143,7 @@
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="hobbies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="admision" Relationship="Self.FK__admision__rut_us__4D94879B" FromRole="miembro" ToRole="admision" />
-    <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__rut_user__5629CD9C" FromRole="miembro" ToRole="cargo" />
+    <NavigationProperty Name="cargo" Relationship="Self.FK__cargo__rut_user__2EDAF651" FromRole="miembro" ToRole="cargo" />
     <NavigationProperty Name="categoria" Relationship="Self.FK__miembro__id_cate__47DBAE45" FromRole="miembro" ToRole="categoria" />
     <NavigationProperty Name="direccion" Relationship="Self.FK__miembro__id_dire__4AB81AF0" FromRole="miembro" ToRole="direccion" />
     <NavigationProperty Name="estudios" Relationship="Self.FK__estudios__rut_us__5BE2A6F2" FromRole="miembro" ToRole="estudios" />
@@ -213,7 +213,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__cargo__id_cargo___5535A963">
+  <Association Name="FK__cargo__id_cargo___2CF2ADDF">
     <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="1" />
     <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -225,7 +225,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__cargo__rut_user__5629CD9C">
+  <Association Name="FK__cargo__id_grupo__2DE6D218">
+    <End Role="grupo" Type="Self.grupo" Multiplicity="1" />
+    <End Role="cargo" Type="Self.cargo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grupo">
+        <PropertyRef Name="id_grupo" />
+      </Principal>
+      <Dependent Role="cargo">
+        <PropertyRef Name="id_grupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cargo__rut_user__2EDAF651">
     <End Role="miembro" Type="Self.miembro" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -236,20 +248,6 @@
       </Principal>
       <Dependent Role="cargo">
         <PropertyRef Name="rut_user" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__cargo_nam__id_gr__52593CB8">
-    <End Role="grupo" Type="Self.grupo" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="cargo_names" Type="Self.cargo_names" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="grupo">
-        <PropertyRef Name="id_grupo" />
-      </Principal>
-      <Dependent Role="cargo_names">
-        <PropertyRef Name="id_grupo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -453,17 +451,17 @@
       <End Role="miembro" EntitySet="miembro" />
       <End Role="admision" EntitySet="admision" />
     </AssociationSet>
-    <AssociationSet Name="FK__cargo__id_cargo___5535A963" Association="Self.FK__cargo__id_cargo___5535A963">
+    <AssociationSet Name="FK__cargo__id_cargo___2CF2ADDF" Association="Self.FK__cargo__id_cargo___2CF2ADDF">
       <End Role="cargo_names" EntitySet="cargo_names" />
       <End Role="cargo" EntitySet="cargo" />
     </AssociationSet>
-    <AssociationSet Name="FK__cargo__rut_user__5629CD9C" Association="Self.FK__cargo__rut_user__5629CD9C">
+    <AssociationSet Name="FK__cargo__id_grupo__2DE6D218" Association="Self.FK__cargo__id_grupo__2DE6D218">
+      <End Role="grupo" EntitySet="grupo" />
+      <End Role="cargo" EntitySet="cargo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cargo__rut_user__2EDAF651" Association="Self.FK__cargo__rut_user__2EDAF651">
       <End Role="miembro" EntitySet="miembro" />
       <End Role="cargo" EntitySet="cargo" />
-    </AssociationSet>
-    <AssociationSet Name="FK__cargo_nam__id_gr__52593CB8" Association="Self.FK__cargo_nam__id_gr__52593CB8">
-      <End Role="grupo" EntitySet="grupo" />
-      <End Role="cargo_names" EntitySet="cargo_names" />
     </AssociationSet>
     <AssociationSet Name="FK__miembro__id_cate__47DBAE45" Association="Self.FK__miembro__id_cate__47DBAE45">
       <End Role="categoria" EntitySet="categoria" />
@@ -522,6 +520,7 @@
       <End Role="provincia" EntitySet="provincia" />
     </AssociationSet>
     <FunctionImport Name="allMembers" ReturnType="Collection(db_MahikariTaiModel.allMembers_Result)" />
+    <FunctionImport Name="cargos" ReturnType="Collection(String)" />
     <FunctionImport Name="categorias" ReturnType="Collection(String)" />
     <FunctionImport Name="crearKenshuMiembro">
       <Parameter Name="rut_user" Mode="In" Type="String" />
@@ -547,9 +546,22 @@
       <Parameter Name="nombre_provincia" Mode="In" Type="String" />
       <Parameter Name="nombre_region" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="eliminarMiembro">
+      <Parameter Name="rut_user" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="generos" ReturnType="Collection(String)" />
+    <FunctionImport Name="grupos" ReturnType="Collection(String)" />
     <FunctionImport Name="miembroAllInfo" ReturnType="Collection(db_MahikariTaiModel.miembroAllInfo_Result)">
       <Parameter Name="rut_user" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="miembroAllInfoKenshu" ReturnType="Collection(db_MahikariTaiModel.miembroAllInfoKenshu_Result)">
+      <Parameter Name="rut_user" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="modificarKenshuMiembro">
+      <Parameter Name="rut_user" Mode="In" Type="String" />
+      <Parameter Name="grado_date_ini" Mode="In" Type="DateTime" />
+      <Parameter Name="grado_date_int" Mode="In" Type="DateTime" />
+      <Parameter Name="grado_date_sup" Mode="In" Type="DateTime" />
     </FunctionImport>
     <FunctionImport Name="modificarMiembro">
       <Parameter Name="rut_user" Mode="In" Type="String" />
@@ -606,5 +618,9 @@
     <Property Type="String" Name="Provincia" Nullable="false" MaxLength="40" />
     <Property Type="String" Name="Comuna" Nullable="false" MaxLength="30" />
     <Property Type="String" Name="Hobbies" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="miembroAllInfoKenshu_Result">
+    <Property Type="String" Name="Grado" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="Fecha" Nullable="false" />
   </ComplexType>
 </Schema>

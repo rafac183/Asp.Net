@@ -15,6 +15,7 @@
         <MappingFragment StoreEntitySet="cargo">
           <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
           <ScalarProperty Name="id_cargo_name" ColumnName="id_cargo_name" />
+          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
           <ScalarProperty Name="rut_user" ColumnName="rut_user" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -24,7 +25,6 @@
         <MappingFragment StoreEntitySet="cargo_names">
           <ScalarProperty Name="id_cargo_name" ColumnName="id_cargo_name" />
           <ScalarProperty Name="cargo_name" ColumnName="cargo_name" />
-          <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -205,10 +205,13 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="cargos" FunctionName="db_MahikariTaiModel.Store.cargos" />
     <FunctionImportMapping FunctionImportName="categorias" FunctionName="db_MahikariTaiModel.Store.categorias" />
     <FunctionImportMapping FunctionImportName="crearKenshuMiembro" FunctionName="db_MahikariTaiModel.Store.crearKenshuMiembro" />
     <FunctionImportMapping FunctionImportName="crearMiembro" FunctionName="db_MahikariTaiModel.Store.crearMiembro" />
+    <FunctionImportMapping FunctionImportName="eliminarMiembro" FunctionName="db_MahikariTaiModel.Store.eliminarMiembro" />
     <FunctionImportMapping FunctionImportName="generos" FunctionName="db_MahikariTaiModel.Store.generos" />
+    <FunctionImportMapping FunctionImportName="grupos" FunctionName="db_MahikariTaiModel.Store.grupos" />
     <FunctionImportMapping FunctionImportName="miembroAllInfo" FunctionName="db_MahikariTaiModel.Store.miembroAllInfo">
       <ResultMapping>
         <ComplexTypeMapping TypeName="db_MahikariTaiModel.miembroAllInfo_Result">
@@ -231,6 +234,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="miembroAllInfoKenshu" FunctionName="db_MahikariTaiModel.Store.miembroAllInfoKenshu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="db_MahikariTaiModel.miembroAllInfoKenshu_Result">
+          <ScalarProperty Name="Grado" ColumnName="Grado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="modificarKenshuMiembro" FunctionName="db_MahikariTaiModel.Store.modificarKenshuMiembro" />
     <FunctionImportMapping FunctionImportName="modificarMiembro" FunctionName="db_MahikariTaiModel.Store.modificarMiembro" />
     <FunctionImportMapping FunctionImportName="nacionalidades" FunctionName="db_MahikariTaiModel.Store.nacionalidades" />
   </EntityContainerMapping>

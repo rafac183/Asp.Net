@@ -6,7 +6,7 @@ var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 //Boton Eliminar Integrante
 $("#tablaMembers tbody").on(touchEvent, '.btn-eliminar', function () {
     fila = $(this).closest('tr');
-    txt.innerText = "Seguro que desea Eliminar el Miembro Seleccionado?";
+    txt.innerText = "Seguro que desea Eliminar el Miembro Seleccionado? No Funciona";
     title.innerText = "Eliminar Miembro";
     $(".btn-closes").hide();
     $(".btn-siDelete").show();

@@ -17,13 +17,13 @@ namespace MahikariTaiV2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public grupo()
         {
-            this.cargo_names = new HashSet<cargo_names>();
+            this.cargo = new HashSet<cargo>();
         }
     
         public int id_grupo { get; set; }
         public string name_grupo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cargo_names> cargo_names { get; set; }
+        public virtual ICollection<cargo> cargo { get; set; }
     }
 }

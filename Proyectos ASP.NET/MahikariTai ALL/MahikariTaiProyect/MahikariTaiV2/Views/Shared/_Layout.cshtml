@@ -137,10 +137,11 @@
         var allMembersUrl = "@Url.Action("AllMembers", "Members")";
         var getRegionesUrl = "@Url.Action("GetRegiones", "Members")";
     </script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/complementos")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery");
+    @Scripts.Render("~/bundles/complementos");
+    @Scripts.Render("~/bundles/complementMember");
+    @Scripts.Render("~/bundles/bootstrap");
+    @RenderSection("scripts", required: false);
 
 </body>
 </html>
