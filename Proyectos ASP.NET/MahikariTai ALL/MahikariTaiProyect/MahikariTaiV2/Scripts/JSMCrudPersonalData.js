@@ -243,8 +243,7 @@ function guardarKenshu() {
         });
     }
     $("#modalDatosKen").modal("hide");
-    $("#modalCargos").modal("show");
-    /*$("#modalUserEstado").modal("show");  */  
+    $("#modalVAñadirCargos").modal("show");  
 }
 
 //Modales Restantes

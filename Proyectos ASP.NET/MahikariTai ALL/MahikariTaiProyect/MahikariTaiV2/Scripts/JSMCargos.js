@@ -1,4 +1,5 @@
-﻿$("#cargoSelect").change(function () {
+﻿var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+$("#cargoSelect").change(function () {
     var carSelect = $(this).val();
     recargarCargos(carSelect);
 });
@@ -23,3 +24,16 @@ function recargarCargos(cargo) {
         }
     });
 }
+
+$("#modalVAñadirCargos").on(touchEvent, 'btn-siCargo', function () {
+    $("#modalCargos").modal("show");
+});
+
+$("#modalVAñadirCargos").on(touchEvent, 'btn-noCargo', function () {
+    $("#modalUserEstado").modal("show");
+});
+
+
+function guardarCargo() {
+    //Abrira Otro modal que dira cargo añadido con exito y cuando le de entendito abrira miembro añadido con exito
+};

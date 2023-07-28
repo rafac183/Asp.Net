@@ -52,37 +52,12 @@
 
 @*MODAL INFORMACION COMPLETA ----------------------------------------------------------*@
 
-@*Modal Pregunta la Informcion que quiere ver*@
-<div class="modal fade" id="modalQInfo" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">Que desea Saber?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="btn-group-vertical">
-                        <button type="button" class="btn btn-primary me-1 mb-1 btn-dataPersonal">Datos Personales</button>
-                        <button type="button" class="btn btn-primary me-1 my-1 btn-dataKenshu">Datos Kenshu</button>
-                        <button type="button" class="btn btn-primary me-1 my-1 btn-dataFamily">Datos Familiares</button>
-                        <button type="button" class="btn btn-primary me-1 mt-1 btn-dataOtros">Datos Otros</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @* Modal Informacion Personal*@
 <div class="modal fade bd-example-modal" id="modalAllInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Informacion Personal</h5>
+                <h5 class="modal-title">Informacion Personal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -127,7 +102,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-secondary btn-datosK" data-bs-dismiss="modal">Datos Kenshu</button>
+                <button type="button" class="btn btn-primary btn-datosK" data-bs-dismiss="modal">Datos Kenshu</button>
             </div>
         </div>
     </div>
@@ -138,7 +113,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Informacion Kenshu</h5>
+                <h5 class="modal-title">Informacion Kenshu</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -156,6 +131,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btn-datosP" data-bs-dismiss="modal">Datos Personales</button>
+                <button type="button" class="btn btn-primary btn-datosF" data-bs-dismiss="modal">Datos Familia</button>
             </div>
         </div>
     </div>
@@ -281,7 +258,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" @*onclick="abrirDatosFam()"*@ onclick="validarCamposPer()">Guardar Cambios</button>
+                <button type="button" class="btn btn-primary" onclick="validarCamposPer()">Guardar Cambios</button>
             </div>
         </div>
     </div>
@@ -292,7 +269,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Miembro</h5>
+                <h5 class="modal-title">Miembro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -335,7 +312,7 @@
 </div>
 
 @*Modal Datos Familiares*@
-<div class="modal fade" id="modalDatosFam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+<!--<div class="modal fade" id="modalDatosFam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
@@ -370,10 +347,10 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 @*Modal Estudios y Trabajo*@
-<div class="modal fade" id="modalDatosWS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+<!--<div class="modal fade" id="modalDatosWS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
@@ -381,7 +358,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @*<div class="row">
+                <div class="row">
                         <h6 class="modal-title">Trabajo y estudios</h6>
                         <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro del Miembro</small>
                         <hr />
@@ -390,7 +367,7 @@
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
 
-                    </div>*@
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="abrirDatosFam()">Atras</button>
@@ -398,19 +375,20 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 @*Modal Verificacion para Añadir Cargo*@
 <div class="modal fade" id="modalVAñadirCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">Añadir Cargo</h5>
+                <h5 class="modal-title" >Añadir Cargo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="btn-group-vertical">
+                        <label class="form-label">Desea Añadir Cargo?</label>
                         <button type="button" class="btn btn-secondary btn-siCargo">Si</button>
                         <button type="button" class="btn btn-secondary btn-noCargo" data-bs-dismiss="modal">No</button>
                     </div>
@@ -425,7 +403,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">Que desea Hacer?</h5>
+                <h5 class="modal-title" id="" value="">Que desea Hacer?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -448,7 +426,7 @@
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">Editar Cargos</h5>
+                <h5 class="modal-title" id="" value="">Editar Cargos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -499,7 +477,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
-                <h5 class="modal-title">Rellene Todos Los Campos</h5>
+                <h5 class="modal-title" id="" value="">Rellene Todos Los Campos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

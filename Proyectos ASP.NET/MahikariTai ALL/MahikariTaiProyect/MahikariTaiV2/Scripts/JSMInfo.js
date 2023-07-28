@@ -4,28 +4,28 @@ var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 //Configuracion del Boton Toda la Informacion del integrante
 $("#tablaMembers tbody").on(touchEvent, '.btn-allInfo', function () {
     fila = $(this).closest('tr');
-    $("#modalQInfo").modal("show");
-});
-$("#modalQInfo").on(touchEvent, '.btn-dataPersonal', function () {
-    $("#modalQInfo").modal("hide");
     var datosFila = tablaData.row(fila).data();
     allInfoPer(datosFila);
 });
-$("#modalQInfo").on(touchEvent, '.btn-dataKenshu', function () {
-    $("#modalQInfo").modal("hide");
+$("#modalAllInfo").on(touchEvent, '.btn-datosK', function () {
     var datosFila = tablaData.row(fila).data();
     allInfoKen(datosFila);
+    
 });
-$("#modalQInfo").on(touchEvent, '.btn-dataFamily', function () {
-    $("#modalQInfo").modal("hide");
+$("#modalAllKen").on(touchEvent, '.btn-datosP', function () {
+    $("#modalAllInfo").modal("show");
+});
+$("#modalAllKen").on(touchEvent, '.btn-datosF', function () {
     var datosFila = tablaData.row(fila).data();
     allInfoFam(datosFila);
 });
-$("#modalQInfo").on(touchEvent, '.btn-dataOtros', function () {
-    $("#modalQInfo").modal("hide");
-    var datosFila = tablaData.row(fila).data();
-    allInfoOtr(datosFila);
-});
+//$("#modalAllKen").on(touchEvent, '.btn-datosP', function () {
+//    $("#modalAllInfo").modal("show");
+//});
+//$("#modalAllFam").on(touchEvent, '.btn-datosO', function () {
+//    var datosFila = tablaData.row(fila).data();
+//    allInfoOtr(datosFila);
+//});
 
 //Toda Informacion del Miembro
 function allInfoPer(json) {
@@ -47,7 +47,7 @@ function allInfoPer(json) {
     $("#provinciaTxt").html(json.provincia);
     $("#comunaTxt").html(json.comuna);
     $("#hobbiesTxt").html(json.hobbies);
-    $("#modalAllInfo").modal("show")
+    $("#modalAllInfo").modal("show");
 }
 
 function allInfoKen(json, modal = false) {
