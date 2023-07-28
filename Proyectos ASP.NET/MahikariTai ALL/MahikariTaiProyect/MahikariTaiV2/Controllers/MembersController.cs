@@ -3,6 +3,7 @@ using MahikariTaiV2.SR_DB;
 using NGeoNames;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -443,6 +444,39 @@ namespace MahikariTaiV2.Controllers
                 Console.WriteLine(ex.ToString());
             }
             return Json(new { comunas = comunasList }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetGrupos(string cargo)
+        {
+            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+            DataSet grupos = WS.Grupos();
+            var gruposList = new List<string>();
+
+            foreach(DataRow row in grupos.Tables[0].Rows)
+            {
+                if (cargo.Contains("Buntaicho"))
+                {
+                    if (!row[0].ToString().Contains("Todo el Grupo"))
+                    {
+                        gruposList.Add(row[0].ToString());
+                    }
+                    
+                } else if (cargo.Equals("Taicho") || cargo.Equals("Shomu"))
+                {
+                    if (row[0].ToString().Contains("Todo el Grupo"))
+                    {
+                        gruposList.Add(row[0].ToString());
+                    }
+                } else
+                {
+                    if (!row[0].ToString().Contains("Taiin "))
+                    {
+                        gruposList.Add(row[0].ToString());
+                    }
+                }              
+            }
+            return Json(new { grupos = gruposList }, JsonRequestBehavior.AllowGet);
         }
     }
 }

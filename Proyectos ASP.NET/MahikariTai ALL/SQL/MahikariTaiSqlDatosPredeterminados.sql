@@ -1,5 +1,9 @@
 USE db_MahikariTai;
 
+INSERT INTO cargo_names VALUES('Taicho'),('Fuku-Taicho'),('Shomu'),('Buntaicho'),('Fuku-Buntaicho');
+
+INSERT INTO grupo VALUES('Shonenbu'),('Jun Taiin'),('Taiin'),('Taiin Masculino'),('Taiin Femenino'),('Todo el Grupo');
+
 insert into login values ('rafac183', '1234');
 
 insert into categoria(categoria_name) values ('Shonenbu');

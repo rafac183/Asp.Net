@@ -17,6 +17,7 @@ namespace MahikariTaiV2
                 "~/Scripts/DataTables/dataTables.responsive.js",
                 "~/Scripts/JSM.js",
                 "~/Scripts/JSMInfo.js",
+                "~/Scripts/JSMCargos.js",
                 "~/Scripts/JSMCrudPersonalData.js",
                 "~/Scripts/JSMCrudFamilyData.js",
                 "~/Scripts/JSMCrudOtherData.js",

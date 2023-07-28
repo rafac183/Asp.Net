@@ -9,6 +9,7 @@
     DataSet generos = WS.Generos();
     DataSet nacionalidades = WS.Nacionalidades();
     DataSet categorias = WS.Categorias();
+    DataSet cargos = WS.Cargos();
 }
 
 @*Principio para volver al Home*@
@@ -372,7 +373,7 @@
 </div>
 
 @*Modal Estudios y Trabajo*@
-<div class="modal fade" id="modalWorkStudy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+<div class="modal fade" id="modalDatosWS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
@@ -380,7 +381,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                @*<div class="row">
                     <h6 class="modal-title">Trabajo y estudios</h6>
                     <small id="h6SmallText" class="form-text text-muted">Estos Datos se Usaran para el registro del Miembro</small>
                     <hr />
@@ -389,7 +390,7 @@
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
 
-                </div>
+                </div>*@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="abrirDatosFam()">Atras</button>
@@ -423,24 +424,35 @@
 </div>
 
 @*Modal Editar Cargos*@
-@*<div class="modal fade" id="modalCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title" id="" value="">Editar Cargos</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id=""></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="guardarCargo()">Guardar Cambios</button>
-                </div>
-
+<div class="modal fade" id="modalCargos" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="" value="">Editar Cargos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+                <label for="cargoSelect" class="form-label">Asigne Cargo</label>
+                <select id="cargoSelect" name="Cargo" class="form-select" required>
+                    <option disabled selected>Elige Una...</option>
+                    @foreach (DataRow row in cargos.Tables[0].Rows)
+                    {
+                        <option value="@row["Cargo"]">@row["Cargo"]</option>
+                    }
+                </select>
+                <label for="grupoSelect" class="form-label">Asigne Grupo</label>
+                <select id="grupoSelect" name="Grupo" class="form-select" required disabled>
+                    <option disabled selected>Elige Una...</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarCargo()">Guardar Cambios</button>
+            </div>
+
         </div>
-    </div>*@
+    </div>
+</div>
 
 @*Modal Aseguramiento o Afirmacion de Datos Modificados/Ingresados*@
 <div class="modal fade" id="modalUserEstado" tabindex="-1" aria-hidden="true" role="dialog" data-bs-backdrop="static">
@@ -490,5 +502,6 @@
     var eliminarUrl = "@Url.Action("EliminarMiembros", "Members")";
     var getProvinciasUrl = "@Url.Action("GetProvincias", "Members")";
     var getComunasUrl = "@Url.Action("GetComunas", "Members")";
-    var allKenshuMUrl = "@Url.Action("AllInfoKenshu", "Members")"
+    var allKenshuMUrl = "@Url.Action("AllInfoKenshu", "Members")";
+    var getGruposUrl = "@Url.Action("GetGrupos", "Members")";
 </script>

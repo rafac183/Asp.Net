@@ -156,6 +156,20 @@ namespace MahikariTaiV2.SR_DB {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Categorias", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> CategoriasAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Grupos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet Grupos();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Grupos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> GruposAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Cargos", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet Cargos();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Cargos", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> CargosAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -335,6 +349,22 @@ namespace MahikariTaiV2.SR_DB {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> CategoriasAsync() {
             return base.Channel.CategoriasAsync();
+        }
+        
+        public System.Data.DataSet Grupos() {
+            return base.Channel.Grupos();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> GruposAsync() {
+            return base.Channel.GruposAsync();
+        }
+        
+        public System.Data.DataSet Cargos() {
+            return base.Channel.Cargos();
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> CargosAsync() {
+            return base.Channel.CargosAsync();
         }
     }
 }

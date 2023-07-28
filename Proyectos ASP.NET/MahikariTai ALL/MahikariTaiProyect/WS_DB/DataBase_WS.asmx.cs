@@ -210,6 +210,36 @@ namespace WS_DB
             da.Fill(ds);
             return ds;
         }
+
+        [WebMethod]
+        public DataSet Grupos()
+        {
+            SqlConnection conn = new SqlConnection();
+
+            //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
+            //sino tendrias que ingresar tu usuario y tu pas de la base de datos
+            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            SqlDataAdapter da = new SqlDataAdapter("exec grupos;", conn);
+            //Cache de memoria, guardar lo que hice
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+        [WebMethod]
+        public DataSet Cargos()
+        {
+            SqlConnection conn = new SqlConnection();
+
+            //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
+            //sino tendrias que ingresar tu usuario y tu pas de la base de datos
+            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            SqlDataAdapter da = new SqlDataAdapter("exec cargos;", conn);
+            //Cache de memoria, guardar lo que hice
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
     }
 
 

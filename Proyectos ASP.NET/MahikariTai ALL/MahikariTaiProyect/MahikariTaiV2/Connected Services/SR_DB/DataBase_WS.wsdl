@@ -253,6 +253,40 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="Grupos">
+        <s:complexType />
+      </s:element>
+      <s:element name="GruposResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GruposResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Cargos">
+        <s:complexType />
+      </s:element>
+      <s:element name="CargosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CargosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AllMembersSoapIn">
@@ -321,6 +355,18 @@
   <wsdl:message name="CategoriasSoapOut">
     <wsdl:part name="parameters" element="tns:CategoriasResponse" />
   </wsdl:message>
+  <wsdl:message name="GruposSoapIn">
+    <wsdl:part name="parameters" element="tns:Grupos" />
+  </wsdl:message>
+  <wsdl:message name="GruposSoapOut">
+    <wsdl:part name="parameters" element="tns:GruposResponse" />
+  </wsdl:message>
+  <wsdl:message name="CargosSoapIn">
+    <wsdl:part name="parameters" element="tns:Cargos" />
+  </wsdl:message>
+  <wsdl:message name="CargosSoapOut">
+    <wsdl:part name="parameters" element="tns:CargosResponse" />
+  </wsdl:message>
   <wsdl:portType name="DataBase_WSSoap">
     <wsdl:operation name="AllMembers">
       <wsdl:input message="tns:AllMembersSoapIn" />
@@ -365,6 +411,14 @@
     <wsdl:operation name="Categorias">
       <wsdl:input message="tns:CategoriasSoapIn" />
       <wsdl:output message="tns:CategoriasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Grupos">
+      <wsdl:input message="tns:GruposSoapIn" />
+      <wsdl:output message="tns:GruposSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Cargos">
+      <wsdl:input message="tns:CargosSoapIn" />
+      <wsdl:output message="tns:CargosSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="DataBase_WSSoap" type="tns:DataBase_WSSoap">
@@ -468,6 +522,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="Grupos">
+      <soap:operation soapAction="http://tempuri.org/Grupos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cargos">
+      <soap:operation soapAction="http://tempuri.org/Cargos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="DataBase_WSSoap12" type="tns:DataBase_WSSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -563,6 +635,24 @@
     </wsdl:operation>
     <wsdl:operation name="Categorias">
       <soap12:operation soapAction="http://tempuri.org/Categorias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Grupos">
+      <soap12:operation soapAction="http://tempuri.org/Grupos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Cargos">
+      <soap12:operation soapAction="http://tempuri.org/Cargos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

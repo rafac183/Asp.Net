@@ -243,8 +243,8 @@ function guardarKenshu() {
         });
     }
     $("#modalDatosKen").modal("hide");
-    $("#modalUserEstado").modal("show");
-    
+    $("#modalCargos").modal("show");
+    /*$("#modalUserEstado").modal("show");  */  
 }
 
 //Modales Restantes
@@ -256,11 +256,11 @@ function abrirCrearNuevo() {
 }
 function abrirDatosFam() {
     $("#modalDatosPer").modal("hide")
-    $("#modalWorkStudy").modal("hide")
+    $("#modalDatosWS").modal("hide")
     $("#modalDatosFam").modal("show")
 }
 
 function abrirWorkStudy() {
     $("#modalDatosFam").modal("hide")
-    $("#modalWorkStudy").modal("show")
+    $("#modalDatosWS").modal("show")
 }

@@ -7,6 +7,20 @@ select nacionality as Nacionalidad from nacionality order by nacionality;
 
 exec nacionalidades;
 
+--Listar Grupos
+create procedure grupos
+as
+select * from grupo;
+
+exec grupos;
+
+--Listar Cargos
+create procedure cargos
+as
+select cargo_name as Cargo from cargo_names;
+
+exec cargos;
+
 --Listar Generos
 
 create procedure generos
@@ -392,7 +406,7 @@ CREATE PROCEDURE crearFamilyMiembro
 
 --Cod para reiniciar Contador
 
-DELETE FROM omitama_date
-DBCC CHECKIDENT ('omitama_date', RESEED, 0);
+DELETE FROM grupo;
+DBCC CHECKIDENT ('grupo', RESEED, 0);
 
 select m.nombres, o.grado, od.grado_date from omitama_date as od join miembro as m on od.rut_user = m.rut_user join omitama as o on o.id_grado = od.id_grado;

@@ -147,7 +147,6 @@ function abrirModal(json) {
             success: function (data) {
                 // Limpiar las opciones actuales del selector de comunas
                 $('#comunaSelect').empty();
-
                 $('#comunaSelect').append('<option value="" disabled selected>Elige Una...</option>');
                 // Iterar sobre las comunas devueltas y agregarlas como opciones en el select
                 $.each(data.comunas, function (index, comuna) {
@@ -163,7 +162,7 @@ function abrirModal(json) {
         $("#hobbiesInput").val(json.hobbies);
         allInfoKen(json, true);
     }
-    $("#modalDatosKen").modal("show");
+    $("#modalDatosPer").modal("show");
 }
 
 function recargarRegiones() {
@@ -266,26 +265,6 @@ function selectValIn(select) {
     }
 }
 
-//$("#yesOrNotSelectIn").change(function () {
-//    select = $(this).val();
-//    selectIn = select;
-//    $.ajax({
-//        success: function () {
-//            if (select == "No") {
-//                $("#dateIntInput").prop("disabled", true);
-//                $("#dateSupInput").prop("disabled", true);
-//                $("#dateIntInput").val("");
-//                $("#dateSupInput").val("");
-//                $("#yesOrNotSelectSu").val("No");
-//            }
-//            else {
-//                $("#dateIntInput").prop("disabled", false);
-//            }
-//        }
-//    })
-
-//});
-
 function selectValSu(select) {
     if (select == "No" || selectIn == "No") {
         $("#dateSupInput").prop("disabled", true);
@@ -296,20 +275,3 @@ function selectValSu(select) {
         $("#dateSupInput").prop("disabled", false);
     }
 }
-
-//$("#yesOrNotSelectSu").change(function () {
-//    select = $(this).val();
-//    $.ajax({
-//        success: function () {
-//            if (select == "No" || selectIn == "No") {
-//                $("#dateSupInput").prop("disabled", true);
-//                $("#dateSupInput").val("");
-//                $("#yesOrNotSelectSu").val("No");
-//            }
-//            else {
-//                $("#dateSupInput").prop("disabled", false);
-//            }
-//        }
-//    })
-
-//});
