@@ -10,7 +10,6 @@ function recargarCargos(cargo) {
         type: "POST",
         data: { cargo: cargo },
         success: function (data) {
-            console.log(data.grupos);
             $('#grupoSelect').empty();
             $('#grupoSelect').append('<option value="" disabled selected>Elige Una...</option>');
             $.each(data.grupos, function (index, grupo) {
@@ -34,6 +33,6 @@ $("#modalVAñadirCargos").on(touchEvent, 'btn-noCargo', function () {
 });
 
 
-function guardarCargo() {
-    //Abrira Otro modal que dira cargo añadido con exito y cuando le de entendito abrira miembro añadido con exito
+function guardarCargo(json) {
+    
 };

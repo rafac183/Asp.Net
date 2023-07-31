@@ -66,6 +66,21 @@ namespace WS_DB
         }
 
         [WebMethod]
+        public DataSet AllInfoCargo(string rut)
+        {
+            SqlConnection conn = new SqlConnection();
+
+            //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
+            //sino tendrias que ingresar tu usuario y tu pas de la base de datos
+            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            SqlDataAdapter da = new SqlDataAdapter("exec miembroAllInfoCargo @rut_user = '" + rut + "';", conn);
+            //Cache de memoria, guardar lo que hice
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+        [WebMethod]
         public DataSet AñadirMiembro(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
         {
             SqlConnection conn = new SqlConnection();
@@ -109,6 +124,23 @@ namespace WS_DB
         }
 
         [WebMethod]
+        public DataSet AñadirCargo(string rut, string cargo, string grupo)
+        {
+            SqlConnection conn = new SqlConnection();
+
+            //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
+            //sino tendrias que ingresar tu usuario y tu pas de la base de datos
+            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            SqlDataAdapter da = new SqlDataAdapter("EXEC crearCargoMiembro @rut_user = '" + rut + "', @cargo_name = '" + cargo + "', @grupo_name = '" + grupo + "';", conn);
+            //Cache de memoria, guardar lo que hice
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+
+
+        [WebMethod]
         public DataSet ModificarMiembro(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
         {
             SqlConnection conn = new SqlConnection();
@@ -145,6 +177,21 @@ namespace WS_DB
             {
                 da = new SqlDataAdapter("EXEC modificarKenshuMiembro @rut_user = '" + rut + "', @grado_date_ini = '" + dateIni + "', @grado_date_int = '" + dateInt + "', @grado_date_sup = '" + dateSup + "';", conn);
             }
+            //Cache de memoria, guardar lo que hice
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+
+        [WebMethod]
+        public DataSet ModificarCargo(string rut, string cargo, string grupo)
+        {
+            SqlConnection conn = new SqlConnection();
+
+            //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
+            //sino tendrias que ingresar tu usuario y tu pas de la base de datos
+            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            SqlDataAdapter da = new SqlDataAdapter("EXEC modificarCargoMiembro @rut_user = '" + rut + "', @cargo_name = '" + cargo + "', @grupo_name = '" + grupo + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
             da.Fill(ds);

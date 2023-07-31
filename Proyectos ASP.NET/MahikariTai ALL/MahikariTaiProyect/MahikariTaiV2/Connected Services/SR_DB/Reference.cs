@@ -37,6 +37,13 @@ namespace MahikariTaiV2.SR_DB {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllInfoKenshu", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> AllInfoKenshuAsync(string rut);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllInfoCargo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AllInfoCargo(string rut);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AllInfoCargo", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AllInfoCargoAsync(string rut);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AñadirMiembro", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet AñadirMiembro(
@@ -83,6 +90,13 @@ namespace MahikariTaiV2.SR_DB {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AñadirKenshu", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> AñadirKenshuAsync(string rut, string dateIni, string dateInt, string dateSup);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AñadirCargo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet AñadirCargo(string rut, string cargo, string grupo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/AñadirCargo", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> AñadirCargoAsync(string rut, string cargo, string grupo);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarMiembro", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Data.DataSet ModificarMiembro(
@@ -128,6 +142,13 @@ namespace MahikariTaiV2.SR_DB {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarKenshu", ReplyAction="*")]
         System.Threading.Tasks.Task<System.Data.DataSet> ModificarKenshuAsync(string rut, string dateIni, string dateInt, string dateSup);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarCargo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataSet ModificarCargo(string rut, string cargo, string grupo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ModificarCargo", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataSet> ModificarCargoAsync(string rut, string cargo, string grupo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EliminarMiembro", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -223,6 +244,14 @@ namespace MahikariTaiV2.SR_DB {
             return base.Channel.AllInfoKenshuAsync(rut);
         }
         
+        public System.Data.DataSet AllInfoCargo(string rut) {
+            return base.Channel.AllInfoCargo(rut);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AllInfoCargoAsync(string rut) {
+            return base.Channel.AllInfoCargoAsync(rut);
+        }
+        
         public System.Data.DataSet AñadirMiembro(
                     string rut, 
                     string nombres, 
@@ -271,6 +300,14 @@ namespace MahikariTaiV2.SR_DB {
             return base.Channel.AñadirKenshuAsync(rut, dateIni, dateInt, dateSup);
         }
         
+        public System.Data.DataSet AñadirCargo(string rut, string cargo, string grupo) {
+            return base.Channel.AñadirCargo(rut, cargo, grupo);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> AñadirCargoAsync(string rut, string cargo, string grupo) {
+            return base.Channel.AñadirCargoAsync(rut, cargo, grupo);
+        }
+        
         public System.Data.DataSet ModificarMiembro(
                     string rut, 
                     string nombres, 
@@ -317,6 +354,14 @@ namespace MahikariTaiV2.SR_DB {
         
         public System.Threading.Tasks.Task<System.Data.DataSet> ModificarKenshuAsync(string rut, string dateIni, string dateInt, string dateSup) {
             return base.Channel.ModificarKenshuAsync(rut, dateIni, dateInt, dateSup);
+        }
+        
+        public System.Data.DataSet ModificarCargo(string rut, string cargo, string grupo) {
+            return base.Channel.ModificarCargo(rut, cargo, grupo);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataSet> ModificarCargoAsync(string rut, string cargo, string grupo) {
+            return base.Channel.ModificarCargoAsync(rut, cargo, grupo);
         }
         
         public System.Data.DataSet EliminarMiembro(string rut) {

@@ -3,55 +3,6 @@ var modal;
 var txt = document.getElementById("txtModalAse");
 var title = document.getElementById("titleModalAse");
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
-//Boton Eliminar Integrante
-$("#tablaMembers tbody").on(touchEvent, '.btn-eliminar', function () {
-    fila = $(this).closest('tr');
-    txt.innerText = "Seguro que desea Eliminar el Miembro Seleccionado? No Funciona";
-    title.innerText = "Eliminar Miembro";
-    $(".btn-closes").hide();
-    $(".btn-siDelete").show();
-    $(".btn-noDelete").show();
-    $("#modalUserEstado").modal("show");
-});
-
-$('#modalUserEstado').on(touchEvent, '.btn-noDelete', function () {
-    setTimeout(function () {
-        $(".btn-siDelete").hide();
-        $(".btn-noDelete").hide();
-        $(".btn-closes").show();
-    }, 1000);
-});
-
-$('#modalUserEstado').on(touchEvent, '.btn-siDelete', function () {
-    var datosFila = tablaData.row(fila).data();
-    eliminar(datosFila);
-});
-
-function eliminar(json) {
-    var jsonRut = json.rut;
-    $("#modalUserEstado").modal("hide");
-    setTimeout(function () {
-        $.ajax({
-            url: eliminarUrl,
-            type: "POST",
-            data: {
-                rut: jsonRut
-            },
-            success: function (respuesta) {
-                txt.innerText = respuesta.mensaje;
-                title.innerText = respuesta.mensaje2;
-            },
-            error: function () {
-                console.error("Error al eliminar");
-            }
-
-        });
-        $(".btn-siDelete").hide();
-        $(".btn-noDelete").hide();
-        $(".btn-closes").show();
-        $("#modalUserEstado").modal("show");
-    }, 1000);
-}
 
 //Boton Añadir/Editar Integrante
 $("#tablaMembers tbody").on(touchEvent, '.btn-editar', function () {
@@ -72,11 +23,12 @@ $('#modalCarOrEdit').on(touchEvent, '.btn-editCargo', function () {
     /*editCargo(datosFila);*/
 });
 
-//Guardar Datos modificados o ingresados
+//VERIFICACION DE LLENADO DE CAMPOS INGRESADOS----------------------------------------------------//
+//Modal para mostrarlo
 $("#modalCampos").on(touchEvent, '.btn-sure', function () {
     $(modal).modal("show");
 });
-//Verificacion de Llenado de todos los Datos
+//Verificacion de Llenado de todos los Datos Personales
 function validarCamposPer() {
     var Miembro = {
         rut: $("#rutInput").val(),
@@ -114,11 +66,13 @@ function validarCamposPer() {
         guardar(Miembro)
     }
 }
+//------------------------------------------------------------------------------------------------//
 
-
-//Guardar Modificaciones/Datos Ingresados
+//GUARDAR MODIFICACIONES/DATOS INGRESADOS --------------------------------------------------------//
+//Modal Datos Personales
 function guardar(Miembro) {
     var id = $("#txtRutId").val();
+    //Si ID es '0' se añadirá un Integrante
     if (id == 0) {
         $.ajax({
             url: añadirUrl,
@@ -145,7 +99,8 @@ function guardar(Miembro) {
                 console.error("Error al Añadir");
             }
         });
-    } else if (id == 1) {
+    //Si ID = '0' Se modificara el Integrante
+    } else {
         $.ajax({
             url: modificarUrl,
             type: "POST",
@@ -174,16 +129,13 @@ function guardar(Miembro) {
             error: function () {
                 console.error("Error al Modificar")
             }
-        })
-
-
-    }
+        });
+    };
     $("#modalDatosPer").modal("hide")
     $("#modalDatosKen").modal("show");
-    
-}
+};
 
-//Modal Kenshu
+//Modal Kenshu Integrante
 function guardarKenshu() {
     var id = $("#txtRutId").val();
     var Kenshu = {
@@ -191,8 +143,8 @@ function guardarKenshu() {
         dateIni: $("#dateIniInput").val(),
         dateInt: $("#dateIntInput").val(),
         dateSup: $("#dateSupInput").val()
-    }
-    debugger;
+    };
+    //Si ID es '0' se añadirá un Integrante
     if (id == 0) {
         $.ajax({
             url: añadirKenshuUrl,
@@ -217,7 +169,8 @@ function guardarKenshu() {
                 console.error("Error al Añadir Kenshu");
             }
         });
-    } else if (id == 1) {
+    //Si ID = '0' Se modificara el Integrante
+    } else {
         $.ajax({
             url: modificarKenshuUrl,
             type: "POST",
@@ -243,8 +196,57 @@ function guardarKenshu() {
         });
     }
     $("#modalDatosKen").modal("hide");
-    $("#modalVAñadirCargos").modal("show");  
+    $("#modalUserEstado").modal("show");
 }
+//------------------------------------------------------------------------------------------------//
+
+//BOTON ELIMINARR --------------------------------------------------------------------------------//
+$("#tablaMembers tbody").on(touchEvent, '.btn-eliminar', function () {
+    fila = $(this).closest('tr');
+    txt.innerText = "Seguro que desea Eliminar el Miembro Seleccionado? No Funciona";
+    title.innerText = "Eliminar Miembro";
+    $(".btn-closes").hide();
+    $(".btn-siDelete").show();
+    $(".btn-noDelete").show();
+    $("#modalUserEstado").modal("show");
+});
+
+$('#modalUserEstado').on(touchEvent, '.btn-noDelete', function () {
+    setTimeout(function () {
+        $(".btn-siDelete").hide();
+        $(".btn-noDelete").hide();
+        $(".btn-closes").show();
+    }, 1000);
+});
+
+$('#modalUserEstado').on(touchEvent, '.btn-siDelete', function () {
+    var datosFila = tablaData.row(fila).data();
+    eliminar(datosFila);
+});
+
+function eliminar(json) {
+    $("#modalUserEstado").modal("hide");
+    setTimeout(function () {
+        $.ajax({
+            url: eliminarUrl,
+            type: "POST",
+            data: { rut: json.rut },
+            success: function (respuesta) {
+                txt.innerText = respuesta.mensaje;
+                title.innerText = respuesta.mensaje2;
+            },
+            error: function () {
+                console.error("Error al eliminar");
+            }
+        });
+        $(".btn-siDelete").hide();
+        $(".btn-noDelete").hide();
+        $(".btn-closes").show();
+        $("#modalUserEstado").modal("show");
+    }, 1000);
+}
+
+// -----------------------------------------------------------------------------------------------//
 
 //Modales Restantes
 

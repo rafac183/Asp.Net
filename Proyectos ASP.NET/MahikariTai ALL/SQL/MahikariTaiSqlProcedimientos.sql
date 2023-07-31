@@ -289,6 +289,17 @@ BEGIN
 	WHERE od.rut_user = @rut_user ORDER BY od.grado_date
 END
 
+CREATE PROCEDURE miembroAllInfoCargo
+@rut_user VARCHAR(13)
+AS
+BEGIN
+	SELECT cn.cargo_name AS Cargo, g.name_grupo AS Grupo
+	FROM cargo AS ca 
+	JOIN cargo_names AS cn ON cn.id_cargo_name = ca.id_cargo_name
+	JOIN grupo AS g ON g.id_grupo = ca.id_grupo
+	WHERE rut_user = @rut_user
+END
+
 --Eliminar Integrante
 
 CREATE PROCEDURE eliminarMiembro
@@ -398,8 +409,37 @@ BEGIN
 	END
 END;
 
-CREATE PROCEDURE crearFamilyMiembro
-	
+CREATE PROCEDURE crearCargoMiembro
+	@rut_user VARCHAR(13),
+	@cargo_name VARCHAR(20),
+	@grupo_name VARCHAR(16)
+AS
+BEGIN
+	DECLARE @id_cargo INT
+	DECLARE @id_grupo INT
+
+	SELECT @id_cargo = id_cargo_name FROM cargo_names WHERE cargo_name = @cargo_name;
+	SELECT @id_grupo = id_grupo FROM grupo WHERE name_grupo = @grupo_name;
+
+	INSERT INTO cargo VALUES (@id_cargo, @id_grupo, @rut_user);
+END;
+
+CREATE PROCEDURE modificarCargoMiembro
+	@rut_user VARCHAR(13),
+	@cargo_name VARCHAR(20),
+	@grupo_name VARCHAR(16)
+AS
+BEGIN
+	DECLARE @id_cargo INT
+	DECLARE @id_grupo INT
+
+	SELECT @id_cargo = id_cargo_name FROM cargo_names WHERE cargo_name = @cargo_name;
+	SELECT @id_grupo = id_grupo FROM grupo WHERE name_grupo = @grupo_name;
+
+	UPDATE cargo
+	SET id_cargo_name = @id_cargo, id_grupo = @id_grupo
+	WHERE rut_user = @rut_user;
+END;
 
 
 

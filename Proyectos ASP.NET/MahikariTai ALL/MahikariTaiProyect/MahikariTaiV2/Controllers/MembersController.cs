@@ -225,6 +225,22 @@ namespace MahikariTaiV2.Controllers
             return Json(resultado);
         }
 
+        [HttpPost]
+        public JsonResult AñadirCargoMiembros(string rut, string cargo, string grupo)
+        {
+            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+            WS.AñadirCargo(rut, cargo, grupo);
+            var resultado = new
+            {
+                exitoso = true,
+                mensaje = "Cargo agregado correctamente.",
+                mensaje2 = "Cargo Creado"
+            };
+            // Lógica para obtener las ciudades según la región desde tu servicio web
+            return Json(resultado);
+        }
+
+
         //Modificar Miembro a la base de datos
         [HttpPost]
         public void ModificarMiembros(string rut, string nombres, string primerApellido, string segundoApellido, string genero, string categoria, string email, string birthdate, string nacionalidad, string phone, string calle, int numero, string region, string provincia, string comuna, string hobbies)
@@ -351,6 +367,34 @@ namespace MahikariTaiV2.Controllers
             // Lógica para obtener las ciudades según la región desde tu servicio web
             DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
             DataSet kenshus = WS.AllInfoKenshu(rut);
+
+
+            var Listakenshu = new List<Kenshu>();
+            if (kenshus != null)
+            {
+                foreach (DataRow row in kenshus.Tables[0].Rows)
+                {
+                    DateTime.TryParse(row["Fecha"].ToString(), out DateTime date);
+                    var Kenshu = new Kenshu
+                    {
+                        grado = row["Grado"].ToString(),
+                        date = date
+                    };
+
+                    Listakenshu.Add(Kenshu);
+                }
+            }
+
+
+            return Json(new { data = Listakenshu }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AllInfoCargo(string rut)
+        {
+            // Lógica para obtener las ciudades según la región desde tu servicio web
+            DataBase_WSSoapClient WS = new DataBase_WSSoapClient();
+            DataSet cargo = WS.AllInfoCargo(rut);
 
 
             var Listakenshu = new List<Kenshu>();

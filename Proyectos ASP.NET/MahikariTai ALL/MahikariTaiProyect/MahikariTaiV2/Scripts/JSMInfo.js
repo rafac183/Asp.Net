@@ -50,81 +50,49 @@ function allInfoPer(json) {
     $("#modalAllInfo").modal("show");
 }
 
-function allInfoKen(json, modal = false) {
-    if (modal == false) {
-        var title = document.getElementById("titleInfoKen");
-        title.innerText = "Se Muestrar los Datos del Rut: '" + json.rut + "'";
+function allInfoKen(json) {
+    var title = document.getElementById("titleInfoKen");
+    title.innerText = "Se Muestrar los Datos del Rut: '" + json.rut + "'";
 
-        // Obtener la referencia al elemento HTML donde se mostrará la tabla
-        var tablaContainer = document.getElementById("tablaKenshu");
+    // Obtener la referencia al elemento HTML donde se mostrará la tabla
+    var tablaContainer = document.getElementById("tablaKenshu");
 
-        // Realizar la llamada AJAX para obtener los datos
-        $.ajax({
-            url: allKenshuMUrl,
-            type: "POST",
-            data: { rut: json.rut },
-            success: function (data) {
-                // Construir el contenido HTML de la tabla
-                var tablaHTML = "<table>";
-                tablaHTML += "<thead><tr><th>Grado</th><th>Fecha</th></tr></thead>";
-                tablaHTML += "<tbody>";
+    // Realizar la llamada AJAX para obtener los datos
+    $.ajax({
+        url: allKenshuMUrl,
+        type: "POST",
+        data: { rut: json.rut },
+        success: function (data) {
+            // Construir el contenido HTML de la tabla
+            var tablaHTML = "<table>";
+            tablaHTML += "<thead><tr><th>Grado</th><th>Fecha</th></tr></thead>";
+            tablaHTML += "<tbody>";
 
-                // Iterar sobre los datos recibidos y agregar filas a la tabla
-                for (var i = 0; i < data.data.length; i++) {
-                    tablaHTML += "<tr>";
-                    tablaHTML += "<td>" + data.data[i].grado + "</td>";
-                    var fecha = moment(data.data[i].date).format("MM-YYYY");
-                    tablaHTML += "<td>" + fecha + "</td>";
-                    tablaHTML += "</tr>";
-                }
-
-                tablaHTML += "</tbody></table>";
-
-                // Agregar la tabla al elemento HTML seleccionado
-                tablaContainer.innerHTML = tablaHTML;
-
-                // Mostrar el modal
-                $("#modalAllKen").modal("show");
-            },
-            error: function (xhr, status, error) {
-                // Manejar el error en caso de que la llamada AJAX falle
-                console.error("Error al obtener los datos: " + error);
+            // Iterar sobre los datos recibidos y agregar filas a la tabla
+            for (var i = 0; i < data.data.length; i++) {
+                tablaHTML += "<tr>";
+                tablaHTML += "<td>" + data.data[i].grado + "</td>";
+                var fecha = moment(data.data[i].date).format("MM-YYYY");
+                tablaHTML += "<td>" + fecha + "</td>";
+                tablaHTML += "</tr>";
             }
-        });
-    } else {
-        $.ajax({
-            url: allKenshuMUrl,
-            type: "POST",
-            data: { rut: json.rut },
-            success: function (data) {
-                console.log(data.data.length);
-                var fechaK;
-                if (data.data.length == 0) {
-                    console.log("No hay datos");
-                }
-                if (data.data.length >= 1) {
-                    fechaK = new Date(parseInt(data.data[0].date.substr(6)));
-                    $("#dateIniInput").val(moment(fechaK).format("YYYY-MM"));
-                }
-                if (data.data.length >= 2) {
-                    fechaK = new Date(parseInt(data.data[1].date.substr(6)));
-                    $("#dateIntInput").val(moment(fechaK).format("YYYY-MM"));
-                    $("#yesOrNotSelectIn").val("Si");
-                    $("#dateIntInput").prop('disabled', false);
 
-                }
-                if (data.data.length == 3) {
-                    fechaK = new Date(parseInt(data.data[2].date.substr(6)));
-                    $("#dateSupInput").val(moment(fechaK).format("YYYY-MM"));
-                    $("#yesOrNotSelectSu").val("Si");
-                    $("#dateSupInput").prop('disabled', false);
-                }                
-            },
-            error: function (xhr, status, error) {
-                // Manejar el error en caso de que la llamada AJAX falle
-                console.error("Error al obtener los datos del Kenshu: " + error);
-            }
-        });
-    }
+            tablaHTML += "</tbody></table>";
+
+            // Agregar la tabla al elemento HTML seleccionado
+            tablaContainer.innerHTML = tablaHTML;
+
+            // Mostrar el modal
+            $("#modalAllKen").modal("show");
+        },
+        error: function (xhr, status, error) {
+            // Manejar el error en caso de que la llamada AJAX falle
+            console.error("Error al obtener los datos: " + error);
+        }
+    });
+}
+
+function AllInfoCargo(json) {
+
 }
 

@@ -160,7 +160,39 @@ function abrirModal(json) {
             }
         });
         $("#hobbiesInput").val(json.hobbies);
-        allInfoKen(json, true);
+        $.ajax({
+            url: allKenshuMUrl,
+            type: "POST",
+            data: { rut: json.rut },
+            success: function (data) {
+                console.log(data.data.length);
+                var fechaK;
+                if (data.data.length == 0) {
+                    console.log("No hay datos");
+                }
+                if (data.data.length >= 1) {
+                    fechaK = new Date(parseInt(data.data[0].date.substr(6)));
+                    $("#dateIniInput").val(moment(fechaK).format("YYYY-MM"));
+                }
+                if (data.data.length >= 2) {
+                    fechaK = new Date(parseInt(data.data[1].date.substr(6)));
+                    $("#dateIntInput").val(moment(fechaK).format("YYYY-MM"));
+                    $("#yesOrNotSelectIn").val("Si");
+                    $("#dateIntInput").prop('disabled', false);
+
+                }
+                if (data.data.length == 3) {
+                    fechaK = new Date(parseInt(data.data[2].date.substr(6)));
+                    $("#dateSupInput").val(moment(fechaK).format("YYYY-MM"));
+                    $("#yesOrNotSelectSu").val("Si");
+                    $("#dateSupInput").prop('disabled', false);
+                }
+            },
+            error: function (xhr, status, error) {
+                // Manejar el error en caso de que la llamada AJAX falle
+                console.error("Error al obtener los datos del Kenshu: " + error);
+            }
+        });
     }
     $("#modalDatosPer").modal("show");
 }

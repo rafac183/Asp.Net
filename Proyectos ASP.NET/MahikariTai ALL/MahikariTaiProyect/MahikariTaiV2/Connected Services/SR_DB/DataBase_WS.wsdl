@@ -61,6 +61,27 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AllInfoCargo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rut" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AllInfoCargoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AllInfoCargoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="AñadirMiembro">
         <s:complexType>
           <s:sequence>
@@ -121,6 +142,29 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="AñadirCargo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cargo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="grupo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AñadirCargoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AñadirCargoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ModificarMiembro">
         <s:complexType>
           <s:sequence>
@@ -171,6 +215,29 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ModificarKenshuResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarCargo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rut" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cargo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="grupo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarCargoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModificarCargoResult">
               <s:complexType>
                 <s:sequence>
                   <s:element ref="s:schema" />
@@ -307,6 +374,12 @@
   <wsdl:message name="AllInfoKenshuSoapOut">
     <wsdl:part name="parameters" element="tns:AllInfoKenshuResponse" />
   </wsdl:message>
+  <wsdl:message name="AllInfoCargoSoapIn">
+    <wsdl:part name="parameters" element="tns:AllInfoCargo" />
+  </wsdl:message>
+  <wsdl:message name="AllInfoCargoSoapOut">
+    <wsdl:part name="parameters" element="tns:AllInfoCargoResponse" />
+  </wsdl:message>
   <wsdl:message name="AñadirMiembroSoapIn">
     <wsdl:part name="parameters" element="tns:AñadirMiembro" />
   </wsdl:message>
@@ -319,6 +392,12 @@
   <wsdl:message name="AñadirKenshuSoapOut">
     <wsdl:part name="parameters" element="tns:AñadirKenshuResponse" />
   </wsdl:message>
+  <wsdl:message name="AñadirCargoSoapIn">
+    <wsdl:part name="parameters" element="tns:AñadirCargo" />
+  </wsdl:message>
+  <wsdl:message name="AñadirCargoSoapOut">
+    <wsdl:part name="parameters" element="tns:AñadirCargoResponse" />
+  </wsdl:message>
   <wsdl:message name="ModificarMiembroSoapIn">
     <wsdl:part name="parameters" element="tns:ModificarMiembro" />
   </wsdl:message>
@@ -330,6 +409,12 @@
   </wsdl:message>
   <wsdl:message name="ModificarKenshuSoapOut">
     <wsdl:part name="parameters" element="tns:ModificarKenshuResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarCargoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarCargo" />
+  </wsdl:message>
+  <wsdl:message name="ModificarCargoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarCargoResponse" />
   </wsdl:message>
   <wsdl:message name="EliminarMiembroSoapIn">
     <wsdl:part name="parameters" element="tns:EliminarMiembro" />
@@ -380,6 +465,10 @@
       <wsdl:input message="tns:AllInfoKenshuSoapIn" />
       <wsdl:output message="tns:AllInfoKenshuSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AllInfoCargo">
+      <wsdl:input message="tns:AllInfoCargoSoapIn" />
+      <wsdl:output message="tns:AllInfoCargoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AñadirMiembro">
       <wsdl:input message="tns:AñadirMiembroSoapIn" />
       <wsdl:output message="tns:AñadirMiembroSoapOut" />
@@ -388,6 +477,10 @@
       <wsdl:input message="tns:AñadirKenshuSoapIn" />
       <wsdl:output message="tns:AñadirKenshuSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AñadirCargo">
+      <wsdl:input message="tns:AñadirCargoSoapIn" />
+      <wsdl:output message="tns:AñadirCargoSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ModificarMiembro">
       <wsdl:input message="tns:ModificarMiembroSoapIn" />
       <wsdl:output message="tns:ModificarMiembroSoapOut" />
@@ -395,6 +488,10 @@
     <wsdl:operation name="ModificarKenshu">
       <wsdl:input message="tns:ModificarKenshuSoapIn" />
       <wsdl:output message="tns:ModificarKenshuSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarCargo">
+      <wsdl:input message="tns:ModificarCargoSoapIn" />
+      <wsdl:output message="tns:ModificarCargoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="EliminarMiembro">
       <wsdl:input message="tns:EliminarMiembroSoapIn" />
@@ -450,6 +547,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AllInfoCargo">
+      <soap:operation soapAction="http://tempuri.org/AllInfoCargo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AñadirMiembro">
       <soap:operation soapAction="http://tempuri.org/AñadirMiembro" style="document" />
       <wsdl:input>
@@ -468,6 +574,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AñadirCargo">
+      <soap:operation soapAction="http://tempuri.org/AñadirCargo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ModificarMiembro">
       <soap:operation soapAction="http://tempuri.org/ModificarMiembro" style="document" />
       <wsdl:input>
@@ -479,6 +594,15 @@
     </wsdl:operation>
     <wsdl:operation name="ModificarKenshu">
       <soap:operation soapAction="http://tempuri.org/ModificarKenshu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarCargo">
+      <soap:operation soapAction="http://tempuri.org/ModificarCargo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -570,6 +694,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AllInfoCargo">
+      <soap12:operation soapAction="http://tempuri.org/AllInfoCargo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AñadirMiembro">
       <soap12:operation soapAction="http://tempuri.org/AñadirMiembro" style="document" />
       <wsdl:input>
@@ -588,6 +721,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AñadirCargo">
+      <soap12:operation soapAction="http://tempuri.org/AñadirCargo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ModificarMiembro">
       <soap12:operation soapAction="http://tempuri.org/ModificarMiembro" style="document" />
       <wsdl:input>
@@ -599,6 +741,15 @@
     </wsdl:operation>
     <wsdl:operation name="ModificarKenshu">
       <soap12:operation soapAction="http://tempuri.org/ModificarKenshu" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarCargo">
+      <soap12:operation soapAction="http://tempuri.org/ModificarCargo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
