@@ -1,6 +1,8 @@
+#Para No Ignorar se usa esto '!' antes de lo que no va a ignorar
 *.jpg
 *.png
 *.jpeg
 *.ico
 *.docx
 *.tmp
+!cursoGit/CursoGit.docx
