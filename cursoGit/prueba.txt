@@ -2,6 +2,8 @@ Hola me Llamo Rafael Cordero
 
 Tengo 21 años
 
+Modificado en GitBash
+
 Estudio Ing. Informatica
 
 En el Instituto Profesional Santo Tomas
