@@ -4,3 +4,5 @@
 CREDITOS
 Yxzandra
 Rafael
+Raelyx
+Papi
