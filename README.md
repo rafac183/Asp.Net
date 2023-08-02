@@ -1,8 +1,8 @@
 # Proyectos
 
 - Aqui Encontraras Todos los proyectos de Rafael Cordero
-CREDITOS
-Yxzandra
-Rafael
-Raelyx
-Papi
+## CREDITOS
+- Yxzandra
+- Rafael
+- Raelyx
+- Papi
