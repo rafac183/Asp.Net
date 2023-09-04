@@ -127,3 +127,7 @@ C:\Users\rafae\Cursos\proyecto2\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiPro
 C:\Users\rafae\Cursos\proyecto2\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.csproj.CopyComplete
 C:\Users\rafae\Cursos\proyecto2\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.dll
 C:\Users\rafae\Cursos\proyecto2\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.pdb
+C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.csproj.AssemblyReference.cache
+C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.csproj.CoreCompileInputs.cache
+C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.dll
+C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\MahikariTaiV2\obj\Debug\MahikariTaiV2.pdb
