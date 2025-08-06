@@ -389,7 +389,7 @@ namespace MahikariTaiV2.Controllers
             return Json(new { data = Listakenshu }, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public JsonResult AllInfoCargo(string rut)
         {
             // Lógica para obtener las ciudades según la región desde tu servicio web
@@ -415,7 +415,7 @@ namespace MahikariTaiV2.Controllers
 
 
             return Json(new { data = Listakenshu }, JsonRequestBehavior.AllowGet);
-        }
+        }*/
 
         [HttpPost]
         public JsonResult GetRegiones()

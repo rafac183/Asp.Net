@@ -175,3 +175,44 @@ C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiPr
 C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.csproj.CopyComplete
 C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.dll
 C:\Users\rafae\Cursos\BlogdeRafa\Proyectos ASP.NET\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.pdb
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\WS_DB.dll.config
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\WS_DB.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\WS_DB.pdb
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\csc.exe
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\csc.exe.config
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\csc.rsp
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\csi.exe
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\csi.exe.config
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\csi.rsp
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Buffers.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Memory.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\vbc.exe
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\vbc.exe.config
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\vbc.rsp
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\VBCSCompiler.exe
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.csproj.AssemblyReference.cache
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.csproj.CoreCompileInputs.cache
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.csproj.Up2Date
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.dll
+C:\Users\RafaC183\Visual\MahikariTai ALL\MahikariTaiProyect\WS_DB\obj\Debug\WS_DB.pdb

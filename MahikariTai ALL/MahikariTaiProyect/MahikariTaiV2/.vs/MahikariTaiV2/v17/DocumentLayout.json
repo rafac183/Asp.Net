@@ -1,0 +1,103 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{227A7C17-D0D0-4DF0-86B8-D735B62EE6F2}|..\\WS_DB\\WS_DB.csproj|c:\\users\\rafac183\\visual\\mahikaritai all\\mahikaritaiproyect\\ws_db\\database_ws.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|c:\\users\\rafac183\\visual\\mahikaritai all\\mahikaritaiproyect\\mahikaritaiv2\\views\\members\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|solutionrelative:views\\members\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|c:\\users\\rafac183\\visual\\mahikaritai all\\mahikaritaiproyect\\mahikaritaiv2\\controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|solutionrelative:controllers\\memberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|c:\\users\\rafac183\\visual\\mahikaritai all\\mahikaritaiproyect\\mahikaritaiv2\\controllers\\miyakushacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|solutionrelative:controllers\\miyakushacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\models\\cargos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C90977F7-BD74-45F9-9123-37A5DCB9AEC7}|MahikariTaiV2.csproj|solutionrelative:models\\cargos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Views\\Members\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Members\\Index.cshtml",
+              "ToolTip": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Views\\Members\\Index.cshtml",
+              "RelativeToolTip": "Views\\Members\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-19T19:48:28.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MembersController.cs",
+              "DocumentMoniker": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Controllers\\MembersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MembersController.cs",
+              "ToolTip": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Controllers\\MembersController.cs",
+              "RelativeToolTip": "Controllers\\MembersController.cs",
+              "ViewState": "AgIAAI4BAAAAAAAAAAAmwKEBAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T19:46:04.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Cargos.cs",
+              "DocumentMoniker": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Models\\Cargos.cs",
+              "RelativeDocumentMoniker": "Models\\Cargos.cs",
+              "ToolTip": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Models\\Cargos.cs",
+              "RelativeToolTip": "Models\\Cargos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T06:06:53.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MiyakushaController.cs",
+              "DocumentMoniker": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Controllers\\MiyakushaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MiyakushaController.cs",
+              "ToolTip": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\MahikariTaiV2\\Controllers\\MiyakushaController.cs",
+              "RelativeToolTip": "Controllers\\MiyakushaController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAswFIAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T06:05:51.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DataBase_WS.asmx.cs",
+              "DocumentMoniker": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\WS_DB\\DataBase_WS.asmx.cs",
+              "RelativeDocumentMoniker": "..\\WS_DB\\DataBase_WS.asmx.cs",
+              "ToolTip": "C:\\Users\\RafaC183\\Visual\\MahikariTai ALL\\MahikariTaiProyect\\WS_DB\\DataBase_WS.asmx.cs",
+              "RelativeToolTip": "..\\WS_DB\\DataBase_WS.asmx.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABoBAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T05:36:40.946Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

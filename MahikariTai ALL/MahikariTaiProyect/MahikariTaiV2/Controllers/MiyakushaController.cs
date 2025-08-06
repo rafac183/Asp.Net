@@ -80,8 +80,7 @@ namespace MahikariTaiV2.Controllers
                          select new Cargos
                          {
                              cargo = cn.cargo_name,
-                             nombre = mi.nombres,
-                             rut = mi.rut_user
+                             grupo = mi.nombres
                          };
 
             return View(modelo.ToList());

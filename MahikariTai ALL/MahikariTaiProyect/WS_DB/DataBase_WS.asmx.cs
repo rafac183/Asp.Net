@@ -27,7 +27,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec allMembers;", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -42,7 +42,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec miembroAllInfo @rut_user = '" + rut + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -57,7 +57,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec miembroAllInfoKenshu @rut_user = '" + rut + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -72,7 +72,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec miembroAllInfoCargo @rut_user = '" + rut + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -87,7 +87,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("EXEC crearMiembro @categoria_name = '" + categoria + "', @nombres = '" + nombres + "', @first_lastname = '" + primerApellido + "', @second_lastname = '" + segundoApellido + "', @gender = '" + genero + "', @rut_user = '" + rut + "', @birthdate = '" + birthdate + "', @nacionality = '" + nacionalidad + "', @calle = '" + calle + "', @number = " + numero + ", @phone_number = '" + phone + "', @email = '" + email + "', @hobbies = '" + hobbies + "', @nombre_comuna = '" + comuna + "', @nombre_provincia = '" + provincia + "', @nombre_region = '" + region + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -102,7 +102,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter();
             if (dateInt == null)
             {
@@ -130,7 +130,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("EXEC crearCargoMiembro @rut_user = '" + rut + "', @cargo_name = '" + cargo + "', @grupo_name = '" + grupo + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -147,7 +147,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("EXEC modificarMiembro @categoria_name = '" + categoria + "', @nombres = '" + nombres + "', @first_lastname = '" + primerApellido + "', @second_lastname = '" + segundoApellido + "', @gender = '" + genero + "', @rut_user = '" + rut + "', @birthdate = '" + birthdate + "', @nacionality = '" + nacionalidad + "', @calle = '" + calle + "', @number = " + numero + ", @phone_number = '" + phone + "', @email = '" + email + "', @hobbies = '" + hobbies + "', @nombre_comuna = '" + comuna + "', @nombre_provincia = '" + provincia + "', @nombre_region = '" + region + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -162,7 +162,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter();
             if (dateInt == null)
             {
@@ -190,7 +190,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("EXEC modificarCargoMiembro @rut_user = '" + rut + "', @cargo_name = '" + cargo + "', @grupo_name = '" + grupo + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -205,7 +205,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec eliminarMiembro @rut_user = '" + rut + "';", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -220,7 +220,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec nacionalidades;", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -235,7 +235,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec generos;", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -250,7 +250,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec categorias;", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -265,7 +265,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec grupos;", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
@@ -280,7 +280,7 @@ namespace WS_DB
 
             //en mi caso tengo autenticacion de windows, por eso uso Integrated Security = True;
             //sino tendrias que ingresar tu usuario y tu pas de la base de datos
-            conn.ConnectionString = "Data Source=DESKTOP-34305JK; Initial Catalog=db_MahikariTai; Integrated Security=True;";
+            conn.ConnectionString = "Data Source=DESKTOP-AD32663; Initial Catalog=db_MahikariTai; Integrated Security=True;";
             SqlDataAdapter da = new SqlDataAdapter("exec cargos;", conn);
             //Cache de memoria, guardar lo que hice
             DataSet ds = new DataSet();
